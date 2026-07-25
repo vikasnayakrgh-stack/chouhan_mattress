@@ -1,0 +1,122 @@
+{
+  "hero": {
+    "slides": [
+      {
+        "id": 1,
+        "title": "Home Sweet Home Sale",
+        "subtitle": "Use code <strong>HOME</strong> (till 30th Jul) to Get up to <strong>65% OFF</strong> + Additional 11% OFF with Bank Offers",
+        "badge": "Sale Ends In",
+        "countdown": { "days": 7, "hours": 18, "minutes": 5, "seconds": 28 },
+        "ctaText": "Shop Now",
+        "ctaLink": "/alloffers",
+        "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/mattress_link_mattress.jpg?tr=w-3840",
+        "bankLogos": ["ICICI", "Axis", "HDFC", "Kotak"],
+        "bankOffer": "Flat 10% OFF"
+      },
+      {
+        "id": 2,
+        "title": "Mattresses Starting ₹779",
+        "subtitle": "Orthopedic, Memory Foam, Latex & More - 100 Night Trial",
+        "badge": "Best Sellers",
+        "ctaText": "Explore Mattresses",
+        "ctaLink": "/mattresses",
+        "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/mattress_link_mattress.jpg?tr=w-3840"
+      },
+      {
+        "id": 3,
+        "title": "Sofas & Seating Up to 50% OFF",
+        "subtitle": "3-Seaters, L-Shapes, Recliners & Sofa Cum Beds",
+        "badge": "New Collection",
+        "ctaText": "Shop Sofas",
+        "ctaLink": "/sofa-set",
+        "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/sofa_link_sofa-set.jpg?tr=w-3840"
+      },
+      {
+        "id": 4,
+        "title": "Smart Mattress - Zense",
+        "subtitle": "AI-Powered Sleep Tracking & Temperature Control",
+        "badge": "Smart Tech",
+        "ctaText": "Discover Zense",
+        "ctaLink": "/zense",
+        "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/Stories-bg/diwali-smart-mattress-2024.jpg?tr=w-3840"
+      },
+      {
+        "id": 5,
+        "title": "Flipper Sofa Cum Bed",
+        "subtitle": "Try for 100 Days Risk-Free - Perfect for Compact Living",
+        "badge": "Innovation",
+        "ctaText": "View Flipper",
+        "ctaLink": "/sofa-set/flipper-sofa-cum-bed-three-seater/WSFAFLPSN3FWGR",
+        "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/bed_link_bed.jpg?tr=w-3840"
+      }
+    ],
+    "trustBadges": [
+      { "icon": "TruckIcon", "title": "Free Shipping", "desc": "Across India on all orders" },
+      { "icon": "RotateCcwIcon", "title": "100 Night Trial", "desc": "Risk-free returns & refunds" },
+      { "icon": "ShieldIcon", "title": "Best Warranty", "desc": "Up to 12 years warranty" },
+      { "icon": "HeadphonesIcon", "title": "Easy Returns", "desc": "Hassle-free return process" }
+    ]
+  },
+  "whyWakefit": {
+    "headline": "Why Choose Chouhan Mattress?",
+    "subheadline": "Everything You Need for a <span class=\"text-brand-primary\">Better Home</span>",
+    "description": "From the mattress you sleep on to the sofa you relax on, every Chouhan Mattress product is handcrafted for Indian homes.",
+    "features": [
+      { "icon": "StarIcon", "title": "50,000+ Happy Customers", "description": "Trusted by thousands of Indian families for superior sleep and comfort", "highlight": "50K+" },
+      { "icon": "TruckIcon", "title": "Free Shipping Pan-India", "description": "Doorstep delivery across 19,000+ pin codes at no extra cost", "highlight": "FREE" },
+      { "icon": "ShieldIcon", "title": "Best-in-Class Warranty", "description": "Up to 10 years warranty on mattresses, 5 years on furniture", "highlight": "10 Yrs" },
+      { "icon": "RotateCcwIcon", "title": "100 Night Risk-Free Trial", "description": "Sleep on it for 100 nights. Love it or return it for full refund", "highlight": "100 Nights" },
+      { "icon": "AwardIcon", "title": "Award Winning Quality", "description": "Handcrafted precision, certified non-toxic foams, ergonomic design", "highlight": "Awarded" },
+      { "icon": "HomeIcon", "title": "Direct From Factory", "description": "No middlemen markup. Get premium luxury quality at true factory prices", "highlight": "Factory Direct" },
+      { "icon": "ZapIcon", "title": "Easy EMI Options", "description": "No Cost EMI starting ₹500/month with leading bank partners", "highlight": "₹500/mo" },
+      { "icon": "CheckIcon", "title": "Free Installation", "description": "Professional assembly & installation on all furniture orders", "highlight": "FREE" }
+    ],
+    "stats": [
+      { "value": "50K+", "label": "Happy Customers" },
+      { "value": "10 Yrs", "label": "Max Warranty" },
+      { "value": "100", "label": "Night Trial" },
+      { "value": "100%", "label": "Factory Direct" }
+    ]
+  },
+  "categories": {
+    "headline": "Shop by Category",
+    "subheadline": "Find Everything for <span class=\"text-brand-primary\">Your Home</span>",
+    "description": "Explore our wide range of categories designed for every room and every need.",
+    "items": [
+      { "name": "Mattresses & Bedding", "href": "/mattresses", "image": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/Bedroom/Mattress.jpg?tr=w-800", "alt": "Mattresses & Bedding", "count": "22+ Products", "color": "from-orange-400 to-orange-600" },
+      { "name": "Beds & Side Tables", "href": "/beds", "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/TAURUS-UPDATED-02-04-2026/WEWB7860STAURUSR2/WEWB7860STAURUSR2-1.jpg?tr=w-800", "alt": "Beds & Side Tables", "count": "45+ Products", "color": "from-blue-400 to-blue-600" },
+      { "name": "Pillows & Cushions", "href": "/bedding", "image": "https://ik.imagekit.io/2xkwa8s1i/img/memory-foam-pillows/memory-foam-pillows-1-new.jpg?tr=w-800", "alt": "Pillows & Cushions", "count": "18+ Products", "color": "from-purple-400 to-purple-600" },
+      { "name": "Chairs & WFH Furniture", "href": "/office-chairs", "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/GRAVINEW2925/WSCHRGRAVIHBCBWYWEGYR1/WSCHRGRAVIHBCBWYWEGYR1_WB_3web.jpg?tr=w-800", "alt": "Chairs & WFH Furniture", "count": "32+ Products", "color": "from-green-400 to-green-600" },
+      { "name": "Sofas & Seating", "href": "/sofas", "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/Dreamer/WSFALGRL3CFMMGR1_LS_1.jpg?tr=w-800", "alt": "Sofas & Seating", "count": "546+ Products", "color": "from-pink-400 to-pink-600" },
+      { "name": "Wardrobes & Dressing Tables", "href": "/wardrobes", "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/TYRIAN/WWRB4S4D2MH2SH1TYRIANPPL/WWRB4S4D2MH2SH1TYRIANPPL_LS_2.jpg?tr=w-800", "alt": "Wardrobes & Dressing Tables", "count": "89+ Products", "color": "from-amber-400 to-amber-600" },
+      { "name": "TV Units & Coffee Tables", "href": "/tv-units", "image": "https://ik.imagekit.io/2xkwa8s1i/img/tv-units/WTVUFRASIER/1.jpg?tr=w-800", "alt": "TV Units & Coffee Tables", "count": "67+ Products", "color": "from-indigo-400 to-indigo-600" },
+      { "name": "Dining Sets & Kitchenware", "href": "/dining", "image": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/Living/Dining-Furniture-Set.jpg?tr=w-800", "alt": "Dining Sets & Kitchenware", "count": "43+ Products", "color": "from-red-400 to-red-600" },
+      { "name": "Cabinets & Shelves", "href": "/cabinets", "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/Side_board/WSBURUKCF_1.jpg?tr=w-800", "alt": "Cabinets & Shelves", "count": "34+ Products", "color": "from-teal-400 to-teal-600" },
+      { "name": "Rugs, Mats & Bath", "href": "/rugs", "image": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/More-Category/Floor-Furnishings/Rugs-carpets.jpg?tr=w-800", "alt": "Rugs, Mats & Bath", "count": "56+ Products", "color": "from-cyan-400 to-cyan-600" },
+      { "name": "Curtains & Decor", "href": "/curtains", "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/Jacquard+Brown+Linings1stand3rd/Dabbe/1.jpg?tr=w-800", "alt": "Curtains & Decor", "count": "78+ Products", "color": "from-rose-400 to-rose-600" },
+      { "name": "Kids Furniture & Nursery", "href": "/kids", "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/Crib_mattress/WCRBMATXLRGR1/Toddler%20Crib%20Mattress%20_%20WCRBMATXLRGR1/1.jpg?tr=w-800", "alt": "Kids Furniture & Nursery", "count": "23+ Products", "color": "from-yellow-400 to-yellow-600" }
+    ],
+    "cta": {
+      "title": "Home Sweet Home Sale",
+      "description": "Up to 65% OFF + Additional 11% Bank Discount. Use code HOME.",
+      "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/mattress_link_mattress.jpg?tr=w-800",
+      "countdown": { "days": 7, "hours": 18, "minutes": 5, "seconds": 28 },
+      "ctaText": "Shop Now",
+      "ctaLink": "/offers"
+    }
+  },
+  "topSelling": {
+    "headline": "Customers' <span class=\"text-brand-primary\">Favorites</span>",
+    "subheadline": "Our best-selling products loved by thousands of happy customers.",
+    "products": [
+      { "id": 1, "name": "ShapeSense Orthopedic Essential Mattress", "shortDesc": "7 Years Warranty", "price": 6229, "originalPrice": 12499, "discount": 50, "rating": 4.5, "reviewCount": 2847, "image": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-400", "href": "/mattress/ortho-essential-mattress/WOEM72366", "badges": ["Bestseller", "50% OFF"], "type": "mattress" },
+      { "id": 2, "name": "ShapeSense Orthopedic Classic Memory Foam", "shortDesc": "10 Years Warranty", "price": 6669, "originalPrice": 14999, "discount": 55, "rating": 4.6, "reviewCount": 1923, "image": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-400", "href": "/mattress/orthopaedic-memory-foam-mattress/WOMFM72305", "badges": ["Popular", "55% OFF"], "type": "mattress" },
+      { "id": 3, "name": "Dreamer 3-Seater Fabric Sofa", "shortDesc": "High Resilience Foam", "price": 24999, "originalPrice": 42999, "discount": 42, "rating": 4.4, "reviewCount": 856, "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/Dreamer/WSFALGRL3CFMMGR1_LS_1.jpg?tr=w-400", "href": "/sofa-set/3-seater-sofa/dreamer", "badges": ["New", "42% OFF"], "type": "sofa" },
+      { "id": 4, "name": "Taurus Sheesham Wood Storage Bed", "shortDesc": "King Size | Hydraulic", "price": 28999, "originalPrice": 45999, "discount": 37, "rating": 4.7, "reviewCount": 1234, "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/TAURUS-UPDATED-02-04-2026/WEWB7860STAURUSR2/WEWB7860STAURUSR2-1.jpg?tr=w-400", "href": "/beds/storage-beds", "badges": ["Bestseller", "37% OFF"], "type": "bed" },
+      { "id": 5, "name": "Gravity Ergonomic Office Chair", "shortDesc": "Mesh Back | Lumbar Support", "price": 8999, "originalPrice": 15999, "discount": 44, "rating": 4.5, "reviewCount": 2103, "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/GRAVINEW2925/WSCHRGRAVIHBCBWYWEGYR1/WSCHRGRAVIHBCBWYWEGYR1_WB_3web.jpg?tr=w-400", "href": "/office-chairs/gravity-chair", "badges": ["Top Rated", "44% OFF"], "type": "chair" },
+      { "id": 6, "name": "Frasier Engineered Wood TV Unit", "shortDesc": "Wall Mounted | 2 Drawers", "price": 12999, "originalPrice": 21999, "discount": 41, "rating": 4.3, "reviewCount": 567, "image": "https://ik.imagekit.io/2xkwa8s1i/img/tv-units/WTVUFRASIER/1.jpg?tr=w-400", "href": "/tv-units/frasier", "badges": ["41% OFF"], "type": "furniture" },
+      { "id": 7, "name": "Tyrian 4-Door Wardrobe", "shortDesc": "Engineered Wood | Mirror", "price": 34999, "originalPrice": 54999, "discount": 36, "rating": 4.4, "reviewCount": 789, "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/TYRIAN/WWRB4S4D2MH2SH1TYRIANPPL/WWRB4S4D2MH2SH1TYRIANPPL_LS_2.jpg?tr=w-400", "href": "/wardrobes/tyrian", "badges": ["36% OFF"], "type": "furniture" },
+      { "id": 8, "name": "Memory Foam Pillow (Pack of 2)", "shortDesc": "Cervical Support | Cooling Gel", "price": 1299, "originalPrice": 2499, "discount": 48, "rating": 4.6, "reviewCount": 4521, "image": "https://ik.imagekit.io/2xkwa8s1i/img/memory-foam-pillows/memory-foam-pillows-1-new.jpg?tr=w-400", "href": "/pillows-and-cushions/memory-foam-pillow", "badges": ["Bestseller", "48% OFF"], "type": "bedding" }
+    ]
+  }
+}

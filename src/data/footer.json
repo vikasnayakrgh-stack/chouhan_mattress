@@ -1,0 +1,60 @@
+{
+  "company": {
+    "name": "Chouhan Mattress Private Limited",
+    "tagline": "Handcrafted Comfort for Perfect Sleep",
+    "description": "Premium handcrafted mattresses, beds, and home furnishings built for supreme comfort and back support.",
+    "address": "Industrial Area, Phase 2, New Delhi, 110020, India",
+    "phone": "+91 9876543210",
+    "email": "support@chouhanmattress.com",
+    "hours": "9:00 AM - 8:00 PM (Daily)",
+    "cin": "U36100DL2024PTC123456"
+  },
+  "links": {
+    "company": [
+      { "label": "About Us", "href": "/about" },
+      { "label": "Careers", "href": "/careers" },
+      { "label": "Press", "href": "/press" },
+      { "label": "Blog", "href": "/blog" },
+      { "label": "Investors", "href": "/investors" },
+      { "label": "Sustainability", "href": "/sustainability" }
+    ],
+    "help": [
+      { "label": "Contact Us", "href": "/contact" },
+      { "label": "FAQs", "href": "/faqs" },
+      { "label": "Shipping Info", "href": "/shipping" },
+      { "label": "Returns & Refunds", "href": "/returns" },
+      { "label": "Warranty", "href": "/warranty" },
+      { "label": "Size Guide", "href": "/size-guide" }
+    ],
+    "shop": [
+      { "label": "Mattresses", "href": "/mattresses" },
+      { "label": "Beds", "href": "/beds" },
+      { "label": "Sofas", "href": "/sofas" },
+      { "label": "Furniture", "href": "/furniture" },
+      { "label": "Pillows & Bedding", "href": "/bedding" },
+      { "label": "Home Decor", "href": "/decor" }
+    ],
+    "policies": [
+      { "label": "Privacy Policy", "href": "/privacy" },
+      { "label": "Terms of Service", "href": "/terms" },
+      { "label": "Cookie Policy", "href": "/cookies" },
+      { "label": "Cancellation Policy", "href": "/cancellation" },
+      { "label": "Grievance Officer", "href": "/grievance" }
+    ]
+  },
+  "social": [
+    { "platform": "Facebook", "href": "https://facebook.com/chouhanmattress", "icon": "Facebook" },
+    { "platform": "Instagram", "href": "https://instagram.com/chouhanmattress", "icon": "Instagram" },
+    { "platform": "YouTube", "href": "https://youtube.com/chouhanmattress", "icon": "Youtube" },
+    { "platform": "Twitter", "href": "https://twitter.com/chouhanmattress", "icon": "Twitter" },
+    { "platform": "LinkedIn", "href": "https://linkedin.com/company/chouhanmattress", "icon": "Linkedin" },
+    { "platform": "Pinterest", "href": "https://in.pinterest.com/chouhanmattress", "icon": "Pinterest" }
+  ],
+  "paymentMethods": [
+    "Visa", "Mastercard", "RuPay", "UPI", "NetBanking", "EMI"
+  ],
+  "trustBadges": [
+    "SSL Secured", "ISO Certified", "Data Protection", "Website Terms of Use"
+  ],
+  "trustBadgesIcons": ["ssl", "iso"]
+}

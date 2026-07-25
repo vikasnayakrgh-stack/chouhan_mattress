@@ -1,0 +1,101 @@
+{
+  "mattresses": {
+    "id": "mattresses",
+    "name": "Mattresses",
+    "description": "Sleep better with our scientifically designed mattresses",
+    "image": "/images/categories/mattresses.jpg",
+    "subcategories": [
+      { "id": "memory-foam", "name": "Memory Foam", "description": "Conforms to your body for pressure relief" },
+      { "id": "latex", "name": "Latex", "description": "Natural bounce with enhanced breathability" },
+      { "id": "grid", "name": "Grid", "description": "Open-grid construction for cool sleep" },
+      { "id": "dual-comfort", "name": "Dual Comfort", "description": "Two firmness levels in one mattress" },
+      { "id": "orthopedic", "name": "Orthopedic", "description": "Targeted spinal support for back pain" },
+      { "id": "plus", "name": "Plus", "description": "Multi-layered luxury hotel feel" },
+      { "id": "rollup", "name": "Rollup", "description": "Compact rolled packaging for easy transport" },
+      { "id": "foldable", "name": "Foldable", "description": "Collapsible for small spaces" }
+    ],
+    "sizes": ["King", "Queen", "Double", "Single", "Diwan", "Kids", "Custom"],
+    "thickness": ["5 Inch", "6 Inch", "8 Inch", "10 Inch"],
+    "priceRanges": ["Under ₹10,000", "Under ₹20,000", "Under ₹30,000", "Premium"]
+  },
+  "beds": {
+    "id": "beds",
+    "name": "Beds & Side Tables",
+    "description": "Complete your bedroom with our range of beds",
+    "image": "/images/categories/beds.jpg",
+    "subcategories": [
+      { "id": "storage-beds", "name": "Storage Beds", "description": "Hidden storage for clutter-free rooms" },
+      { "id": "hydraulic-beds", "name": "Hydraulic Beds", "description": "Easy lift mechanism for under-bed access" },
+      { "id": "box-beds", "name": "Box Beds", "description": "Traditional box storage design" },
+      { "id": "platform-beds", "name": "Platform Beds", "description": "Modern low-profile designs" },
+      { "id": "poster-beds", "name": "Poster Beds", "description": "Classic four-poster elegance" },
+      { "id": "kids-beds", "name": "Kids Beds", "description": "Fun and functional designs for children" }
+    ],
+    "materials": ["Sheesham Wood", "Engineered Wood", "Metal", "Upholstered"],
+    "sizes": ["King", "Queen", "Double", "Single"]
+  },
+  "sofas": {
+    "id": "sofas",
+    "name": "Sofas & Seating",
+    "description": "Comfort meets style in our sofa collection",
+    "image": "/images/categories/sofas.jpg",
+    "subcategories": [
+      { "id": "3-seater", "name": "3 Seater", "description": "Perfect for family living rooms" },
+      { "id": "l-shape", "name": "L-Shape", "description": "Corner space maximization" },
+      { "id": "sofa-cum-bed", "name": "Sofa Cum Bed", "description": "Dual purpose for compact living" },
+      { "id": "recliners", "name": "Recliners", "description": "Ultimate relaxation with adjustable positions" },
+      { "id": "leatherette", "name": "Leatherette", "description": "Premium look, easy maintenance" },
+      { "id": "fabric", "name": "Fabric", "description": "Soft, breathable, versatile" }
+    ],
+    "materials": ["Fabric", "Leatherette", "Velvet", "Linen"]
+  },
+  "furniture": {
+    "id": "furniture",
+    "name": "Furniture",
+    "description": "Complete your home with functional furniture",
+    "image": "/images/categories/furniture.jpg",
+    "subcategories": {
+      "living-room": {
+        "name": "Living Room",
+        "items": ["Coffee Tables", "TV Units", "Side Tables", "Bookshelves", "Cabinets"]
+      },
+      "bedroom": {
+        "name": "Bedroom",
+        "items": ["Wardrobes", "Dressing Tables", "Side Tables", "Study Tables"]
+      },
+      "dining": {
+        "name": "Dining",
+        "items": ["Dining Sets", "Dining Tables", "Chairs", "Bar Units"]
+      },
+      "office": {
+        "name": "Office",
+        "items": ["Office Chairs", "Desks", "Filing Cabinets"]
+      }
+    }
+  },
+  "bedding": {
+    "id": "bedding",
+    "name": "Pillows & Bedding",
+    "description": "Complete your sleep experience",
+    "image": "/images/categories/bedding.jpg",
+    "subcategories": [
+      { "id": "pillows", "name": "Pillows", "items": ["Memory Foam", "Latex", "Microfiber", "Cervical", "Body Pillows"] },
+      { "id": "comforters", "name": "Comforters", "items": ["Reversible", "All Season", "Winter", "Summer"] },
+      { "id": "bedsheets", "name": "Bedsheets", "items": ["Cotton", "Bamboo", "Tencel", "Fitted", "Flat"] },
+      { "id": "protectors", "name": "Mattress Protectors", "items": ["Waterproof", "Cotton", "Bamboo", "Cooling"] }
+    ]
+  },
+  "decor": {
+    "id": "decor",
+    "name": "Home Decor",
+    "description": "Add personality to your space",
+    "image": "/images/categories/decor.jpg",
+    "subcategories": [
+      { "id": "rugs", "name": "Rugs & Carpets" },
+      { "id": "curtains", "name": "Curtains" },
+      { "id": "lighting", "name": "Lighting" },
+      { "id": "wall-art", "name": "Wall Art" },
+      { "id": "planters", "name": "Planters" }
+    ]
+  }
+}

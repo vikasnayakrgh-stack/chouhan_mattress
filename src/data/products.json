@@ -1,0 +1,237 @@
+[
+  {
+    "id": "1",
+    "name": "ShapeSense Orthopedic Essential Mattress",
+    "description": "India's most trusted orthopedic mattress with 7-year warranty. Designed by sleep scientists for optimal spinal alignment.",
+    "category": "mattresses",
+    "subcategory": "orthopedic",
+    "price": 6229,
+    "originalPrice": 12499,
+    "discount": 50,
+    "images": [
+      "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-800",
+      "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-800"
+    ],
+    "thumbnail": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-400",
+    "variants": [
+      { "size": "Single", "dimensions": "36x75 in", "price": 5499, "stock": 50 },
+      { "size": "Double", "dimensions": "48x78 in", "price": 6229, "stock": 75 },
+      { "size": "Queen", "dimensions": "60x78 in", "price": 7299, "stock": 100 },
+      { "size": "King", "dimensions": "72x78 in", "price": 8499, "stock": 80 }
+    ],
+    "thickness": ["6 Inch", "8 Inch"],
+    "firmness": "Medium Firm",
+    "material": "High-density orthopedic foam",
+    "warranty": "7 Years",
+    "trial": "100 Nights",
+    "rating": 4.5,
+    "reviewCount": 2847,
+    "features": ["Spinal Alignment", "Motion Isolation", "Breathable Cover", "Dust Mite Resistant"],
+    "badges": ["Bestseller", "50% OFF"],
+    "inStock": true,
+    "delivery": "Free",
+    "installation": "Free"
+  },
+  {
+    "id": "2",
+    "name": "ShapeSense Orthopedic Classic Memory Foam Mattress",
+    "description": "Premium memory foam with 10-year warranty. Contours to your body for personalized pressure relief.",
+    "category": "mattresses",
+    "subcategory": "memory-foam",
+    "price": 6669,
+    "originalPrice": 14999,
+    "discount": 55,
+    "images": [
+      "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-800"
+    ],
+    "thumbnail": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-400",
+    "variants": [
+      { "size": "Single", "dimensions": "36x75 in", "price": 5999, "stock": 40 },
+      { "size": "Double", "dimensions": "48x78 in", "price": 6669, "stock": 65 },
+      { "size": "Queen", "dimensions": "60x78 in", "price": 7899, "stock": 90 },
+      { "size": "King", "dimensions": "72x78 in", "price": 9199, "stock": 70 }
+    ],
+    "thickness": ["8 Inch"],
+    "firmness": "Medium",
+    "material": "Memory foam + orthopedic base",
+    "warranty": "10 Years",
+    "trial": "100 Nights",
+    "rating": 4.6,
+    "reviewCount": 1923,
+    "features": ["Pressure Relief", "Body Contouring", "Zero Partner Disturbance", "Hypoallergenic"],
+    "badges": ["Popular", "55% OFF"],
+    "inStock": true,
+    "delivery": "Free",
+    "installation": "Free"
+  },
+  {
+    "id": "3",
+    "name": "Dreamer 3-Seater Fabric Sofa",
+    "description": "Contemporary 3-seater with high-resilience foam cushions. Perfect for modern living rooms.",
+    "category": "sofas",
+    "subcategory": "3-seater",
+    "price": 24999,
+    "originalPrice": 42999,
+    "discount": 42,
+    "images": [
+      "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/Dreamer/WSFALGRL3CFMMGR1_LS_1.jpg?tr=w-800"
+    ],
+    "thumbnail": "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/Dreamer/WSFALGRL3CFMMGR1_LS_1.jpg?tr=w-400",
+    "variants": [
+      { "color": "Grey", "fabric": "Premium Fabric", "price": 24999, "stock": 25 },
+      { "color": "Beige", "fabric": "Premium Fabric", "price": 24999, "stock": 30 },
+      { "color": "Navy Blue", "fabric": "Premium Fabric", "price": 25999, "stock": 15 }
+    ],
+    "dimensions": "210x85x75 cm",
+    "seatingCapacity": 3,
+    "material": "High-resilience foam + solid wood frame",
+    "upholstery": "Premium fabric",
+    "warranty": "5 Years",
+    "rating": 4.4,
+    "reviewCount": 856,
+    "features": ["High-Resilience Foam", "Durable Upholstery", "Solid Wood Frame", "Free Installation"],
+    "badges": ["New", "42% OFF"],
+    "inStock": true,
+    "delivery": "Free",
+    "installation": "Free"
+  },
+  {
+    "id": "4",
+    "name": "Taurus Sheesham Wood Storage Bed",
+    "description": "Solid Sheesham wood king-size bed with hydraulic storage. Built to last generations.",
+    "category": "beds",
+    "subcategory": "storage-beds",
+    "price": 28999,
+    "originalPrice": 45999,
+    "discount": 37,
+    "images": [
+      "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/TAURUS-UPDATED-02-04-2026/WEWB7860STAURUSR2/WEWB7860STAURUSR2-1.jpg?tr=w-800"
+    ],
+    "thumbnail": "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/TAURUS-UPDATED-02-04-2026/WEWB7860STAURUSR2/WEWB7860STAURUSR2-1.jpg?tr=w-400",
+    "variants": [
+      { "size": "Queen", "storage": "Hydraulic", "price": 26999, "stock": 20 },
+      { "size": "King", "storage": "Hydraulic", "price": 28999, "stock": 35 },
+      { "size": "King", "storage": "Box", "price": 25999, "stock": 15 }
+    ],
+    "material": "Solid Sheesham Wood",
+    "finish": "Natural walnut",
+    "warranty": "5 Years",
+    "rating": 4.7,
+    "reviewCount": 1234,
+    "features": ["Hydraulic Storage", "Solid Sheesham Wood", "Termite Resistant", "Free Installation"],
+    "badges": ["Bestseller", "37% OFF"],
+    "inStock": true,
+    "delivery": "Free",
+    "installation": "Free"
+  },
+  {
+    "id": "5",
+    "name": "Gravity Ergonomic Office Chair",
+    "description": "Mesh-back ergonomic chair with adjustable lumbar support. Designed for 8+ hour workdays.",
+    "category": "furniture",
+    "subcategory": "office-chairs",
+    "price": 8999,
+    "originalPrice": 15999,
+    "discount": 44,
+    "images": [
+      "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/GRAVINEW2925/WSCHRGRAVIHBCBWYWEGYR1/WSCHRGRAVIHBCBWYWEGYR1_WB_3web.jpg?tr=w-800"
+    ],
+    "thumbnail": "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/GRAVINEW2925/WSCHRGRAVIHBCBWYWEGYR1/WSCHRGRAVIHBCBWYWEGYR1_WB_3web.jpg?tr=w-400",
+    "variants": [
+      { "color": "Black", "mesh": "Breathable Mesh", "price": 8999, "stock": 50 },
+      { "color": "Grey", "mesh": "Breathable Mesh", "price": 9499, "stock": 30 }
+    ],
+    "features": ["Adjustable Lumbar", "Breathable Mesh", "360° Swivel", "Tilt Mechanism", "Height Adjustable"],
+    "warranty": "3 Years",
+    "rating": 4.5,
+    "reviewCount": 2103,
+    "badges": ["Top Rated", "44% OFF"],
+    "inStock": true,
+    "delivery": "Free",
+    "installation": "Free"
+  },
+  {
+    "id": "6",
+    "name": "Frasier Engineered Wood TV Unit",
+    "description": "Wall-mounted TV unit with 2 drawers and cable management. Sleek modern design.",
+    "category": "furniture",
+    "subcategory": "tv-units",
+    "price": 12999,
+    "originalPrice": 21999,
+    "discount": 41,
+    "images": [
+      "https://ik.imagekit.io/2xkwa8s1i/img/tv-units/WTVUFRASIER/1.jpg?tr=w-800"
+    ],
+    "thumbnail": "https://ik.imagekit.io/2xkwa8s1i/img/tv-units/WTVUFRASIER/1.jpg?tr=w-400",
+    "variants": [
+      { "color": "Walnut", "finish": "Matte", "price": 12999, "stock": 25 },
+      { "color": "Oak", "finish": "Matte", "price": 13499, "stock": 20 }
+    ],
+    "dimensions": "180x40x45 cm",
+    "material": "Engineered wood",
+    "warranty": "3 Years",
+    "rating": 4.3,
+    "reviewCount": 567,
+    "features": ["Wall Mounted", "2 Drawers", "Cable Management", "Free Installation"],
+    "badges": ["41% OFF"],
+    "inStock": true,
+    "delivery": "Free",
+    "installation": "Free"
+  },
+  {
+    "id": "7",
+    "name": "Tyrian 4-Door Wardrobe",
+    "description": "Spacious 4-door wardrobe with mirror. Engineered wood with premium finish.",
+    "category": "furniture",
+    "subcategory": "wardrobes",
+    "price": 34999,
+    "originalPrice": 54999,
+    "discount": 36,
+    "images": [
+      "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/TYRIAN/WWRB4S4D2MH2SH1TYRIANPPL/WWRB4S4D2MH2SH1TYRIANPPL_LS_2.jpg?tr=w-800"
+    ],
+    "thumbnail": "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/TYRIAN/WWRB4S4D2MH2SH1TYRIANPPL/WWRB4S4D2MH2SH1TYRIANPPL_LS_2.jpg?tr=w-400",
+    "variants": [
+      { "color": "Walnut", "mirror": true, "price": 34999, "stock": 15 },
+      { "color": "Oak", "mirror": true, "price": 35999, "stock": 10 }
+    ],
+    "dimensions": "180x55x210 cm",
+    "material": "Engineered wood",
+    "warranty": "5 Years",
+    "rating": 4.4,
+    "reviewCount": 789,
+    "features": ["4 Doors", "Full-length Mirror", "Adjustable Shelves", "Free Installation"],
+    "badges": ["36% OFF"],
+    "inStock": true,
+    "delivery": "Free",
+    "installation": "Free"
+  },
+  {
+    "id": "8",
+    "name": "Memory Foam Pillow (Pack of 2)",
+    "description": "Cervical support memory foam pillows with cooling gel layer. Perfect for neck pain relief.",
+    "category": "bedding",
+    "subcategory": "pillows",
+    "price": 1299,
+    "originalPrice": 2499,
+    "discount": 48,
+    "images": [
+      "https://ik.imagekit.io/2xkwa8s1i/img/memory-foam-pillows/memory-foam-pillows-1-new.jpg?tr=w-800"
+    ],
+    "thumbnail": "https://ik.imagekit.io/2xkwa8s1i/img/memory-foam-pillows/memory-foam-pillows-1-new.jpg?tr=w-400",
+    "variants": [
+      { "pack": "2 Pillows", "size": "Standard", "price": 1299, "stock": 200 },
+      { "pack": "2 Pillows", "size": "King", "price": 1499, "stock": 150 }
+    ],
+    "material": "Memory foam + cooling gel",
+    "cover": "Removable washable cover",
+    "warranty": "2 Years",
+    "rating": 4.6,
+    "reviewCount": 4521,
+    "features": ["Cervical Support", "Cooling Gel", "Hypoallergenic", "Removable Cover"],
+    "badges": ["Bestseller", "48% OFF"],
+    "inStock": true,
+    "delivery": "Free",
+    "installation": "N/A"
+  }
+]

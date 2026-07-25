@@ -1,0 +1,605 @@
+{
+  "categories": [
+    {
+      "id": "mattresses",
+      "name": "Mattresses",
+      "slug": "mattresses",
+      "image": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/Bedroom/Mattress.jpg?tr=w-800",
+      "productCount": 24
+    },
+    {
+      "id": "beds",
+      "name": "Beds & Side Tables",
+      "slug": "beds",
+      "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/TAURUS-UPDATED-02-04-2026/WEWB7860STAURUSR2/WEWB7860STAURUSR2-1.jpg?tr=w-800",
+      "productCount": 45
+    },
+    {
+      "id": "bedding",
+      "name": "Pillows & Cushions",
+      "slug": "bedding",
+      "image": "https://ik.imagekit.io/2xkwa8s1i/img/memory-foam-pillows/memory-foam-pillows-1-new.jpg?tr=w-800",
+      "productCount": 18
+    },
+    {
+      "id": "chairs",
+      "name": "Chairs & WFH Furniture",
+      "slug": "office-chairs",
+      "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/GRAVINEW2925/WSCHRGRAVIHBCBWYWEGYR1/WSCHRGRAVIHBCBWYWEGYR1_WB_3web.jpg?tr=w-800",
+      "productCount": 32
+    },
+    {
+      "id": "sofas",
+      "name": "Sofas & Seating",
+      "slug": "sofas",
+      "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/Dreamer/WSFALGRL3CFMMGR1_LS_1.jpg?tr=w-800",
+      "productCount": 56
+    },
+    {
+      "id": "wardrobes",
+      "name": "Wardrobes & Dressing Tables",
+      "slug": "wardrobes",
+      "image": "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/TYRIAN/WWRB4S4D2MH2SH1TYRIANPPL/WWRB4S4D2MH2SH1TYRIANPPL_LS_2.jpg?tr=w-800",
+      "productCount": 89
+    },
+    {
+      "id": "tv-units",
+      "name": "TV Units & Coffee Tables",
+      "slug": "tv-units",
+      "image": "https://ik.imagekit.io/2xkwa8s1i/img/tv-units/WTVUFRASIER/1.jpg?tr=w-800",
+      "productCount": 67
+    },
+    {
+      "id": "dining",
+      "name": "Dining Sets & Kitchenware",
+      "slug": "dining",
+      "image": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/Living/Dining-Furniture-Set.jpg?tr=w-800",
+      "productCount": 43
+    }
+  ],
+  "products": [
+    {
+      "id": "WOEM72366",
+      "name": "ShapeSense Orthopedic Essential Mattress",
+      "slug": "ortho-essential-mattress",
+      "shortDesc": "7 Years Warranty",
+      "description": "The ShapeSense Orthopedic Essential Mattress is designed to provide optimal support for your back and spine. Made with high-density orthopedic foam, it conforms to your body shape while maintaining proper spinal alignment.",
+      "price": 6229,
+      "originalPrice": 12499,
+      "discount": 50,
+      "currency": "₹",
+      "rating": 4.5,
+      "reviewCount": 2847,
+      "images": [
+        "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-400",
+        "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-800"
+      ],
+      "primaryImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-400",
+      "badges": [
+        { "text": "Bestseller", "variant": "primary" },
+        { "text": "50% OFF", "variant": "warning" }
+      ],
+      "category": "Mattresses",
+      "subCategory": "Orthopedic",
+      "inStock": true,
+      "stockCount": 150,
+      "sku": "WOEM72366",
+      "attributes": {
+        "Firmness": "Medium Firm",
+        "Thickness": "6 inches",
+        "Material": "High-Density Orthopedic Foam",
+        "Warranty": "7 Years"
+      },
+      "variants": [
+        {
+          "id": "WOEM72366-S",
+          "name": "Single (72x36)",
+          "sku": "WOEM72366-S",
+          "price": { "current": 6229, "original": 12499 },
+          "attributes": { "Size": "Single (72x36)" },
+          "inStock": true
+        },
+        {
+          "id": "WOEM72366-D",
+          "name": "Double (72x48)",
+          "sku": "WOEM72366-D",
+          "price": { "current": 8299, "original": 15999 },
+          "attributes": { "Size": "Double (72x48)" },
+          "inStock": true
+        },
+        {
+          "id": "WOEM72366-Q",
+          "name": "Queen (72x60)",
+          "sku": "WOEM72366-Q",
+          "price": { "current": 9999, "original": 18999 },
+          "attributes": { "Size": "Queen (72x60)" },
+          "inStock": true
+        },
+        {
+          "id": "WOEM72366-K",
+          "name": "King (72x72)",
+          "sku": "WOEM72366-K",
+          "price": { "current": 11999, "original": 21999 },
+          "attributes": { "Size": "King (72x72)" },
+          "inStock": true
+        }
+      ]
+    },
+    {
+      "id": "WOMFM72305",
+      "name": "ShapeSense Orthopedic Classic Memory Foam",
+      "slug": "orthopaedic-memory-foam-mattress",
+      "shortDesc": "10 Years Warranty",
+      "description": "Premium memory foam mattress with cooling gel technology. Adapts to your body temperature and provides pressure relief for a restful sleep.",
+      "price": 6669,
+      "originalPrice": 14999,
+      "discount": 55,
+      "currency": "₹",
+      "rating": 4.6,
+      "reviewCount": 1923,
+      "images": [
+        "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-400"
+      ],
+      "primaryImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-400",
+      "badges": [
+        { "text": "Popular", "variant": "secondary" },
+        { "text": "55% OFF", "variant": "warning" }
+      ],
+      "category": "Mattresses",
+      "subCategory": "Memory Foam",
+      "inStock": true,
+      "stockCount": 89,
+      "sku": "WOMFM72305",
+      "attributes": {
+        "Firmness": "Medium",
+        "Thickness": "8 inches",
+        "Material": "Memory Foam + Cooling Gel",
+        "Warranty": "10 Years"
+      },
+      "variants": [
+        { "id": "WOMFM72305-S", "name": "Single (72x36)", "sku": "WOMFM72305-S", "price": { "current": 6669, "original": 14999 }, "attributes": { "Size": "Single (72x36)" }, "inStock": true },
+        { "id": "WOMFM72305-D", "name": "Double (72x48)", "sku": "WOMFM72305-D", "price": { "current": 8999, "original": 17999 }, "attributes": { "Size": "Double (72x48)" }, "inStock": true },
+        { "id": "WOMFM72305-Q", "name": "Queen (72x60)", "sku": "WOMFM72305-Q", "price": { "current": 10999, "original": 21999 }, "attributes": { "Size": "Queen (72x60)" }, "inStock": true },
+        { "id": "WOMFM72305-K", "name": "King (72x72)", "sku": "WOMFM72305-K", "price": { "current": 12999, "original": 25999 }, "attributes": { "Size": "King (72x72)" }, "inStock": true }
+      ]
+    },
+    {
+      "id": "WSFALGRL3CFMMGR1",
+      "name": "Dreamer 3-Seater Fabric Sofa",
+      "slug": "3-seater-sofa-dreamer",
+      "shortDesc": "High Resilience Foam",
+      "description": "Modern 3-seater sofa with premium fabric upholstery and high-resilience foam cushions. Perfect for contemporary living spaces.",
+      "price": 24999,
+      "originalPrice": 42999,
+      "discount": 42,
+      "currency": "₹",
+      "rating": 4.4,
+      "reviewCount": 856,
+      "images": [
+        "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/Dreamer/WSFALGRL3CFMMGR1_LS_1.jpg?tr=w-400"
+      ],
+      "primaryImage": "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/Dreamer/WSFALGRL3CFMMGR1_LS_1.jpg?tr=w-400",
+      "badges": [
+        { "text": "New", "variant": "success" },
+        { "text": "42% OFF", "variant": "warning" }
+      ],
+      "category": "Sofas & Seating",
+      "subCategory": "3-Seater",
+      "inStock": true,
+      "stockCount": 34,
+      "sku": "WSFALGRL3CFMMGR1",
+      "attributes": {
+        "Seating": "3 Seater",
+        "Material": "Premium Fabric",
+        "Filling": "High Resilience Foam",
+        "Color": "Mist Grey"
+      }
+    },
+    {
+      "id": "WEWB7860STAURUSR2",
+      "name": "Taurus Sheesham Wood Storage Bed",
+      "slug": "storage-beds-taurus",
+      "shortDesc": "King Size | Hydraulic",
+      "description": "Solid Sheesham wood bed with hydraulic storage mechanism. Ample storage space with premium finish.",
+      "price": 28999,
+      "originalPrice": 45999,
+      "discount": 37,
+      "currency": "₹",
+      "rating": 4.7,
+      "reviewCount": 1234,
+      "images": [
+        "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/TAURUS-UPDATED-02-04-2026/WEWB7860STAURUSR2/WEWB7860STAURUSR2-1.jpg?tr=w-400"
+      ],
+      "primaryImage": "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/TAURUS-UPDATED-02-04-2026/WEWB7860STAURUSR2/WEWB7860STAURUSR2-1.jpg?tr=w-400",
+      "badges": [
+        { "text": "Bestseller", "variant": "primary" },
+        { "text": "37% OFF", "variant": "warning" }
+      ],
+      "category": "Beds & Side Tables",
+      "subCategory": "Storage Beds",
+      "inStock": true,
+      "stockCount": 22,
+      "sku": "WEWB7860STAURUSR2",
+      "attributes": {
+        "Size": "King Size",
+        "Material": "Sheesham Wood",
+        "Storage": "Hydraulic",
+        "Finish": "Walnut"
+      },
+      "variants": [
+        { "id": "WEWB7860STAURUSR2-Q", "name": "Queen Size", "sku": "WEWB7860STAURUSR2-Q", "price": { "current": 26999, "original": 42999 }, "attributes": { "Size": "Queen" }, "inStock": true },
+        { "id": "WEWB7860STAURUSR2-K", "name": "King Size", "sku": "WEWB7860STAURUSR2-K", "price": { "current": 28999, "original": 45999 }, "attributes": { "Size": "King" }, "inStock": true }
+      ]
+    },
+    {
+      "id": "WSCHRGRAVIHBCBWYWEGYR1",
+      "name": "Gravity Ergonomic Office Chair",
+      "slug": "gravity-chair",
+      "shortDesc": "Mesh Back | Lumbar Support",
+      "description": "Ergonomic office chair with breathable mesh back, adjustable lumbar support, and synchronized tilt mechanism.",
+      "price": 8999,
+      "originalPrice": 15999,
+      "discount": 44,
+      "currency": "₹",
+      "rating": 4.5,
+      "reviewCount": 2103,
+      "images": [
+        "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/GRAVINEW2925/WSCHRGRAVIHBCBWYWEGYR1/WSCHRGRAVIHBCBWYWEGYR1_WB_3web.jpg?tr=w-400"
+      ],
+      "primaryImage": "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/GRAVINEW2925/WSCHRGRAVIHBCBWYWEGYR1/WSCHRGRAVIHBCBWYWEGYR1_WB_3web.jpg?tr=w-400",
+      "badges": [
+        { "text": "Top Rated", "variant": "success" },
+        { "text": "44% OFF", "variant": "warning" }
+      ],
+      "category": "Chairs & WFH Furniture",
+      "subCategory": "Office Chairs",
+      "inStock": true,
+      "stockCount": 67,
+      "sku": "WSCHRGRAVIHBCBWYWEGYR1",
+      "attributes": {
+        "Back": "Mesh",
+        "Support": "Adjustable Lumbar",
+        "Mechanism": "Synchronized Tilt",
+        "Color": "Black"
+      }
+    },
+    {
+      "id": "WTVUFRASIER",
+      "name": "Frasier Engineered Wood TV Unit",
+      "slug": "frasier-tv-unit",
+      "shortDesc": "Wall Mounted | 2 Drawers",
+      "description": "Sleek wall-mounted TV unit with engineered wood construction. Features 2 spacious drawers and cable management.",
+      "price": 12999,
+      "originalPrice": 21999,
+      "discount": 41,
+      "currency": "₹",
+      "rating": 4.3,
+      "reviewCount": 567,
+      "images": [
+        "https://ik.imagekit.io/2xkwa8s1i/img/tv-units/WTVUFRASIER/1.jpg?tr=w-400"
+      ],
+      "primaryImage": "https://ik.imagekit.io/2xkwa8s1i/img/tv-units/WTVUFRASIER/1.jpg?tr=w-400",
+      "badges": [
+        { "text": "41% OFF", "variant": "warning" }
+      ],
+      "category": "TV Units & Coffee Tables",
+      "subCategory": "TV Units",
+      "inStock": true,
+      "stockCount": 45,
+      "sku": "WTVUFRASIER",
+      "attributes": {
+        "Mounting": "Wall Mounted",
+        "Drawers": "2",
+        "Material": "Engineered Wood",
+        "Finish": "Oak & Black"
+      }
+    },
+    {
+      "id": "WWRB4S4D2MH2SH1TYRIANPPL",
+      "name": "Tyrian 4-Door Wardrobe",
+      "slug": "tyrian-wardrobe",
+      "shortDesc": "Engineered Wood | Mirror",
+      "description": "Spacious 4-door wardrobe with full-length mirror. Engineered wood construction with premium finish.",
+      "price": 34999,
+      "originalPrice": 54999,
+      "discount": 36,
+      "currency": "₹",
+      "rating": 4.4,
+      "reviewCount": 789,
+      "images": [
+        "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/TYRIAN/WWRB4S4D2MH2SH1TYRIANPPL/WWRB4S4D2MH2SH1TYRIANPPL_LS_2.jpg?tr=w-400"
+      ],
+      "primaryImage": "https://ik.imagekit.io/2xkwa8s1i/img/npl_modified_images/TYRIAN/WWRB4S4D2MH2SH1TYRIANPPL/WWRB4S4D2MH2SH1TYRIANPPL_LS_2.jpg?tr=w-400",
+      "badges": [
+        { "text": "36% OFF", "variant": "warning" }
+      ],
+      "category": "Wardrobes & Dressing Tables",
+      "subCategory": "Wardrobes",
+      "inStock": true,
+      "stockCount": 18,
+      "sku": "WWRB4S4D2MH2SH1TYRIANPPL",
+      "attributes": {
+        "Doors": "4",
+        "Mirror": "Full Length",
+        "Material": "Engineered Wood",
+        "Finish": "Teak & White"
+      }
+    },
+    {
+      "id": "MEMFOAM-PILLOW-2PK",
+      "name": "Memory Foam Pillow (Pack of 2)",
+      "slug": "memory-foam-pillow",
+      "shortDesc": "Cervical Support | Cooling Gel",
+      "description": "Contoured memory foam pillows with cooling gel layer. Provides optimal cervical support for all sleep positions.",
+      "price": 1299,
+      "originalPrice": 2499,
+      "discount": 48,
+      "currency": "₹",
+      "rating": 4.6,
+      "reviewCount": 4521,
+      "images": [
+        "https://ik.imagekit.io/2xkwa8s1i/img/memory-foam-pillows/memory-foam-pillows-1-new.jpg?tr=w-400"
+      ],
+      "primaryImage": "https://ik.imagekit.io/2xkwa8s1i/img/memory-foam-pillows/memory-foam-pillows-1-new.jpg?tr=w-400",
+      "badges": [
+        { "text": "Bestseller", "variant": "primary" },
+        { "text": "48% OFF", "variant": "warning" }
+      ],
+      "category": "Pillows & Cushions",
+      "subCategory": "Memory Foam",
+      "inStock": true,
+      "stockCount": 234,
+      "sku": "MEMFOAM-PILLOW-2PK",
+      "attributes": {
+        "Pack": "2 Pillows",
+        "Material": "Memory Foam + Cooling Gel",
+        "Support": "Cervical",
+        "Cover": "Removable & Washable"
+      }
+    },
+    {
+      "id": "ZENSE-SMART-MATTRESS",
+      "name": "Zense Smart Mattress",
+      "slug": "zense-smart-mattress",
+      "shortDesc": "AI Sleep Tracking | Temp Control",
+      "description": "Revolutionary AI-powered mattress with sleep tracking, temperature control, and personalized sleep insights via mobile app.",
+      "price": 44999,
+      "originalPrice": 59999,
+      "discount": 25,
+      "currency": "₹",
+      "rating": 4.8,
+      "reviewCount": 234,
+      "images": [
+        "https://ik.imagekit.io/2xkwa8s1i/consumer-react/Stories-bg/diwali-smart-mattress-2024.jpg?tr=w-400"
+      ],
+      "primaryImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/Stories-bg/diwali-smart-mattress-2024.jpg?tr=w-400",
+      "badges": [
+        { "text": "Smart Tech", "variant": "info" },
+        { "text": "25% OFF", "variant": "warning" }
+      ],
+      "category": "Mattresses",
+      "subCategory": "Smart",
+      "inStock": true,
+      "stockCount": 12,
+      "sku": "ZENSE-SMART-MATTRESS",
+      "attributes": {
+        "Technology": "AI Sleep Tracking",
+        "Control": "App Controlled Temperature",
+        "Sensors": "Heart Rate, Breathing, Movement",
+        "Warranty": "5 Years"
+      }
+    },
+    {
+      "id": "FLIPPER-SOFA-BED",
+      "name": "Flipper Sofa Cum Bed",
+      "slug": "flipper-sofa-cum-bed-three-seater",
+      "shortDesc": "100 Days Risk-Free Trial",
+      "description": "Innovative sofa-cum-bed perfect for compact living. Transforms from comfortable sofa to spacious bed in seconds.",
+      "price": 29999,
+      "originalPrice": 44999,
+      "discount": 33,
+      "currency": "₹",
+      "rating": 4.3,
+      "reviewCount": 678,
+      "images": [
+        "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/bed_link_bed.jpg?tr=w-400"
+      ],
+      "primaryImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/bed_link_bed.jpg?tr=w-400",
+      "badges": [
+        { "text": "Innovation", "variant": "success" },
+        { "text": "33% OFF", "variant": "warning" }
+      ],
+      "category": "Sofas & Seating",
+      "subCategory": "Sofa Cum Beds",
+      "inStock": true,
+      "stockCount": 28,
+      "sku": "FLIPPER-SOFA-BED",
+      "attributes": {
+        "Type": "3-Seater Sofa Cum Bed",
+        "Mechanism": "Easy Flip",
+        "Trial": "100 Days Risk-Free",
+        "Fabric": "Premium Upholstery"
+      }
+    },
+    {
+      "id": "ORTHO-LATEX-MATTRESS",
+      "name": "Orthopedic Latex Mattress",
+      "slug": "orthopedic-latex-mattress",
+      "shortDesc": "Natural Latex | 12 Years Warranty",
+      "description": "100% natural latex mattress with 7-zone support system. Hypoallergenic, breathable, and eco-friendly.",
+      "price": 18999,
+      "originalPrice": 32999,
+      "discount": 42,
+      "currency": "₹",
+      "rating": 4.7,
+      "reviewCount": 567,
+      "images": [
+        "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-400"
+      ],
+      "primaryImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/category-thumb/mattress-recommendation_desk2.jpg?tr=w-400",
+      "badges": [
+        { "text": "Natural", "variant": "success" },
+        { "text": "42% OFF", "variant": "warning" }
+      ],
+      "category": "Mattresses",
+      "subCategory": "Latex",
+      "inStock": true,
+      "stockCount": 45,
+      "sku": "ORTHO-LATEX-MATTRESS",
+      "attributes": {
+        "Material": "100% Natural Latex",
+        "Zones": "7-Zone Support",
+        "Warranty": "12 Years",
+        "Certification": "OEKO-TEX Certified"
+      },
+      "variants": [
+        { "id": "ORTHO-LATEX-S", "name": "Single (72x36)", "sku": "ORTHO-LATEX-S", "price": { "current": 18999, "original": 32999 }, "attributes": { "Size": "Single (72x36)" }, "inStock": true },
+        { "id": "ORTHO-LATEX-D", "name": "Double (72x48)", "sku": "ORTHO-LATEX-D", "price": { "current": 24999, "original": 41999 }, "attributes": { "Size": "Double (72x48)" }, "inStock": true },
+        { "id": "ORTHO-LATEX-Q", "name": "Queen (72x60)", "sku": "ORTHO-LATEX-Q", "price": { "current": 29999, "original": 49999 }, "attributes": { "Size": "Queen (72x60)" }, "inStock": true },
+        { "id": "ORTHO-LATEX-K", "name": "King (72x72)", "sku": "ORTHO-LATEX-K", "price": { "current": 34999, "original": 57999 }, "attributes": { "Size": "King (72x72)" }, "inStock": true }
+      ]
+    },
+    {
+      "id": "ERGO-PRO-CHAIR",
+      "name": "ErgoPro Mesh Office Chair",
+      "slug": "ergo-pro-chair",
+      "shortDesc": "Full Mesh | 4D Armrests",
+      "description": "Professional ergonomic chair with full mesh design, 4D adjustable armrests, headrest, and multi-lock tilt mechanism.",
+      "price": 15999,
+      "originalPrice": 24999,
+      "discount": 36,
+      "currency": "₹",
+      "rating": 4.6,
+      "reviewCount": 892,
+      "images": [
+        "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/GRAVINEW2925/WSCHRGRAVIHBCBWYWEGYR1/WSCHRGRAVIHBCBWYWEGYR1_WB_3web.jpg?tr=w-400"
+      ],
+      "primaryImage": "https://ik.imagekit.io/2xkwa8s1i/img/npl_raw_images/GRAVINEW2925/WSCHRGRAVIHBCBWYWEGYR1/WSCHRGRAVIHBCBWYWEGYR1_WB_3web.jpg?tr=w-400",
+      "badges": [
+        { "text": "Professional", "variant": "info" },
+        { "text": "36% OFF", "variant": "warning" }
+      ],
+      "category": "Chairs & WFH Furniture",
+      "subCategory": "Office Chairs",
+      "inStock": true,
+      "stockCount": 33,
+      "sku": "ERGO-PRO-CHAIR",
+      "attributes": {
+        "Back": "Full Mesh",
+        "Armrests": "4D Adjustable",
+        "Headrest": "Adjustable",
+        "Mechanism": "Multi-lock Tilt",
+        "Color": "Black/Grey"
+      }
+    },
+    {
+      "id": "SOLID-WOOD-DINING",
+      "name": "Solid Wood 6-Seater Dining Set",
+      "slug": "solid-wood-dining-set",
+      "shortDesc": "Sheesham Wood | 6 Chairs",
+      "description": "Premium solid Sheesham wood dining table with 6 matching chairs. Classic design with modern finish.",
+      "price": 38999,
+      "originalPrice": 59999,
+      "discount": 35,
+      "currency": "₹",
+      "rating": 4.5,
+      "reviewCount": 345,
+      "images": [
+        "https://ik.imagekit.io/2xkwa8s1i/consumer-react/Living/Dining-Furniture-Set.jpg?tr=w-400"
+      ],
+      "primaryImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/Living/Dining-Furniture-Set.jpg?tr=w-400",
+      "badges": [
+        { "text": "Solid Wood", "variant": "success" },
+        { "text": "35% OFF", "variant": "warning" }
+      ],
+      "category": "Dining Sets & Kitchenware",
+      "subCategory": "Dining Sets",
+      "inStock": true,
+      "stockCount": 15,
+      "sku": "SOLID-WOOD-DINING",
+      "attributes": {
+        "Table Material": "Sheesham Wood",
+        "Chairs": "6 (Included)",
+        "Finish": "Honey Oak",
+        "Seating": "6 People"
+      }
+    }
+  ],
+  "heroSlides": [
+    {
+      "id": 1,
+      "title": "Home Sweet Home Sale",
+      "subtitle": "Use code <strong>HOME</strong> (till 30th Jul) to Get up to <strong>65% OFF</strong> + Additional 11% OFF with Bank Offers",
+      "badge": "Sale Ends In",
+      "countdown": { "days": 7, "hours": 18, "minutes": 5, "seconds": 28 },
+      "ctaText": "Shop Now",
+      "ctaLink": "/alloffers",
+      "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/logo_do_nothing.png?tr=w-3840",
+      "bankLogos": ["ICICI", "Axis", "HDFC", "Kotak"],
+      "bankOffer": "Flat 10% OFF"
+    },
+    {
+      "id": 2,
+      "title": "Mattresses Starting ₹779",
+      "subtitle": "Orthopedic, Memory Foam, Latex & More - 100 Night Trial",
+      "badge": "Best Sellers",
+      "ctaText": "Explore Mattresses",
+      "ctaLink": "/mattresses",
+      "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/mattress_link_mattress.jpg?tr=w-3840"
+    },
+    {
+      "id": 3,
+      "title": "Sofas & Seating Up to 50% OFF",
+      "subtitle": "3-Seaters, L-Shapes, Recliners & Sofa Cum Beds",
+      "badge": "New Collection",
+      "ctaText": "Shop Sofas",
+      "ctaLink": "/sofa-set",
+      "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/sofa_link_sofa-set.jpg?tr=w-3840"
+    },
+    {
+      "id": 4,
+      "title": "Smart Mattress - Zense",
+      "subtitle": "AI-Powered Sleep Tracking & Temperature Control",
+      "badge": "Smart Tech",
+      "ctaText": "Discover Zense",
+      "ctaLink": "/zense",
+      "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/Stories-bg/diwali-smart-mattress-2024.jpg?tr=w-3840"
+    },
+    {
+      "id": 5,
+      "title": "Flipper Sofa Cum Bed",
+      "subtitle": "Try for 100 Days Risk-Free - Perfect for Compact Living",
+      "badge": "Innovation",
+      "ctaText": "View Flipper",
+      "ctaLink": "/sofa-set/flipper-sofa-cum-bed-three-seater/WSFAFLPSN3FWGR",
+      "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/bed_link_bed.jpg?tr=w-3840"
+    }
+  ],
+  "trustBadges": [
+    { "icon": "Truck", "title": "Free Shipping", "desc": "Across India on all orders" },
+    { "icon": "RotateCcw", "title": "100 Night Trial", "desc": "Risk-free returns & refunds" },
+    { "icon": "Shield", "title": "Best Warranty", "desc": "Up to 12 years warranty" },
+    { "icon": "Headphones", "title": "Easy Returns", "desc": "Hassle-free return process" }
+  ],
+  "whyWakefit": {
+    "headline": "Why Choose Wakefit?",
+    "subheadline": "Everything You Need for a <span class=\"text-wakefit-orange\">Better Home</span>",
+    "description": "From the mattress you sleep on to the sofa you relax on, every Wakefit product is designed for real Indian homes and real Indian lives.",
+    "features": [
+      { "icon": "Star", "title": "25 Lakhs+ Happy Customers", "description": "Trusted by millions of Indian families for their sleep and home needs", "highlight": "25L+" },
+      { "icon": "Truck", "title": "Free Shipping Pan-India", "description": "Doorstep delivery across 19,000+ pin codes at no extra cost", "highlight": "FREE" },
+      { "icon": "Shield", "title": "Best-in-Class Warranty", "description": "Up to 12 years warranty on mattresses, 5 years on furniture", "highlight": "12 Yrs" },
+      { "icon": "RotateCcw", "title": "100 Night Risk-Free Trial", "description": "Sleep on it for 100 nights. Love it or return it for full refund", "highlight": "100 Nights" },
+      { "icon": "Award", "title": "Award Winning Quality", "description": "Forbes D2C Award, Indian Content Marketing Awards, MOMMYs 2023", "highlight": "Awarded" },
+      { "icon": "Home", "title": "173+ Experience Stores", "description": "Touch, feel & experience products before buying at a store near you", "highlight": "173+" },
+      { "icon": "Zap", "title": "Easy EMI Options", "description": "No Cost EMI starting ₹500/month with leading bank partners", "highlight": "₹500/mo" },
+      { "icon": "Check", "title": "Free Installation", "description": "Professional assembly & installation on all furniture orders", "highlight": "FREE" }
+    ],
+    "stats": [
+      { "value": "25L+", "label": "Happy Customers" },
+      { "value": "173+", "label": "Experience Stores" },
+      { "value": "12 Yrs", "label": "Max Warranty" },
+      { "value": "100", "label": "Night Trial" }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "primary": [
+    { "label": "Mattresses", "href": "/mattresses", "hasMegaMenu": true },
+    { "label": "Beds", "href": "/beds", "hasMegaMenu": true },
+    { "label": "Sofas", "href": "/sofas", "hasMegaMenu": true },
+    { "label": "Furniture", "href": "/furniture", "hasMegaMenu": true },
+    { "label": "Pillows & Bedding", "href": "/bedding", "hasMegaMenu": true },
+    { "label": "Decor", "href": "/decor", "hasMegaMenu": false },
+    { "label": "Offers", "href": "/offers", "hasMegaMenu": false }
+  ],
+  "utility": [
+    { "label": "Track Order", "href": "/track-order" },
+    { "label": "Stores", "href": "/furniture-store" },
+    { "label": "Bulk Orders", "href": "/bulk-orders" }
+  ]
+}

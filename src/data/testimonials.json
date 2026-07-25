@@ -1,0 +1,75 @@
+{
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Priya Sharma",
+      "location": "Bangalore",
+      "rating": 5,
+      "date": "2024-01-15",
+      "product": "ShapeSense Orthopedic Essential Mattress",
+      "content": "Best mattress I've ever owned! My back pain has completely disappeared. The 100-night trial gave me confidence to try it, and I'm so glad I did. Delivery was free and installation was professional.",
+      "verified": true,
+      "helpful": 124
+    },
+    {
+      "id": 2,
+      "name": "Rajesh Kumar",
+      "location": "Delhi",
+      "rating": 5,
+      "date": "2024-01-10",
+      "product": "Dreamer 3-Seater Fabric Sofa",
+      "content": "Beautiful sofa that transformed our living room. The fabric is premium quality and very comfortable. Free installation was a huge plus. Highly recommend!",
+      "verified": true,
+      "helpful": 89
+    },
+    {
+      "id": 3,
+      "name": "Anita Patel",
+      "location": "Mumbai",
+      "rating": 4,
+      "date": "2024-01-08",
+      "product": "Gravity Ergonomic Office Chair",
+      "content": "Excellent chair for long work hours. The lumbar support is adjustable and really helps with my lower back. Mesh back keeps me cool. Worth every rupee!",
+      "verified": true,
+      "helpful": 67
+    },
+    {
+      "id": 4,
+      "name": "Suresh Reddy",
+      "location": "Hyderabad",
+      "rating": 5,
+      "date": "2024-01-05",
+      "product": "Taurus Sheesham Wood Storage Bed",
+      "content": "Solid wood quality is amazing. The hydraulic storage is so convenient - we store all our extra bedding there. Free installation was done perfectly. Very happy!",
+      "verified": true,
+      "helpful": 156
+    },
+    {
+      "id": 5,
+      "name": "Meera Joshi",
+      "location": "Pune",
+      "rating": 4,
+      "date": "2024-01-02",
+      "product": "Memory Foam Pillow (Pack of 2)",
+      "content": "Great pillows for neck pain. The cooling gel really works - I don't wake up hot anymore. Comes with washable covers which is a plus.",
+      "verified": true,
+      "helpful": 43
+    },
+    {
+      "id": 6,
+      "name": "Vikram Singh",
+      "location": "Chennai",
+      "rating": 5,
+      "date": "2023-12-28",
+      "product": "ShapeSense Orthopedic Classic Memory Foam Mattress",
+      "content": "My wife and I both sleep better now. No more partner disturbance when one of us moves. The 10-year warranty gives peace of mind. Best purchase ever!",
+      "verified": true,
+      "helpful": 201
+    }
+  ],
+  "summary": {
+    "averageRating": 4.7,
+    "totalReviews": 12547,
+    "recommendPercentage": 96
+  }
+}

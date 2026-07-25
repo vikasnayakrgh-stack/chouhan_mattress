@@ -1,0 +1,90 @@
+{
+  "faqs": [
+    {
+      "id": 1,
+      "question": "How do I choose the right mattress size?",
+      "answer": "Depending on the size of your room and the number of people you'll be sharing it with, select one. Single (36x75\") for solo sleepers, Double (48x78\") for smaller rooms, Queen (60x78\") is suitable for most couples, King (72x78\") provides maximum space for those who require it."
+    },
+    {
+      "id": 2,
+      "question": "Which mattress is best for back pain?",
+      "answer": "The best mattress for back pain is either an orthopaedic mattress or a medium-firm memory foam mattress. It helps maintain a neutral position of the spine, takes pressure off the lumbar area, and prevents the \"sinking\" that can aggravate chronic pain. Chouhan Mattress's Orthopaedic range is tailored towards this."
+    },
+    {
+      "id": 3,
+      "question": "How long does a mattress last?",
+      "answer": "With care, a good quality mattress will last 7-10 years. High-density foam and latex mattresses will last longer than lower-density mattresses. Rotation, a mattress protector and avoiding moisture will help prolong the lifespan of the mattress."
+    },
+    {
+      "id": 4,
+      "question": "What firmness of mattress should I buy?",
+      "answer": "It is based on how you sleep. Side sleepers will find comfort in soft to medium firm mattresses that provide pressure relief. Medium-Firm is the best firmness for back sleepers. Firm support is needed for stomach sleepers and heavier people to maintain the correct alignment of the spine and prevent sinking."
+    },
+    {
+      "id": 5,
+      "question": "What is the difference between soft and firm mattresses?",
+      "answer": "Soft mattresses are form-fitting and best for people who sleep on their side and those who sleep with a lighter weight. Hard mattresses offer a flatter and more stable surface, allowing for heavier body weight and maintaining a straight back, thus making it suitable for back and stomach sleepers."
+    },
+    {
+      "id": 6,
+      "question": "Do mattresses affect sleep quality?",
+      "answer": "Absolutely. All of these factors can directly influence sleep depth and quality of sleep, and the right mattress can help to alleviate pressure points, ensure the body is aligned, help regulate temperature and reduce disturbance from partners. One of the more common reasons for chronic fatigue and back pain is a poor mattress."
+    },
+    {
+      "id": 7,
+      "question": "What is the ideal mattress thickness?",
+      "answer": "Generally, 8 to 10 inches is the optimum size for most adults. An 8 inch mattress works best for the average weight sleeper, and a 10 inch mattress has a higher level of comfort and support for heavier sleepers, couples and people who like a softer feel."
+    },
+    {
+      "id": 8,
+      "question": "Does a mattress help improve posture?",
+      "answer": "Yes. An ideal sleeping position directly benefits from a good mattress that supports a proper spine alignment while you're sleeping. If your spine is supported properly with 7-8 hours of sleep per night, it decreases the muscular strain that causes you to have poor posture during the day and that which causes chronic back problems."
+    },
+    {
+      "id": 9,
+      "question": "How important is mattress firmness?",
+      "answer": "Among the most crucial factors when choosing mattresses is firmness. A firmness that is appropriate for your body and sleep position will provide adequate support, pressure relief and comfort. The wrong firmness is one of the main reasons for sleep disruption, stiffness in the morning and back pain."
+    },
+    {
+      "id": 10,
+      "question": "What is the lifespan of a good mattress?",
+      "answer": "A good bed mattress that comes from a trustworthy company should last anywhere from seven to 10 years. Longevity is influenced by the following factors: foam density, frequency of use, body weight, maintenance practices. Chouhan Mattress has up to a 10-year warranty on specific mattresses, a testament to their durability."
+    },
+    {
+      "id": 11,
+      "question": "What is the return policy?",
+      "answer": "Chouhan Mattress offers a 100-night risk-free trial. If you're not satisfied, you can return the mattress for a full refund. The return process is hassle-free with free pickup."
+    },
+    {
+      "id": 12,
+      "question": "Do you offer EMI options?",
+      "answer": "Yes, we offer No Cost EMI starting from ₹500/month with leading bank partners including ICICI, Axis, HDFC, and Kotak."
+    },
+    {
+      "id": 13,
+      "question": "Is installation free?",
+      "answer": "Yes, professional assembly and installation is free on all furniture orders. For mattresses, setup is included with delivery."
+    },
+    {
+      "id": 14,
+      "question": "How can I find a store near me?",
+      "answer": "We have 173+ experience stores across India. Visit our Store Locator page to find the nearest Wakefit store in your city."
+    },
+    {
+      "id": 15,
+      "question": "What payment methods do you accept?",
+      "answer": "We accept Visa, Mastercard, RuPay, UPI, NetBanking, and EMI options. All payments are SSL secured."
+    }
+  ],
+  "categories": [
+    "Mattresses",
+    "Beds",
+    "Sofas",
+    "Furniture",
+    "Pillows & Bedding",
+    "Home Decor",
+    "Orders & Delivery",
+    "Payments",
+    "Warranty & Returns"
+  ]
+}

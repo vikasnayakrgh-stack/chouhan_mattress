@@ -1,0 +1,979 @@
+/**
+ * Wakefit Design Tokens - CSS Custom Properties
+ * Platform-agnostic design tokens as CSS variables.
+ * 
+ * Based on Phase 1 audit findings:
+ * - Primary: #FF6B00 (Wakefit Orange)
+ * - Headings: Poppins, Body: Inter
+ * - Base radius: 12px (0.75rem)
+ * - Standard transition: 300ms
+ * - 6 breakpoints (sm through 2xl)
+ * - Max container: 1400px
+ * - Fluid typography with clamp()
+ * 
+ * Usage:
+ *   @import 'src/styles/tokens.css';
+ *   .my-element { color: var(--color-primary); padding: var(--space-4); }
+ */
+
+/* ============================================================================
+   SPACING SCALE (0-32rem)
+   Base unit: 4px = 0.25rem
+   ============================================================================ */
+
+:root {
+  /* Base spacing units */
+  --space-0: 0;
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-7: 1.75rem;   /* 28px */
+  --space-8: 2rem;      /* 32px */
+  --space-9: 2.25rem;   /* 36px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-11: 2.75rem;  /* 44px */
+  --space-12: 3rem;     /* 48px */
+  --space-14: 3.5rem;   /* 56px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-28: 7rem;     /* 112px */
+  --space-32: 8rem;     /* 128px */
+  --space-36: 9rem;     /* 144px */
+  --space-40: 10rem;    /* 160px */
+  --space-44: 11rem;    /* 176px */
+  --space-48: 12rem;    /* 192px */
+  --space-52: 13rem;    /* 208px */
+  --space-56: 14rem;    /* 224px */
+  --space-60: 15rem;    /* 240px */
+  --space-64: 16rem;    /* 256px */
+  --space-72: 18rem;    /* 288px */
+  --space-80: 20rem;    /* 320px */
+  --space-88: 22rem;    /* 352px */
+  --space-96: 24rem;    /* 384px */
+  --space-104: 26rem;   /* 416px */
+  --space-112: 28rem;   /* 448px */
+  --space-128: 32rem;   /* 512px */
+
+  /* Semantic spacing aliases */
+  --space-xs: var(--space-1);
+  --space-sm: var(--space-2);
+  --space-md: var(--space-4);
+  --space-lg: var(--space-6);
+  --space-xl: var(--space-8);
+  --space-2xl: var(--space-12);
+  --space-3xl: var(--space-16);
+  --space-4xl: var(--space-24);
+}
+
+/* ============================================================================
+   FONT FAMILIES
+   ============================================================================ */
+
+:root {
+  --font-heading: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', Menlo, Monaco, Consolas, monospace;
+}
+
+/* ============================================================================
+   FONT WEIGHTS
+   ============================================================================ */
+
+:root {
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+}
+
+/* ============================================================================
+   FONT SIZES - Fluid Typography with clamp()
+   ============================================================================ */
+
+/* Display sizes - for hero sections, major headlines */
+:root {
+  --text-display-xl: clamp(3.5rem, 8vw, 6rem);
+  --text-display-xl-line-height: 1.1;
+  --text-display-xl-letter-spacing: -0.02em;
+  --text-display-xl-font-weight: var(--font-weight-extrabold);
+
+  --text-display-lg: clamp(2.5rem, 6vw, 4.5rem);
+  --text-display-lg-line-height: 1.15;
+  --text-display-lg-letter-spacing: -0.01em;
+  --text-display-lg-font-weight: var(--font-weight-extrabold);
+
+  --text-display-md: clamp(2rem, 4vw, 3.5rem);
+  --text-display-md-line-height: 1.2;
+  --text-display-md-letter-spacing: -0.01em;
+  --text-display-md-font-weight: var(--font-weight-bold);
+
+  --text-display-sm: clamp(1.5rem, 3vw, 2.5rem);
+  --text-display-sm-line-height: 1.25;
+  --text-display-sm-letter-spacing: 0;
+  --text-display-sm-font-weight: var(--font-weight-bold);
+}
+
+/* Heading sizes - for section headers, card titles */
+:root {
+  --text-heading-xl: clamp(1.875rem, 2.5vw, 2.25rem);
+  --text-heading-xl-line-height: 1.3;
+  --text-heading-xl-letter-spacing: 0;
+  --text-heading-xl-font-weight: var(--font-weight-bold);
+
+  --text-heading-lg: clamp(1.5rem, 2vw, 1.875rem);
+  --text-heading-lg-line-height: 1.35;
+  --text-heading-lg-letter-spacing: 0;
+  --text-heading-lg-font-weight: var(--font-weight-bold);
+
+  --text-heading-md: clamp(1.25rem, 1.5vw, 1.5rem);
+  --text-heading-md-line-height: 1.4;
+  --text-heading-md-letter-spacing: 0;
+  --text-heading-md-font-weight: var(--font-weight-semibold);
+
+  --text-heading-sm: clamp(1.125rem, 1.25vw, 1.25rem);
+  --text-heading-sm-line-height: 1.45;
+  --text-heading-sm-letter-spacing: 0;
+  --text-heading-sm-font-weight: var(--font-weight-semibold);
+}
+
+/* Body sizes - for paragraphs, content */
+:root {
+  --text-body-lg: 1.125rem;
+  --text-body-lg-line-height: 1.6;
+  --text-body-lg-letter-spacing: 0;
+  --text-body-lg-font-weight: var(--font-weight-normal);
+
+  --text-body-md: 1rem;
+  --text-body-md-line-height: 1.6;
+  --text-body-md-letter-spacing: 0;
+  --text-body-md-font-weight: var(--font-weight-normal);
+
+  --text-body-sm: 0.875rem;
+  --text-body-sm-line-height: 1.5;
+  --text-body-sm-letter-spacing: 0;
+  --text-body-sm-font-weight: var(--font-weight-normal);
+}
+
+/* Small utility sizes */
+:root {
+  --text-caption: 0.75rem;
+  --text-caption-line-height: 1.5;
+  --text-caption-letter-spacing: 0.02em;
+  --text-caption-font-weight: var(--font-weight-medium);
+
+  --text-overline: 0.75rem;
+  --text-overline-line-height: 1.5;
+  --text-overline-letter-spacing: 0.1em;
+  --text-overline-font-weight: var(--font-weight-semibold);
+  --text-overline-text-transform: uppercase;
+}
+
+/* ============================================================================
+   COLOR PALETTE - Primitive Tokens (Raw Values)
+   ============================================================================ */
+
+:root {
+  /* Brand Colors - Chouhan Mattress */
+  --color-brand-orange: #FF6B00;
+  --color-brand-orange-light: #FF8C33;
+  --color-brand-orange-dark: #E65A00;
+  --color-brand-blue: #0066CC;
+  --color-brand-blue-light: #338FFF;
+  --color-brand-blue-dark: #0052A3;
+  --color-brand-green: #00A651;
+  --color-brand-green-light: #33C973;
+  --color-brand-green-dark: #008541;
+  --color-brand-gray: #6B7280;
+  --color-brand-gray-light: #9CA3AF;
+  --color-brand-gray-dark: #374151;
+  --color-brand-black: #111827;
+  --color-brand-white: #FFFFFF;
+  --color-brand-cream: #FDF8F3;
+  --color-brand-beige: #F5F0EB;
+
+  /* Legacy Wakefit Brand Colors - Direct Values */
+  --color-wakefit-orange: #FF6B00;
+  --color-wakefit-orange-light: #FF8C33;
+  --color-wakefit-orange-dark: #E65A00;
+  --color-wakefit-blue: #0066CC;
+  --color-wakefit-blue-light: #338FFF;
+  --color-wakefit-blue-dark: #0052A3;
+  --color-wakefit-green: #00A651;
+  --color-wakefit-green-light: #33C973;
+  --color-wakefit-green-dark: #008541;
+  --color-wakefit-gray: #6B7280;
+  --color-wakefit-gray-light: #9CA3AF;
+  --color-wakefit-gray-dark: #374151;
+  --color-wakefit-black: #111827;
+  --color-wakefit-white: #FFFFFF;
+  --color-wakefit-cream: #FDF8F3;
+  --color-wakefit-beige: #F5F0EB;
+
+  /* Extended Orange Scale */
+  --color-orange-50: #FFF7ED;
+  --color-orange-100: #FFEDD5;
+  --color-orange-200: #FED7AA;
+  --color-orange-300: #FDBA74;
+  --color-orange-400: #FB923C;
+  --color-orange-500: #F97316;
+  --color-orange-600: #EA580C;
+  --color-orange-700: #C2410C;
+  --color-orange-800: #9A3412;
+  --color-orange-900: #7C2D12;
+  --color-orange-950: #431407;
+
+  /* Extended Blue Scale */
+  --color-blue-50: #EFF6FF;
+  --color-blue-100: #DBEAFE;
+  --color-blue-200: #BFDBFE;
+  --color-blue-300: #93C5FD;
+  --color-blue-400: #60A5FA;
+  --color-blue-500: #3B82F6;
+  --color-blue-600: #2563EB;
+  --color-blue-700: #1D4ED8;
+  --color-blue-800: #1E40AF;
+  --color-blue-900: #1E3A8A;
+  --color-blue-950: #172554;
+
+  /* Extended Green Scale */
+  --color-green-50: #F0FDF4;
+  --color-green-100: #DCFCE7;
+  --color-green-200: #BBF7D0;
+  --color-green-300: #86EFAC;
+  --color-green-400: #4ADE80;
+  --color-green-500: #22C55E;
+  --color-green-600: #16A34A;
+  --color-green-700: #15803D;
+  --color-green-800: #166534;
+  --color-green-900: #14532D;
+  --color-green-950: #052E16;
+
+  /* Gray/Neutral Scale */
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+  --color-gray-950: #030712;
+
+  /* Base Colors */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-transparent: transparent;
+}
+
+/* ============================================================================
+   SEMANTIC COLOR TOKENS - LIGHT MODE (Default)
+   ============================================================================ */
+
+:root {
+  /* Background Layers */
+  --color-bg-primary: var(--color-white);
+  --color-bg-secondary: var(--color-wakefit-cream);
+  --color-bg-tertiary: var(--color-wakefit-beige);
+  --color-bg-inverse: var(--color-wakefit-black);
+
+  /* Foreground/Text Layers */
+  --color-fg-primary: var(--color-wakefit-black);
+  --color-fg-secondary: var(--color-wakefit-gray-dark);
+  --color-fg-tertiary: var(--color-wakefit-gray);
+  --color-fg-inverse: var(--color-white);
+  --color-fg-muted: var(--color-wakefit-gray-light);
+
+  /* Primary Brand */
+  --color-primary: var(--color-wakefit-orange);
+  --color-primary-light: var(--color-wakefit-orange-light);
+  --color-primary-dark: var(--color-wakefit-orange-dark);
+  --color-primary-fg: var(--color-white);
+  --color-primary-subtle: var(--color-orange-50);
+  --color-primary-muted: var(--color-orange-100);
+
+  /* Secondary Brand */
+  --color-secondary: var(--color-wakefit-blue);
+  --color-secondary-light: var(--color-wakefit-blue-light);
+  --color-secondary-dark: var(--color-wakefit-blue-dark);
+  --color-secondary-fg: var(--color-white);
+  --color-secondary-subtle: var(--color-blue-50);
+  --color-secondary-muted: var(--color-blue-100);
+
+  /* Success */
+  --color-success: var(--color-wakefit-green);
+  --color-success-light: var(--color-wakefit-green-light);
+  --color-success-dark: var(--color-wakefit-green-dark);
+  --color-success-fg: var(--color-white);
+  --color-success-subtle: var(--color-green-50);
+  --color-success-muted: var(--color-green-100);
+
+  /* Warning */
+  --color-warning: var(--color-orange-500);
+  --color-warning-light: var(--color-orange-400);
+  --color-warning-dark: var(--color-orange-600);
+  --color-warning-fg: var(--color-white);
+  --color-warning-subtle: var(--color-orange-50);
+  --color-warning-muted: var(--color-orange-100);
+
+  /* Danger/Error */
+  --color-danger: #EF4444;
+  --color-danger-light: #F87171;
+  --color-danger-dark: #DC2626;
+  --color-danger-fg: var(--color-white);
+  --color-danger-subtle: #FEF2F2;
+  --color-danger-muted: #FEE2E2;
+
+  /* Neutral */
+  --color-neutral-50: var(--color-gray-50);
+  --color-neutral-100: var(--color-gray-100);
+  --color-neutral-200: var(--color-gray-200);
+  --color-neutral-300: var(--color-gray-300);
+  --color-neutral-400: var(--color-gray-400);
+  --color-neutral-500: var(--color-gray-500);
+  --color-neutral-600: var(--color-gray-600);
+  --color-neutral-700: var(--color-gray-700);
+  --color-neutral-800: var(--color-gray-800);
+  --color-neutral-900: var(--color-gray-900);
+  --color-neutral-950: var(--color-gray-950);
+
+  /* Borders */
+  --color-border: var(--color-gray-200);
+  --color-border-light: var(--color-gray-100);
+  --color-border-dark: var(--color-gray-300);
+  --color-border-focus: var(--color-wakefit-orange);
+  --color-border-error: #EF4444;
+
+  /* Interactive States */
+  --color-interactive-hover: var(--color-gray-100);
+  --color-interactive-active: var(--color-gray-200);
+  --color-interactive-focus: var(--color-orange-200);
+  --color-interactive-disabled: var(--color-gray-100);
+
+  /* Overlays */
+  --color-overlay-light: rgba(0, 0, 0, 0.3);
+  --color-overlay-medium: rgba(0, 0, 0, 0.5);
+  --color-overlay-dark: rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================================================
+   SEMANTIC COLOR TOKENS - DARK MODE
+   ============================================================================ */
+
+.dark {
+  /* Background Layers */
+  --color-bg-primary: var(--color-wakefit-black);
+  --color-bg-secondary: var(--color-gray-900);
+  --color-bg-tertiary: var(--color-gray-800);
+  --color-bg-inverse: var(--color-white);
+
+  /* Foreground/Text Layers */
+  --color-fg-primary: var(--color-white);
+  --color-fg-secondary: var(--color-gray-300);
+  --color-fg-tertiary: var(--color-gray-400);
+  --color-fg-inverse: var(--color-wakefit-black);
+  --color-fg-muted: var(--color-gray-500);
+
+  /* Primary Brand */
+  --color-primary: var(--color-wakefit-orange-light);
+  --color-primary-light: var(--color-wakefit-orange);
+  --color-primary-dark: var(--color-wakefit-orange-dark);
+  --color-primary-fg: var(--color-wakefit-black);
+  --color-primary-subtle: var(--color-orange-900);
+  --color-primary-muted: var(--color-orange-800);
+
+  /* Secondary Brand */
+  --color-secondary: var(--color-wakefit-blue-light);
+  --color-secondary-light: var(--color-wakefit-blue);
+  --color-secondary-dark: var(--color-wakefit-blue-dark);
+  --color-secondary-fg: var(--color-white);
+  --color-secondary-subtle: var(--color-blue-900);
+  --color-secondary-muted: var(--color-blue-800);
+
+  /* Success */
+  --color-success: var(--color-wakefit-green-light);
+  --color-success-light: var(--color-wakefit-green);
+  --color-success-dark: var(--color-wakefit-green-dark);
+  --color-success-fg: var(--color-wakefit-black);
+  --color-success-subtle: var(--color-green-900);
+  --color-success-muted: var(--color-green-800);
+
+  /* Warning */
+  --color-warning: var(--color-orange-400);
+  --color-warning-light: var(--color-orange-300);
+  --color-warning-dark: var(--color-orange-500);
+  --color-warning-fg: var(--color-wakefit-black);
+  --color-warning-subtle: var(--color-orange-900);
+  --color-warning-muted: var(--color-orange-800);
+
+  /* Danger/Error */
+  --color-danger: #F87171;
+  --color-danger-light: #FCA5A5;
+  --color-danger-dark: #EF4444;
+  --color-danger-fg: var(--color-white);
+  --color-danger-subtle: #7F1D1D;
+  --color-danger-muted: #991B1B;
+
+  /* Neutral (same values, different context) */
+  --color-neutral-50: var(--color-gray-50);
+  --color-neutral-100: var(--color-gray-100);
+  --color-neutral-200: var(--color-gray-200);
+  --color-neutral-300: var(--color-gray-300);
+  --color-neutral-400: var(--color-gray-400);
+  --color-neutral-500: var(--color-gray-500);
+  --color-neutral-600: var(--color-gray-600);
+  --color-neutral-700: var(--color-gray-700);
+  --color-neutral-800: var(--color-gray-800);
+  --color-neutral-900: var(--color-gray-900);
+  --color-neutral-950: var(--color-gray-950);
+
+  /* Borders */
+  --color-border: var(--color-gray-700);
+  --color-border-light: var(--color-gray-800);
+  --color-border-dark: var(--color-gray-600);
+  --color-border-focus: var(--color-wakefit-orange-light);
+  --color-border-error: #F87171;
+
+  /* Interactive States */
+  --color-interactive-hover: var(--color-gray-800);
+  --color-interactive-active: var(--color-gray-700);
+  --color-interactive-focus: var(--color-orange-800);
+  --color-interactive-disabled: var(--color-gray-800);
+
+  /* Overlays */
+  --color-overlay-light: rgba(255, 255, 255, 0.1);
+  --color-overlay-medium: rgba(255, 255, 255, 0.2);
+  --color-overlay-dark: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================================================
+   BORDER RADIUS
+   Base: 12px (0.75rem)
+   ============================================================================ */
+
+:root {
+  --radius-none: 0;
+  --radius-sm: 0.25rem;    /* 4px */
+  --radius: 0.5rem;        /* 8px (default) */
+  --radius-md: 0.625rem;   /* 10px */
+  --radius-lg: 0.75rem;    /* 12px (base from audit) */
+  --radius-xl: 1rem;       /* 16px */
+  --radius-2xl: 1.5rem;    /* 24px */
+  --radius-3xl: 2rem;      /* 32px */
+  --radius-full: 9999px;
+}
+
+/* ============================================================================
+   SHADOW SYSTEM (5 Levels + Special)
+   ============================================================================ */
+
+:root {
+  /* Elevation Levels */
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+
+  /* Component-Specific Shadows */
+  --shadow-card: 0 2px 8px 0 rgb(0 0 0 / 0.08), 0 1px 3px 0 rgb(0 0 0 / 0.05);
+  --shadow-card-hover: 0 12px 24px -8px rgb(0 0 0 / 0.12), 0 4px 12px -4px rgb(0 0 0 / 0.08);
+  --shadow-float: 0 20px 40px -12px rgb(0 0 0 / 0.15);
+
+  /* Brand Glow Shadows */
+  --shadow-glow: 0 0 0 1px rgb(255 107 0 / 0.1), 0 4px 12px 0 rgb(255 107 0 / 0.15);
+  --shadow-glow-lg: 0 0 0 1px rgb(255 107 0 / 0.1), 0 12px 28px 0 rgb(255 107 0 / 0.2);
+  --shadow-glow-blue: 0 0 0 1px rgb(0 102 204 / 0.1), 0 4px 12px 0 rgb(0 102 204 / 0.15);
+  --shadow-glow-green: 0 0 0 1px rgb(0 166 81 / 0.1), 0 4px 12px 0 rgb(0 166 81 / 0.15);
+
+  /* Focus Ring */
+  --shadow-focus: 0 0 0 3px rgb(255 107 0 / 0.3);
+  --shadow-focus-blue: 0 0 0 3px rgb(0 102 204 / 0.3);
+}
+
+/* ============================================================================
+   ANIMATION DURATIONS
+   Standard: 300ms
+   ============================================================================ */
+
+:root {
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;    /* Standard transition from audit */
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
+  --duration-carousel: 400ms;  /* Carousel/slider transitions */
+  --duration-modal: 200ms;     /* Modal enter/exit */
+  --duration-tooltip: 100ms;   /* Tooltip show/hide */
+  --duration-dropdown: 150ms;  /* Dropdown animations */
+}
+
+/* ============================================================================
+   EASING FUNCTIONS
+   ============================================================================ */
+
+:root {
+  /* Standard Material-style Easings */
+  --ease-linear: linear;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);       /* ease-in-out */
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);              /* ease-out */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);               /* ease-in */
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);         /* ease-in-out */
+
+  /* Expressive Easings */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);    /* Spring/bounce */
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bouncy */
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);           /* Quick, responsive */
+  --ease-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);  /* Gentle ease */
+
+  /* Entrance/Exit Specific */
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* ============================================================================
+   Z-INDEX LAYERS
+   ============================================================================ */
+
+:root {
+  --z-hide: -1;
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-popover: 600;
+  --z-tooltip: 700;
+  --z-toast: 800;
+  --z-tooltip-hover: 900;
+  --z-max: 9999;
+}
+
+/* ============================================================================
+   BREAKPOINTS (6 breakpoints)
+   ============================================================================ */
+
+:root {
+  --bp-sm: 640px;    /* Small tablets, large phones */
+  --bp-md: 768px;    /* Tablets */
+  --bp-lg: 1024px;   /* Small laptops */
+  --bp-xl: 1280px;   /* Desktop */
+  --bp-2xl: 1400px;  /* Large desktop (max container) */
+  --bp-3xl: 1600px;  /* Extra large desktop */
+}
+
+/* ============================================================================
+   CONTAINER WIDTHS
+   Max container: 1400px (87.5rem)
+   ============================================================================ */
+
+:root {
+  --container-none: none;
+  --container-xs: 20rem;     /* 320px */
+  --container-sm: 24rem;     /* 384px */
+  --container-md: 28rem;     /* 448px */
+  --container-lg: 32rem;     /* 512px */
+  --container-xl: 36rem;     /* 576px */
+  --container-2xl: 42rem;    /* 672px */
+  --container-3xl: 48rem;    /* 768px */
+  --container-4xl: 56rem;    /* 896px */
+  --container-5xl: 64rem;    /* 1024px */
+  --container-6xl: 72rem;    /* 1152px */
+  --container-7xl: 80rem;    /* 1280px */
+  --container-wakefit: 87.5rem; /* 1400px - max container from audit */
+  --container-full: 100%;
+  --container-screen: 100vw;
+}
+
+/* ============================================================================
+   OPACITY VALUES
+   ============================================================================ */
+
+:root {
+  --opacity-0: 0;
+  --opacity-5: 0.05;
+  --opacity-10: 0.1;
+  --opacity-20: 0.2;
+  --opacity-25: 0.25;
+  --opacity-30: 0.3;
+  --opacity-40: 0.4;
+  --opacity-50: 0.5;
+  --opacity-60: 0.6;
+  --opacity-70: 0.7;
+  --opacity-75: 0.75;
+  --opacity-80: 0.8;
+  --opacity-90: 0.9;
+  --opacity-95: 0.95;
+  --opacity-100: 1;
+}
+
+/* ============================================================================
+   BLUR VALUES
+   ============================================================================ */
+
+:root {
+  --blur-none: 0;
+  --blur-sm: 4px;
+  --blur: 8px;
+  --blur-md: 12px;
+  --blur-lg: 16px;
+  --blur-xl: 24px;
+  --blur-2xl: 40px;
+  --blur-3xl: 64px;
+}
+
+/* ============================================================================
+   TRANSITION PROPERTIES
+   ============================================================================ */
+
+:root {
+  --transition-all: all;
+  --transition-colors: color, background-color, border-color, text-decoration-color, fill, stroke;
+  --transition-opacity: opacity;
+  --transition-shadow: box-shadow;
+  --transition-transform: transform;
+  --transition-transform-opacity: transform, opacity;
+  --transition-colors-opacity: color, background-color, border-color, text-decoration-color, fill, stroke, opacity;
+  --transition-colors-shadow: color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow;
+}
+
+/* ============================================================================
+   COMPOSITE TRANSITION SHORTHANDS
+   ============================================================================ */
+
+:root {
+  /* Standard transition (300ms ease-out) */
+  --transition-standard: var(--transition-colors-opacity) var(--duration-normal) var(--ease-out);
+  
+  /* Fast transition (150ms) */
+  --transition-fast: var(--transition-colors-opacity) var(--duration-fast) var(--ease-out);
+  
+  /* Slow transition (500ms) */
+  --transition-slow: var(--transition-colors-opacity) var(--duration-slow) var(--ease-out);
+  
+  /* Transform transition */
+  --transition-transform: var(--transition-transform) var(--duration-normal) var(--ease-out);
+  
+  /* Shadow transition */
+  --transition-shadow: var(--transition-shadow) var(--duration-normal) var(--ease-out);
+  
+  /* Modal transition */
+  --transition-modal: var(--transition-transform-opacity) var(--duration-modal) var(--ease-out);
+}
+
+/* ============================================================================
+   MEDIA QUERY HELPERS (as CSS custom properties for reference)
+   Note: These can't be used directly in @media rules, but are available
+   for reference and can be used with CSS-in-JS solutions.
+   ============================================================================ */
+
+:root {
+  --mq-sm: (min-width: 640px);
+  --mq-md: (min-width: 768px);
+  --mq-lg: (min-width: 1024px);
+  --mq-xl: (min-width: 1280px);
+  --mq-2xl: (min-width: 1400px);
+  --mq-3xl: (min-width: 1600px);
+  
+  --mq-max-sm: (max-width: 639px);
+  --mq-max-md: (max-width: 767px);
+  --mq-max-lg: (max-width: 1023px);
+  --mq-max-xl: (max-width: 1279px);
+  --mq-max-2xl: (max-width: 1399px);
+  
+  --mq-reduce-motion: (prefers-reduced-motion: reduce);
+  --mq-dark: (prefers-color-scheme: dark);
+  --mq-high-contrast: (prefers-contrast: high);
+  --mq-print: print;
+}
+
+/* ============================================================================
+   UTILITY CLASSES FOR COMMON PATTERNS
+   These can be used directly in HTML or as @apply in CSS
+   ============================================================================ */
+
+/* Fluid Typography Utilities */
+.text-display-xl {
+  font-size: var(--text-display-xl);
+  line-height: var(--text-display-xl-line-height);
+  letter-spacing: var(--text-display-xl-letter-spacing);
+  font-weight: var(--text-display-xl-font-weight);
+  font-family: var(--font-heading);
+}
+
+.text-display-lg {
+  font-size: var(--text-display-lg);
+  line-height: var(--text-display-lg-line-height);
+  letter-spacing: var(--text-display-lg-letter-spacing);
+  font-weight: var(--text-display-lg-font-weight);
+  font-family: var(--font-heading);
+}
+
+.text-display-md {
+  font-size: var(--text-display-md);
+  line-height: var(--text-display-md-line-height);
+  letter-spacing: var(--text-display-md-letter-spacing);
+  font-weight: var(--text-display-md-font-weight);
+  font-family: var(--font-heading);
+}
+
+.text-display-sm {
+  font-size: var(--text-display-sm);
+  line-height: var(--text-display-sm-line-height);
+  letter-spacing: var(--text-display-sm-letter-spacing);
+  font-weight: var(--text-display-sm-font-weight);
+  font-family: var(--font-heading);
+}
+
+.text-heading-xl {
+  font-size: var(--text-heading-xl);
+  line-height: var(--text-heading-xl-line-height);
+  letter-spacing: var(--text-heading-xl-letter-spacing);
+  font-weight: var(--text-heading-xl-font-weight);
+  font-family: var(--font-heading);
+}
+
+.text-heading-lg {
+  font-size: var(--text-heading-lg);
+  line-height: var(--text-heading-lg-line-height);
+  letter-spacing: var(--text-heading-lg-letter-spacing);
+  font-weight: var(--text-heading-lg-font-weight);
+  font-family: var(--font-heading);
+}
+
+.text-heading-md {
+  font-size: var(--text-heading-md);
+  line-height: var(--text-heading-md-line-height);
+  letter-spacing: var(--text-heading-md-letter-spacing);
+  font-weight: var(--text-heading-md-font-weight);
+  font-family: var(--font-heading);
+}
+
+.text-heading-sm {
+  font-size: var(--text-heading-sm);
+  line-height: var(--text-heading-sm-line-height);
+  letter-spacing: var(--text-heading-sm-letter-spacing);
+  font-weight: var(--text-heading-sm-font-weight);
+  font-family: var(--font-heading);
+}
+
+.text-body-lg {
+  font-size: var(--text-body-lg);
+  line-height: var(--text-body-lg-line-height);
+  letter-spacing: var(--text-body-lg-letter-spacing);
+  font-weight: var(--text-body-lg-font-weight);
+  font-family: var(--font-body);
+}
+
+.text-body-md {
+  font-size: var(--text-body-md);
+  line-height: var(--text-body-md-line-height);
+  letter-spacing: var(--text-body-md-letter-spacing);
+  font-weight: var(--text-body-md-font-weight);
+  font-family: var(--font-body);
+}
+
+.text-body-sm {
+  font-size: var(--text-body-sm);
+  line-height: var(--text-body-sm-line-height);
+  letter-spacing: var(--text-body-sm-letter-spacing);
+  font-weight: var(--text-body-sm-font-weight);
+  font-family: var(--font-body);
+}
+
+.text-caption {
+  font-size: var(--text-caption);
+  line-height: var(--text-caption-line-height);
+  letter-spacing: var(--text-caption-letter-spacing);
+  font-weight: var(--text-caption-font-weight);
+  font-family: var(--font-body);
+}
+
+.text-overline {
+  font-size: var(--text-overline);
+  line-height: var(--text-overline-line-height);
+  letter-spacing: var(--text-overline-letter-spacing);
+  font-weight: var(--text-overline-font-weight);
+  text-transform: var(--text-overline-text-transform);
+  font-family: var(--font-heading);
+}
+
+/* Spacing Utilities */
+.p-0 { padding: var(--space-0); }
+.p-1 { padding: var(--space-1); }
+.p-2 { padding: var(--space-2); }
+.p-3 { padding: var(--space-3); }
+.p-4 { padding: var(--space-4); }
+.p-5 { padding: var(--space-5); }
+.p-6 { padding: var(--space-6); }
+.p-8 { padding: var(--space-8); }
+.p-10 { padding: var(--space-10); }
+.p-12 { padding: var(--space-12); }
+.p-16 { padding: var(--space-16); }
+.p-20 { padding: var(--space-20); }
+.p-24 { padding: var(--space-24); }
+
+.m-0 { margin: var(--space-0); }
+.m-1 { margin: var(--space-1); }
+.m-2 { margin: var(--space-2); }
+.m-3 { margin: var(--space-3); }
+.m-4 { margin: var(--space-4); }
+.m-5 { margin: var(--space-5); }
+.m-6 { margin: var(--space-6); }
+.m-8 { margin: var(--space-8); }
+.m-10 { margin: var(--space-10); }
+.m-12 { margin: var(--space-12); }
+.m-16 { margin: var(--space-16); }
+.m-20 { margin: var(--space-20); }
+.m-24 { margin: var(--space-24); }
+
+/* Gap Utilities */
+.gap-0 { gap: var(--space-0); }
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-5 { gap: var(--space-5); }
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
+.gap-10 { gap: var(--space-10); }
+.gap-12 { gap: var(--space-12); }
+.gap-16 { gap: var(--space-16); }
+
+/* Border Radius Utilities */
+.rounded-none { border-radius: var(--radius-none); }
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded { border-radius: var(--radius); }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+.rounded-2xl { border-radius: var(--radius-2xl); }
+.rounded-3xl { border-radius: var(--radius-3xl); }
+.rounded-full { border-radius: var(--radius-full); }
+
+/* Shadow Utilities */
+.shadow-none { box-shadow: var(--shadow-none); }
+.shadow-xs { box-shadow: var(--shadow-xs); }
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow { box-shadow: var(--shadow); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
+.shadow-2xl { box-shadow: var(--shadow-2xl); }
+.shadow-inner { box-shadow: var(--shadow-inner); }
+.shadow-card { box-shadow: var(--shadow-card); }
+.shadow-card-hover { box-shadow: var(--shadow-card-hover); }
+.shadow-float { box-shadow: var(--shadow-float); }
+.shadow-glow { box-shadow: var(--shadow-glow); }
+.shadow-glow-lg { box-shadow: var(--shadow-glow-lg); }
+
+/* Transition Utilities */
+.transition-standard { transition: var(--transition-standard); }
+.transition-fast { transition: var(--transition-fast); }
+.transition-slow { transition: var(--transition-slow); }
+.transition-transform { transition: var(--transition-transform); }
+.transition-shadow { transition: var(--transition-shadow); }
+.transition-modal { transition: var(--transition-modal); }
+
+/* Color Utilities */
+.text-primary { color: var(--color-primary); }
+.text-primary-light { color: var(--color-primary-light); }
+.text-primary-dark { color: var(--color-primary-dark); }
+.text-secondary { color: var(--color-secondary); }
+.text-success { color: var(--color-success); }
+.text-warning { color: var(--color-warning); }
+.text-danger { color: var(--color-danger); }
+.text-fg-primary { color: var(--color-fg-primary); }
+.text-fg-secondary { color: var(--color-fg-secondary); }
+.text-fg-tertiary { color: var(--color-fg-tertiary); }
+.text-fg-muted { color: var(--color-fg-muted); }
+
+.bg-primary { background-color: var(--color-primary); }
+.bg-primary-subtle { background-color: var(--color-primary-subtle); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-success { background-color: var(--color-success); }
+.bg-warning { background-color: var(--color-warning); }
+.bg-danger { background-color: var(--color-danger); }
+.bg-bg-primary { background-color: var(--color-bg-primary); }
+.bg-bg-secondary { background-color: var(--color-bg-secondary); }
+.bg-bg-tertiary { background-color: var(--color-bg-tertiary); }
+
+.border-primary { border-color: var(--color-primary); }
+.border-border { border-color: var(--color-border); }
+.border-focus { border-color: var(--color-border-focus); }
+.border-error { border-color: var(--color-border-error); }
+
+/* Focus Ring Utility */
+.focus-ring {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+.focus-ring:focus-visible {
+  box-shadow: var(--shadow-focus);
+}
+.focus-ring-blue {
+  box-shadow: var(--shadow-focus-blue);
+}
+.focus-ring-blue:focus-visible {
+  box-shadow: var(--shadow-focus-blue);
+}
+
+/* Container Utility */
+.container-wakefit {
+  max-width: var(--container-wakefit);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High Contrast Support */
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: var(--color-fg-primary);
+    --color-border-focus: var(--color-fg-primary);
+  }
+  
+  .dark {
+    --color-border: var(--color-white);
+    --color-border-focus: var(--color-white);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  
+  :root {
+    --color-bg-primary: var(--color-white);
+    --color-fg-primary: var(--color-black);
+  }
+}
