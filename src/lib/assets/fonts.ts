@@ -7,38 +7,24 @@
  * - Inter: 400, 500, 600 (body text, UI)
  */
 
-import { Poppins, Inter } from 'next/font/google';
-import localFont from 'next/font/local';
+// NOTE: We intentionally do NOT use `next/font/google` here.
+// next/font/google downloads font files from fonts.googleapis.com at
+// *compile time*. In sandboxed/WebContainer preview environments (e.g.
+// StackBlitz) there is no reliable outbound network, which causes the
+// font loader to throw "Maximum call stack size exceeded" and the app
+// fails to render ("workspace failed to render").
+//
+// Instead we expose plain CSS-variable class names whose values are
+// defined in globals.css as robust system-font stacks. This renders
+// identically in every environment with zero network dependency, while
+// keeping the same export surface (poppins, inter, fontClassNames, ...)
+// so no downstream code changes are required.
+//
+// If you later want the *actual* Poppins/Inter faces (with self-hosted
+// woff2 files), switch to `next/font/local` pointing at /public/fonts.
 
-/**
- * Poppins - Google Font
- * Used for headings, UI elements, brand text
- * Weights: 400, 500, 600, 700, 800
- */
-export const poppins = Poppins({
-  subsets: ['latin', 'latin-ext'],
-  display: 'swap',
-  variable: '--font-poppins',
-  fallback: ['system-ui', 'Arial', 'sans-serif'],
-  weight: ['400', '500', '600', '700', '800'],
-  preload: true,
-  adjustFontFallback: true,
-});
-
-/**
- * Inter - Google Font
- * Used for body text, UI, data display
- * Weights: 400, 500, 600
- */
-export const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-  fallback: ['system-ui', 'Arial', 'sans-serif'],
-  weight: ['400', '500', '600'],
-  preload: true,
-  adjustFontFallback: true,
-});
+export const poppins = { variable: 'font-poppins' } as const;
+export const inter = { variable: 'font-inter' } as const;
 
 /**
  * Local font fallback (if self-hosting)
@@ -82,20 +68,18 @@ export const FONT_VARIABLES = {
 } as const;
 
 /**
- * Combined font class names for RootLayout
+ * Combined font class names for RootLayout.
+ * `.app-fonts` defines --font-poppins / --font-inter as system-font stacks
+ * in globals.css, so no external font download is required (WebContainer-safe).
  */
-export const fontClassNames = `${poppins.variable} ${inter.variable}`;
+export const fontClassNames = 'app-fonts';
 
 /**
- * Preconnect and DNS prefetch hints for font domains
- * Add these to layout.tsx <head>
+ * Preconnect hints are intentionally empty: with the system-font approach
+ * there is no external font domain to preconnect to. This avoids failed
+ * network probes in sandboxed preview environments.
  */
-export const fontPreconnectHints = [
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossOrigin: 'anonymous' as const },
-  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' as const },
-  { rel: 'dns-prefetch', href: 'https://fonts.googleapis.com' },
-  { rel: 'dns-prefetch', href: 'https://fonts.gstatic.com' },
-];
+export const fontPreconnectHints: { rel: string; href: string; crossOrigin?: 'anonymous' }[] = [];
 
 /**
  * Font subset configuration for performance

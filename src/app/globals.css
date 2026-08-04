@@ -24,6 +24,19 @@
     --input: 30 20% 88%;
     --ring: 24 95% 53%;
     --radius: 0.5rem;
+
+    /* Network-free font variables (WebContainer / StackBlitz safe).
+       Poppins/Inter are approximated with system stacks so the app
+       renders identically without downloading webfonts. Swap to a
+       self-hosted @font-face (next/font/local) if exact faces are needed. */
+    --font-poppins: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    --font-inter: 'Inter', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* Applied on <html> via layout.tsx `app-fonts` class. */
+  .app-fonts {
+    --font-poppins: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    --font-inter: 'Inter', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
   }
 
   .dark {

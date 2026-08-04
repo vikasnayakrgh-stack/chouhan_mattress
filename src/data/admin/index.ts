@@ -1,0 +1,7 @@
+export * from './products.mock'
+export * from './orders.mock'
+export * from './customers.mock'
+export * from './categories.mock'
+export * from './collections.mock'
+export * from './dashboard.mock'
+export * from './returns.mock'

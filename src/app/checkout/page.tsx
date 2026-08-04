@@ -79,13 +79,37 @@ function CheckoutPageContent() {
     setCurrentStep(2);
   };
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     setIsProcessing(true);
-    setTimeout(() => {
-      const mockOrderId = `CM-${Math.floor(100000 + Math.random() * 900000)}`;
+    try {
+      const response = await fetch('/api/checkout/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: items.map((item) => ({
+            productId: item.productId,
+            variantSize: item.size || (typeof item.variant === 'string' ? item.variant : undefined),
+            quantity: item.quantity,
+          })),
+          shippingAddress: address,
+          shippingMethod: selectedShipping,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        alert(result.error || 'Failed to create authoritative server order');
+        setIsProcessing(false);
+        return;
+      }
+
       clearCart();
-      router.push(`/order-confirmation/${mockOrderId}`);
-    }, 1500);
+      router.push(`/order-confirmation/${result.order.orderId}`);
+    } catch (err: any) {
+      alert('Order placement network error');
+      setIsProcessing(false);
+    }
   };
 
   return (

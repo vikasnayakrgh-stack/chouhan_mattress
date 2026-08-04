@@ -1,287 +1,204 @@
 /**
- * Wakefit Clone - Hero Component
- * Reusable hero section with countdown, CTAs, badges, animations
+ * Chouhan Mattress - Official Wakefit-Inspired Hero Carousel Component
+ * Full-bleed slide banner with support for custom uploaded artwork banners & live text slides
  */
 
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { HeroProps, CtaButton, Badge, CountdownData, BaseComponentProps } from '@/types';
+import { ChevronLeftIcon, ChevronRightIcon, SparklesIcon, ShieldCheckIcon } from 'lucide-react';
+import homepageData from '@/data/homepage.json';
 
-export function Hero({
-  className = '',
-  title,
-  subtitle,
-  description,
-  backgroundImage,
-  backgroundPosition = 'center',
-  ctaPrimary,
-  ctaSecondary,
-  badges = [],
-  countdown,
-  showArrow = false,
-  arrowLabel = 'Scroll to explore',
-  overlay,
-  height = 'standard',
-  'data-testid': testId,
-}: HeroProps) {
-  const [countdownTime, setCountdownTime] = useState<CountdownData | null>(countdown || null);
+export function Hero() {
+  const slides = homepageData.hero.slides;
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Countdown timer
   useEffect(() => {
-    if (!countdown) return;
-    setCountdownTime(countdown);
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
 
-    const interval = setInterval(() => {
-      setCountdownTime(prev => {
-        if (!prev) return null;
-        let { days, hours, minutes, seconds } = prev;
-        seconds -= 1;
-        if (seconds < 0) {
-          seconds = 59;
-          minutes -= 1;
-        }
-        if (minutes < 0) {
-          minutes = 59;
-          hours -= 1;
-        }
-        if (hours < 0) {
-          hours = 23;
-          days -= 1;
-        }
-        if (days < 0) return null;
-        return { days, hours, minutes, seconds };
-      });
-    }, 1000);
+  const activeSlide = slides[currentIndex] as any;
 
-    return () => clearInterval(interval);
-  }, [countdown?.days, countdown?.hours, countdown?.minutes, countdown?.seconds]);
-
-  const heightStyles = {
-    standard: 'min-h-[600px] md:min-h-[700px] lg:min-h-[800px]',
-    tall: 'min-h-[700px] md:min-h-[850px] lg:min-h-[950px]',
-    full: 'min-h-screen',
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  const containerHeight = {
-    standard: 'h-[600px] md:h-[700px] lg:h-[800px]',
-    tall: 'h-[700px] md:h-[850px] lg:h-[950px]',
-    full: 'h-screen',
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % slides.length);
   };
 
   return (
-    <section
-      className={cn(
-        'relative w-full overflow-hidden',
-        heightStyles[height],
-        className
-      )}
-      data-testid={testId}
-      aria-labelledby="hero-title"
-    >
-      {/* Background Image */}
-      {backgroundImage && (
-        <OptimizedImage
-          src={backgroundImage}
-          alt=""
-          preset={height === 'tall' ? 'heroTall' : 'hero'}
-          priority={true}
-          placeholder="blur"
-          className={cn(
-            'absolute inset-0 w-full h-full object-cover',
-            containerHeight[height]
-          )}
-          containerClassName="absolute inset-0"
-          style={{ objectPosition: backgroundPosition }}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" aria-hidden="true" />
-
-      {/* Custom Overlay */}
-      {overlay && (
-        <div className="absolute inset-0 flex items-center justify-center px-4">
-          <div className="container mx-auto max-w-6xl w-full">
-            <div className="max-w-3xl animate-slide-up">{overlay}</div>
-          </div>
-        </div>
-      )}
-
-      {/* Content */}
-      <div className={cn('relative z-10 flex items-end', containerHeight[height])}>
-        <div className="container mx-auto px-4 pb-12 md:pb-16 lg:pb-20 w-full">
-          <div className="max-w-3xl animate-slide-up">
-            {/* Badges */}
-            {badges.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-6" role="list" aria-label="Badges">
-                {badges.map((badge, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.3 }}
-                    className={cn(
-                      'inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-full',
-                      badge.variant === 'primary' && 'bg-wakefit-orange text-white',
-                      badge.variant === 'secondary' && 'bg-wakefit-dark text-white',
-                      badge.variant === 'success' && 'bg-green-600 text-white',
-                      badge.variant === 'warning' && 'bg-yellow-500 text-white',
-                      badge.variant === 'outline' && 'border-2 border-wakefit-orange text-wakefit-orange bg-transparent'
-                    )}
-                    role="listitem"
-                  >
-                    {badge.text}
-                  </motion.span>
-                ))}
+    <section className="relative w-full bg-gray-950 text-white overflow-hidden group">
+      {/* Slider Container */}
+      <div className="relative h-[360px] sm:h-[440px] md:h-[500px] lg:h-[560px] w-full">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeSlide.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="absolute inset-0 w-full h-full"
+          >
+            {activeSlide.isCustomBanner ? (
+              /* Custom Artwork Banner Rendering */
+              <div className="relative w-full h-full">
+                <Image
+                  src={activeSlide.backgroundImage}
+                  alt={activeSlide.title}
+                  fill
+                  priority
+                  className="object-cover object-center"
+                />
+                {/* Hotspot Click Overlay for Primary CTA */}
+                <Link
+                  href={activeSlide.ctaLink || '/category/sofas'}
+                  className="absolute left-[5%] top-[45%] w-[18%] h-[15%] z-10 cursor-pointer"
+                  aria-label="Shop Sofas"
+                />
+                {/* Hotspot Click Overlay for Explore Offer Products */}
+                <Link
+                  href="/products"
+                  className="absolute right-[6%] top-[38%] w-[18%] h-[15%] z-10 cursor-pointer"
+                  aria-label="Explore Offer Products"
+                />
               </div>
-            )}
+            ) : (
+              /* Standard Live Text Slide Overlay */
+              <>
+                {/* Background Image */}
+                <Image
+                  src={activeSlide.backgroundImage}
+                  alt={activeSlide.title}
+                  fill
+                  priority
+                  className="object-cover object-center"
+                />
 
-            {/* Countdown */}
-            {countdownTime && (
-              <div className="flex items-center gap-4 mb-6" role="timer" aria-label="Sale countdown">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold text-white bg-wakefit-orange/90 rounded-full backdrop-blur">
-                  Sale Ends In
-                </span>
-                <div className="flex items-center gap-1">
-                  {[
-                    { value: countdownTime.days, label: 'Days' },
-                    { value: countdownTime.hours, label: 'Hours' },
-                    { value: countdownTime.minutes, label: 'Mins' },
-                    { value: countdownTime.seconds, label: 'Secs' },
-                  ].map(({ value, label }, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.3 + index * 0.1 }}
-                      className="flex items-center gap-1"
-                    >
-                      <span className="flex items-center justify-center w-10 h-10 text-lg font-bold text-white bg-black/60 rounded-lg backdrop-blur font-mono">
-                        {String(value).padStart(2, '0')}
+                {/* Gradient Overlay for Text legibility */}
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+
+                {/* Slide Content Overlay */}
+                <div className="container mx-auto px-6 h-full flex items-center justify-between relative z-10">
+                  {/* Left Column: Headline & Subtitle */}
+                  <div className="max-w-xl space-y-4">
+                    {activeSlide.badge && (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F26522] text-white text-xs font-black rounded-full uppercase tracking-wider shadow-sm">
+                        <SparklesIcon className="w-3.5 h-3.5" /> {activeSlide.badge}
                       </span>
-                      <span className="text-xs text-white/70 hidden sm:block">{label}</span>
-                    </motion.span>
-                  ))}
+                    )}
+
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-white drop-shadow-md">
+                      {activeSlide.title}
+                    </h1>
+
+                    <p
+                      className="text-sm sm:text-base md:text-lg text-gray-200 leading-relaxed drop-shadow-sm max-w-md"
+                      dangerouslySetInnerHTML={{ __html: activeSlide.subtitle }}
+                    />
+
+                    <div className="pt-2">
+                      <Link
+                        href={activeSlide.ctaLink || '/products'}
+                        className="inline-flex items-center gap-2 px-7 py-3 bg-[#F26522] text-white font-extrabold text-sm rounded-xl hover:bg-[#d85519] transition-all shadow-md hover:scale-105"
+                      >
+                        {activeSlide.ctaText || 'Shop Now'} →
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Offer Box (Dynamic per slide) */}
+                  <div className="hidden lg:flex flex-col items-center justify-center bg-purple-950/80 backdrop-blur-md text-white p-6 rounded-3xl border border-purple-500/30 shadow-2xl max-w-xs text-center space-y-3">
+                    {activeSlide.offerCard ? (
+                      <>
+                        <div className="flex items-center gap-2 border-b border-purple-500/30 pb-2 w-full justify-center">
+                          <ShieldCheckIcon className="w-7 h-7 text-purple-300" />
+                          <div className="text-left">
+                            <span className="text-xs font-black uppercase text-purple-200 block leading-none">{activeSlide.offerCard.title}</span>
+                            <span className="text-[10px] font-bold text-purple-300">{activeSlide.offerCard.subtitle}</span>
+                          </div>
+                        </div>
+
+                        <div>
+                          <span className="text-xs font-bold text-purple-300 uppercase block">{activeSlide.offerCard.price}</span>
+                        </div>
+
+                        <Link
+                          href={activeSlide.offerCard.ctaLink || "/products"}
+                          className="w-full py-2.5 px-4 bg-[#F26522] text-white font-bold text-xs rounded-xl hover:bg-[#d85519] transition-colors shadow-sm"
+                        >
+                          {activeSlide.offerCard.ctaText}
+                        </Link>
+                      </>
+                    ) : (
+                      /* Fallback for slides without offerCard */
+                      <>
+                        <div className="flex items-center gap-2 border-b border-purple-500/30 pb-2 w-full justify-center">
+                          <ShieldCheckIcon className="w-7 h-7 text-purple-300" />
+                          <div className="text-left">
+                            <span className="text-xs font-black uppercase text-purple-200 block leading-none">100 Days</span>
+                            <span className="text-[10px] font-bold text-purple-300">Risk-Free Return</span>
+                          </div>
+                        </div>
+
+                        <div>
+                          <span className="text-xs font-bold text-purple-300 uppercase block">Starting @</span>
+                          <span className="text-3xl font-black text-white">₹6,580</span>
+                        </div>
+
+                        <Link
+                          href="/products"
+                          className="w-full py-2.5 px-4 bg-[#F26522] text-white font-bold text-xs rounded-xl hover:bg-[#d85519] transition-colors shadow-sm"
+                        >
+                          Explore Offer Products
+                        </Link>
+                      </>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </>
             )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
-            {/* Title */}
-            <h1
-              id="hero-title"
-              className={cn(
-                'font-bold tracking-tight mb-4',
-                height === 'full' ? 'text-5xl md:text-7xl lg:text-8xl' : 'text-4xl md:text-6xl lg:text-7xl'
-              )}
-            >
-              {title}
-            </h1>
+      {/* Navigation Arrows */}
+      <button
+        onClick={handlePrev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-[#F26522] transition-colors z-20 focus:outline-none"
+        aria-label="Previous slide"
+      >
+        <ChevronLeftIcon className="w-6 h-6" />
+      </button>
 
-            {/* Subtitle */}
-            {subtitle && (
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.4 }}
-                className="text-lg md:text-xl text-white/90 mb-4 max-w-2xl"
-                dangerouslySetInnerHTML={{ __html: subtitle }}
-              />
+      <button
+        onClick={handleNext}
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-[#F26522] transition-colors z-20 focus:outline-none"
+        aria-label="Next slide"
+      >
+        <ChevronRightIcon className="w-6 h-6" />
+      </button>
+
+      {/* Pagination Dots */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
+        {slides.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentIndex(idx)}
+            className={cn(
+              'h-2.5 rounded-full transition-all cursor-pointer',
+              currentIndex === idx ? 'w-8 bg-[#F26522]' : 'w-2.5 bg-white/50 hover:bg-white'
             )}
-
-            {/* Description */}
-            {description && (
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.4 }}
-                className="text-white/70 mb-8 max-w-xl"
-              >
-                {description}
-              </motion.p>
-            )}
-
-            {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.4 }}
-              className="flex flex-wrap items-center gap-4"
-            >
-              {ctaPrimary && (
-                <Link
-                  href={ctaPrimary.href}
-                  className={cn(
-                    'inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold rounded-lg',
-                    'transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-                    ctaPrimary.variant === 'primary'
-                      ? 'bg-wakefit-orange text-white hover:bg-wakefit-orange/90 focus:ring-wakefit-orange/50 shadow-lg hover:shadow-xl'
-                      : ctaPrimary.variant === 'secondary'
-                      ? 'bg-wakefit-dark text-white hover:bg-wakefit-dark/90 focus:ring-wakefit-dark/50'
-                      : ctaPrimary.variant === 'outline'
-                      ? 'border-2 border-white text-white hover:bg-white/10 focus:ring-white/50'
-                      : 'bg-white text-wakefit-dark hover:bg-white/90 focus:ring-white/50'
-                  )}
-                >
-                  {ctaPrimary.text}
-                  {ctaPrimary.icon && <span aria-hidden="true">{ctaPrimary.icon}</span>}
-                </Link>
-              )}
-              {ctaSecondary && (
-                <Link
-                  href={ctaSecondary.href}
-                  className={cn(
-                    'inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold rounded-lg',
-                    'transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-                    ctaSecondary.variant === 'primary'
-                      ? 'bg-wakefit-orange text-white hover:bg-wakefit-orange/90 focus:ring-wakefit-orange/50'
-                      : ctaSecondary.variant === 'secondary'
-                      ? 'bg-wakefit-dark text-white hover:bg-wakefit-dark/90 focus:ring-wakefit-dark/50'
-                      : ctaSecondary.variant === 'outline'
-                      ? 'border-2 border-white text-white hover:bg-white/10 focus:ring-white/50'
-                      : 'bg-white text-wakefit-dark hover:bg-white/90 focus:ring-white/50'
-                  )}
-                >
-                  {ctaSecondary.text}
-                  {ctaSecondary.icon && <span aria-hidden="true">{ctaSecondary.icon}</span>}
-                </Link>
-              )}
-            </motion.div>
-
-            {/* Scroll Arrow */}
-            {showArrow && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.2, duration: 0.5 }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2"
-                aria-hidden="true"
-              >
-                <motion.button
-                  className="flex flex-col items-center gap-1 p-2 text-white/70 hover:text-white transition-colors"
-                  aria-label={arrowLabel}
-                  whileHover={{ y: 2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="text-xs font-medium">{arrowLabel}</span>
-                  <svg
-                    className="h-6 w-6 animate-bounce"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </motion.button>
-              </motion.div>
-            )}
-          </div>
-        </div>
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
       </div>
     </section>
   );

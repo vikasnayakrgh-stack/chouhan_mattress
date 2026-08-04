@@ -55,19 +55,15 @@ export function CategoriesSection({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="text-center mb-16"
+          className="mb-10 text-left"
         >
           <h2
             id="categories-heading"
-            className="text-3xl md:text-4xl font-bold text-wakefit-dark mb-4"
-            dangerouslySetInnerHTML={{ __html: headline }}
-          />
-          {subheadline && (
-            <p className="text-lg md:text-xl text-wakefit-gray max-w-2xl mx-auto mb-4" dangerouslySetInnerHTML={{ __html: subheadline }} />
-          )}
-          {description && (
-            <p className="text-wakefit-gray max-w-3xl mx-auto">{description}</p>
-          )}
+            className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight"
+          >
+            Shop By Categories
+          </h2>
+          <div className="w-16 h-1 bg-[#3B0764] rounded-full mt-2" />
         </motion.div>
 
         {/* Categories Grid */}

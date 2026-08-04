@@ -146,6 +146,11 @@ export function getCDNConfig(): CDNConfig {
 export function getOptimizedImageUrl(options: OptimizedImageUrlOptions): string {
   const { src, transformations = {}, priority = false } = options;
   
+  // If src is a local path (starts with / or data:), return it directly
+  if (src.startsWith('/') || src.startsWith('data:')) {
+    return src;
+  }
+  
   // If src is already a full URL, use it as base
   const isFullUrl = src.startsWith('http://') || src.startsWith('https://');
   const baseSrc = isFullUrl ? src : `${currentConfig.baseUrl}/${src.replace(/^\//, '')}`;

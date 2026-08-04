@@ -3,51 +3,59 @@
     "slides": [
       {
         "id": 1,
+        "title": "Flipper Sofa Cum Bed",
+        "subtitle": "Try for 100 Days Risk-Free - Perfect for Compact Living",
+        "badge": "Innovation",
+        "ctaText": "View Flipper",
+        "ctaLink": "/sofa-set",
+        "backgroundImage": "/images/hero_sofa.png",
+        "offerCard": {
+          "icon": "ShieldCheck",
+          "title": "100 Days",
+          "subtitle": "Risk-Free Return",
+          "price": "STARTING @ ₹6,580",
+          "ctaText": "Explore Offer Products",
+          "ctaLink": "/products"
+        }
+      },
+      {
+        "id": 2,
         "title": "Home Sweet Home Sale",
         "subtitle": "Use code <strong>HOME</strong> (till 30th Jul) to Get up to <strong>65% OFF</strong> + Additional 11% OFF with Bank Offers",
         "badge": "Sale Ends In",
         "countdown": { "days": 7, "hours": 18, "minutes": 5, "seconds": 28 },
         "ctaText": "Shop Now",
         "ctaLink": "/alloffers",
-        "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/mattress_link_mattress.jpg?tr=w-3840",
+        "backgroundImage": "/images/hero_mattress.png",
         "bankLogos": ["ICICI", "Axis", "HDFC", "Kotak"],
         "bankOffer": "Flat 10% OFF"
       },
       {
-        "id": 2,
+        "id": 3,
         "title": "Mattresses Starting ₹779",
         "subtitle": "Orthopedic, Memory Foam, Latex & More - 100 Night Trial",
         "badge": "Best Sellers",
         "ctaText": "Explore Mattresses",
         "ctaLink": "/mattresses",
-        "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/mattress_link_mattress.jpg?tr=w-3840"
+        "backgroundImage": "/images/hero_mattress.png"
       },
       {
-        "id": 3,
+        "id": 4,
         "title": "Sofas & Seating Up to 50% OFF",
         "subtitle": "3-Seaters, L-Shapes, Recliners & Sofa Cum Beds",
         "badge": "New Collection",
         "ctaText": "Shop Sofas",
         "ctaLink": "/sofa-set",
-        "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/sofa_link_sofa-set.jpg?tr=w-3840"
+        "backgroundImage": "/images/hero_sofa.png"
       },
       {
-        "id": 4,
+        "id": 5,
         "title": "Smart Mattress - Zense",
         "subtitle": "AI-Powered Sleep Tracking & Temperature Control",
         "badge": "Smart Tech",
         "ctaText": "Discover Zense",
         "ctaLink": "/zense",
-        "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/Stories-bg/diwali-smart-mattress-2024.jpg?tr=w-3840"
-      },
-      {
-        "id": 5,
-        "title": "Flipper Sofa Cum Bed",
-        "subtitle": "Try for 100 Days Risk-Free - Perfect for Compact Living",
-        "badge": "Innovation",
-        "ctaText": "View Flipper",
-        "ctaLink": "/sofa-set/flipper-sofa-cum-bed-three-seater/WSFAFLPSN3FWGR",
-        "backgroundImage": "https://ik.imagekit.io/2xkwa8s1i/consumer-react/sale-banners/09-07-2026/HOME/bed_link_bed.jpg?tr=w-3840"
+        "backgroundImage": "/images/hero_mattress.png"
       }
     ],
     "trustBadges": [

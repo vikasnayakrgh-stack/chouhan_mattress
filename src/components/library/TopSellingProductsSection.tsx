@@ -1,6 +1,6 @@
 /**
- * Wakefit Clone - Top Selling Products Section Component
- * Reusable product grid with section header
+ * Chouhan Mattress - Top Selling Products Section Component
+ * Fully functional product grid with Cart & Wishlist actions
  */
 
 'use client';
@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import { ProductGrid } from './ProductGrid';
 import { cn } from '@/lib/utils';
 import { BaseComponentProps } from '@/types';
+import { useCart } from '@/context/CartContext';
 
 interface TopSellingProductsSectionProps extends BaseComponentProps {
   products: any[];
@@ -30,9 +31,34 @@ export function TopSellingProductsSection({
   viewAllText = 'View All Favorites',
   'data-testid': testId,
 }: TopSellingProductsSectionProps) {
+  const { addItem, openDrawer } = useCart();
+
+  const handleAddToCart = (product: any) => {
+    addItem({
+      productId: String(product.id),
+      name: product.name,
+      price: typeof product.price === 'number' ? product.price : (product.price?.current || 0),
+      originalPrice: product.originalPrice,
+      quantity: 1,
+      image: product.primaryImage || product.image || (product.images && product.images[0]) || '',
+      category: product.category || product.type || 'mattresses',
+    });
+    openDrawer();
+  };
+
+  const handleToggleWishlist = (product: any) => {
+    // Navigate to wishlist or trigger toast notification
+    window.location.href = '/wishlist';
+  };
+
+  const handleProductClick = (product: any) => {
+    const targetUrl = product.href || `/products/${product.slug || product.id}`;
+    window.location.href = targetUrl;
+  };
+
   return (
     <section
-      className={cn('py-20 bg-wakefit-gray/30', className)}
+      className={cn('py-16 bg-gray-50/60', className)}
       data-testid={testId}
       aria-labelledby="top-selling-heading"
     >
@@ -42,14 +68,15 @@ export function TopSellingProductsSection({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="text-center mb-12"
+          className="mb-10 text-left"
         >
           <h2
             id="top-selling-heading"
-            className="text-3xl md:text-4xl font-bold text-wakefit-dark mb-4"
+            className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight"
             dangerouslySetInnerHTML={{ __html: headline }}
           />
-          <p className="text-lg md:text-xl text-wakefit-gray max-w-2xl mx-auto">
+          <div className="w-16 h-1 bg-[#3B0764] rounded-full mt-2 mb-3" />
+          <p className="text-base text-gray-600 max-w-2xl">
             {subheadline}
           </p>
         </motion.div>
@@ -63,9 +90,9 @@ export function TopSellingProductsSection({
           showActions={true}
           showBadges={true}
           showRating={true}
-          onAddToCart={(product) => console.log('Add to cart:', product.name)}
-          onToggleWishlist={(product) => console.log('Toggle wishlist:', product.name)}
-          onProductClick={(product) => console.log('Product click:', product.name)}
+          onAddToCart={handleAddToCart}
+          onToggleWishlist={handleToggleWishlist}
+          onProductClick={handleProductClick}
           data-testid={`${testId}-grid`}
         />
 
@@ -75,14 +102,14 @@ export function TopSellingProductsSection({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.4 }}
-            className="mt-10 text-center"
+            className="mt-12 text-center"
           >
             <a
               href={viewAllHref}
-              className="inline-flex items-center gap-1.5 px-6 py-3 text-wakefit-orange font-semibold border-2 border-wakefit-orange rounded-lg hover:bg-wakefit-orange hover:text-white transition-all"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#3B0764] text-white font-bold text-sm rounded-xl hover:bg-purple-900 hover:shadow-lg transition-all"
             >
               {viewAllText}
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>

@@ -1,0 +1,90 @@
+import type { ProductWithVariants, ProductVariant } from '@/features/products/types'
+import type { Order, OrderStatus, Refund } from '@/features/orders/types'
+import type { Customer, CustomerAddress, CustomerNote } from '@/features/customers/types'
+import type { Return, ReturnStatus } from '@/features/returns/types'
+import type { Discount } from '@/features/discounts/types'
+import type { Category, Collection } from '@/features/catalog/types'
+import type { InventoryItem, StockAdjustment } from '@/features/inventory/types'
+import type { DashboardStats } from '@/features/admin/types'
+
+export interface IProductRepository {
+  getAll(): Promise<ProductWithVariants[]>
+  getById(id: string): Promise<ProductWithVariants | null>
+  getBySlug(slug: string): Promise<ProductWithVariants | null>
+  search(filters: {
+    categoryId?: string
+    status?: string
+    stock?: string
+    query?: string
+    page?: number
+    pageSize?: number
+  }): Promise<{ products: ProductWithVariants[]; total: number }>
+  create(product: ProductWithVariants): Promise<ProductWithVariants>
+  update(id: string, updates: Partial<ProductWithVariants>): Promise<ProductWithVariants | null>
+  archive(id: string): Promise<boolean>
+  duplicate(id: string): Promise<ProductWithVariants | null>
+  getVariants(productId: string): Promise<ProductVariant[]>
+}
+
+export interface IOrderRepository {
+  getAll(): Promise<Order[]>
+  getById(id: string): Promise<Order | null>
+  getByCustomer(customerId: string): Promise<Order[]>
+  updateStatus(id: string, status: OrderStatus, adminNote?: string): Promise<Order | null>
+  addTracking(id: string, trackingNumber: string, carrier: string): Promise<Order | null>
+  addRefund(id: string, refund: Omit<Refund, 'id' | 'createdAt'>): Promise<Order | null>
+}
+
+export interface ICustomerRepository {
+  getAll(): Promise<Customer[]>
+  getById(id: string): Promise<Customer | null>
+  addNote(customerId: string, content: string, author: string): Promise<CustomerNote | null>
+  updateNote(customerId: string, noteId: string, content: string): Promise<CustomerNote | null>
+  deleteNote(customerId: string, noteId: string): Promise<boolean>
+  addAddress(customerId: string, address: Omit<CustomerAddress, 'id'>): Promise<CustomerAddress | null>
+  updateAddress(customerId: string, addressId: string, updates: Partial<Omit<CustomerAddress, 'id'>>): Promise<CustomerAddress | null>
+  deleteAddress(customerId: string, addressId: string): Promise<boolean>
+  setDefaultAddress(customerId: string, addressId: string, kind: 'shipping' | 'billing'): Promise<boolean>
+}
+
+export interface IReturnRepository {
+  getAll(): Promise<Return[]>
+  getById(id: string): Promise<Return | null>
+  getByOrderId(orderId: string): Promise<Return[]>
+  getByCustomerId(customerId: string): Promise<Return[]>
+  getByCustomer(customerId: string): Promise<Return[]>
+  updateStatus(id: string, status: ReturnStatus, actor: string): Promise<Return | null>
+  delete(id: string): Promise<boolean>
+}
+
+export interface IDiscountRepository {
+  getAll(): Promise<Discount[]>
+  getById(id: string): Promise<Discount | null>
+  create(discount: Discount): Promise<Discount>
+  update(id: string, updates: Partial<Discount>): Promise<Discount | null>
+  remove(id: string): Promise<boolean>
+}
+
+export interface ICategoryRepository {
+  getAll(): Promise<Category[]>
+  getById(id: string): Promise<Category | null>
+  getBySlug(slug: string): Promise<Category | null>
+  create(category: Omit<Category, 'id' | 'createdAt' | 'productCount'>): Promise<Category>
+  update(id: string, updates: Partial<Category>): Promise<Category | null>
+  delete(id: string): Promise<boolean>
+}
+
+export interface ICollectionRepository {
+  getAll(): Promise<Collection[]>
+  getById(id: string): Promise<Collection | null>
+}
+
+export interface IInventoryRepository {
+  getAll(): Promise<InventoryItem[]>
+  getBySku(sku: string): Promise<InventoryItem | null>
+  adjustStock(adjustment: Omit<StockAdjustment, 'id' | 'createdAt'>): Promise<InventoryItem | null>
+}
+
+export interface IDashboardRepository {
+  getStats(): Promise<DashboardStats>
+}
