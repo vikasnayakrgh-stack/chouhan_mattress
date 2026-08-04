@@ -55,37 +55,32 @@ function ProductsPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const categoryParam = searchParams.get('category');
+  const subcategoryParam = searchParams.get('subcategory');
+  const minPriceParam = searchParams.get('minPrice');
+  const maxPriceParam = searchParams.get('maxPrice');
+  const sizeParam = searchParams.get('size');
+  const sortParam = searchParams.get('sort') as SortOption;
+
+  const initialFilters: FilterState = useMemo(() => ({
+    ...DEFAULT_FILTER_STATE,
+    category: categoryParam ? categoryParam.split(',') : [],
+    subcategory: subcategoryParam ? subcategoryParam.split(',') : [],
+    priceRange: [
+      minPriceParam ? Number(minPriceParam) : 0,
+      maxPriceParam ? Number(maxPriceParam) : 100000,
+    ],
+    size: sizeParam ? sizeParam.split(',') : [],
+  }), [categoryParam, subcategoryParam, minPriceParam, maxPriceParam, sizeParam]);
+
   // ─── State ───
-  const [filterState, setFilterState] = useState<FilterState>(DEFAULT_FILTER_STATE);
-  const [sortOption, setSortOption] = useState<SortOption>('bestselling');
+  const [filterState, setFilterState] = useState<FilterState>(initialFilters);
+  const [sortOption, setSortOption] = useState<SortOption>(sortParam || 'bestselling');
   const [layout, setLayout] = useState<ViewLayout>('grid-4');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [mobileFilterOpen, setMobileFilterOpen] = useState<boolean>(false);
 
   const itemsPerPage = 8;
-
-  // ─── Synchronize initial URL SearchParams ───
-  useEffect(() => {
-    const categoryParam = searchParams.get('category');
-    const subcategoryParam = searchParams.get('subcategory');
-    const minPriceParam = searchParams.get('minPrice');
-    const maxPriceParam = searchParams.get('maxPrice');
-    const sizeParam = searchParams.get('size');
-    const sortParam = searchParams.get('sort') as SortOption;
-
-    setFilterState({
-      ...DEFAULT_FILTER_STATE,
-      category: categoryParam ? categoryParam.split(',') : [],
-      subcategory: subcategoryParam ? subcategoryParam.split(',') : [],
-      priceRange: [
-        minPriceParam ? Number(minPriceParam) : 0,
-        maxPriceParam ? Number(maxPriceParam) : 100000,
-      ],
-      size: sizeParam ? sizeParam.split(',') : [],
-    });
-
-    if (sortParam) setSortOption(sortParam);
-  }, [searchParams]);
 
   // ─── Compute Available Facets from Products Data ───
   const availableCategories: FilterOption[] = useMemo(() => {

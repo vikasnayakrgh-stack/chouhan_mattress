@@ -67,12 +67,28 @@ function CategoryPageContent() {
   const [layout, setLayout] = useState<ViewLayout>('grid-4');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [mobileFilterOpen, setMobileFilterOpen] = useState<boolean>(false);
+  const [currentSlug, setCurrentSlug] = useState<string>(slug);
+
+  // Synchronous State Reset on Route Slug Change (React 19 / Next.js 15 instant navigation pattern)
+  if (currentSlug !== slug) {
+    setCurrentSlug(slug);
+    setFilterState({
+      category: [slug],
+      subcategory: [],
+      priceRange: [0, 100000],
+      size: [],
+      thickness: [],
+      firmness: [],
+      material: [],
+      minDiscount: 0,
+      inStockOnly: false,
+      minRating: 0,
+      searchQuery: '',
+    });
+    setCurrentPage(1);
+  }
 
   const itemsPerPage = 8;
-
-  useEffect(() => {
-    setFilterState((prev) => ({ ...prev, category: [slug] }));
-  }, [slug]);
 
   // Facets
   const availableCategories: FilterOption[] = useMemo(() => {

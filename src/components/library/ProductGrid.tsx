@@ -149,6 +149,7 @@ export function ProductGrid({
           <ProductCard
             product={product}
             variant={variant}
+            priority={index < 4}
             showActions={showActions}
             showBadges={showBadges}
             showRating={showRating}

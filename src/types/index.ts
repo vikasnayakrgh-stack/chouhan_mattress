@@ -147,16 +147,22 @@ export interface Product {
 }
 
 export interface ProductCardProps extends BaseComponentProps {
-  product: Product;
+  product: any;
   variant?: 'grid' | 'list' | 'featured' | 'compact';
   showActions?: boolean;
   showWishlist?: boolean;
+  showBadges?: boolean;
+  showRating?: boolean;
   showQuickView?: boolean;
   showCompare?: boolean;
-  onAddToCart?: (product: Product) => void;
-  onToggleWishlist?: (product: Product) => void;
-  onQuickView?: (product: Product) => void;
-  onCompare?: (product: Product) => void;
+  priority?: boolean;
+  isInWishlist?: boolean;
+  loading?: boolean;
+  onAddToCart?: (product: any, variant?: any) => void;
+  onToggleWishlist?: (product: any) => void;
+  onQuickView?: (product: any) => void;
+  onCompare?: (product: any) => void;
+  onClick?: (product: any) => void;
 }
 
 /**

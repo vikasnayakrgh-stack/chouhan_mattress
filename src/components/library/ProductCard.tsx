@@ -21,13 +21,14 @@ export function ProductCard({
   showBadges = true,
   showRating = true,
   showWishlist = true,
+  priority = false,
   onAddToCart,
   onToggleWishlist,
   onClick,
   isInWishlist = false,
   loading = false,
   'data-testid': testId,
-}: ProductCardProps) {
+}: ProductCardProps & { priority?: boolean }) {
   const currentPrice = typeof product.price === 'number' ? product.price : (product.price?.current || 0);
   const origPrice = product.originalPrice || (typeof product.price === 'object' ? product.price?.original : undefined);
   const priceUnit = typeof product.price === 'object' ? product.price?.unit : undefined;
@@ -59,16 +60,13 @@ export function ProductCard({
   // Grid variant
   if (variant === 'grid') {
     return (
-      <motion.article
+      <article
         className={cn(
           'group relative bg-white rounded-2xl border border-slate-200 overflow-hidden',
-          'transition-all duration-300 hover:shadow-xl hover:border-amber-500/50',
+          'transition-all duration-300 hover:shadow-xl hover:border-amber-500/50 hover:-translate-y-1',
           loading && 'animate-pulse pointer-events-none',
           className
         )}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        whileHover={{ y: -4, boxShadow: '0 20px 40px -10px rgba(15,23,42,0.12)' }}
         data-testid={testId}
         onClick={handleClick}
       >
@@ -84,6 +82,7 @@ export function ProductCard({
               src={product.primaryImage || product.images[0]}
               alt={product.alt || product.name}
               preset="productGrid"
+              priority={priority}
               placeholder="blur"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               containerClassName="h-full"
@@ -237,7 +236,7 @@ export function ProductCard({
             )}
           </div>
         </div>
-      </motion.article>
+      </article>
     );
   }
 
