@@ -33,24 +33,24 @@ function AccordionSection({
   const [isOpen, setIsOpen] = useState(isOpenDefault);
 
   return (
-    <div className="border-b border-gray-100 py-4">
+    <div className="border-b border-slate-100 py-4">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between text-left font-semibold text-sm text-gray-900 hover:text-[#F26522] transition-colors"
+        className="w-full flex items-center justify-between text-left font-semibold text-sm text-slate-900 hover:text-amber-600 transition-colors"
         aria-expanded={isOpen}
       >
         <span className="flex items-center gap-2">
           {title}
           {count > 0 && (
-            <span className="w-5 h-5 rounded-full bg-orange-100 text-[#F26522] text-xs font-bold flex items-center justify-center">
+            <span className="w-5 h-5 rounded-full bg-amber-100 text-amber-800 text-xs font-bold flex items-center justify-center">
               {count}
             </span>
           )}
         </span>
         {isOpen ? (
-          <ChevronUpIcon className="w-4 h-4 text-gray-400" />
+          <ChevronUpIcon className="w-4 h-4 text-slate-400" />
         ) : (
-          <ChevronDownIcon className="w-4 h-4 text-gray-400" />
+          <ChevronDownIcon className="w-4 h-4 text-slate-400" />
         )}
       </button>
 
@@ -99,13 +99,13 @@ export function FilterSidebar({
     (filterState.inStockOnly ? 1 : 0);
 
   const sidebarContent = (
-    <div className="divide-y divide-gray-100">
+    <div className="divide-y divide-slate-100">
       {/* Sidebar Header */}
       <div className="pb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <h2 className="font-bold text-lg text-gray-900">Filter By</h2>
+          <h2 className="font-bold text-lg text-slate-900">Filter By</h2>
           {activeCount > 0 && (
-            <span className="bg-[#F26522] text-white text-xs font-bold px-2 py-0.5 rounded-full">
+            <span className="bg-amber-500 text-slate-950 text-xs font-bold px-2 py-0.5 rounded-full">
               {activeCount}
             </span>
           )}
@@ -113,7 +113,7 @@ export function FilterSidebar({
         {activeCount > 0 && (
           <button
             onClick={onResetFilters}
-            className="text-xs text-[#F26522] font-semibold hover:underline flex items-center gap-1"
+            className="text-xs text-amber-600 font-semibold hover:underline flex items-center gap-1"
           >
             <RotateCcwIcon className="w-3 h-3" />
             Reset All
@@ -133,25 +133,25 @@ export function FilterSidebar({
             return (
               <label
                 key={cat.value}
-                className="flex items-center justify-between text-sm text-gray-700 hover:text-gray-900 cursor-pointer group py-1"
+                className="flex items-center justify-between text-sm text-slate-700 hover:text-slate-900 cursor-pointer group py-1"
               >
                 <div className="flex items-center gap-2.5">
                   <div
                     className={cn(
                       'w-4 h-4 rounded border flex items-center justify-center transition-colors',
                       isChecked
-                        ? 'bg-[#F26522] border-[#F26522] text-white'
-                        : 'border-gray-300 group-hover:border-gray-400 bg-white'
+                        ? 'bg-amber-500 border-amber-500 text-slate-950'
+                        : 'border-slate-300 group-hover:border-slate-400 bg-white'
                     )}
                   >
                     {isChecked && <CheckIcon className="w-3 h-3 stroke-[3]" />}
                   </div>
-                  <span className={cn(isChecked && 'font-semibold text-[#F26522]')}>
+                  <span className={cn(isChecked && 'font-semibold text-amber-700')}>
                     {cat.label}
                   </span>
                 </div>
                 {cat.count !== undefined && (
-                  <span className="text-xs text-gray-400">({cat.count})</span>
+                  <span className="text-xs text-slate-400">({cat.count})</span>
                 )}
                 <input
                   type="checkbox"
@@ -177,25 +177,25 @@ export function FilterSidebar({
             return (
               <label
                 key={sub.value}
-                className="flex items-center justify-between text-sm text-gray-700 hover:text-gray-900 cursor-pointer group py-1"
+                className="flex items-center justify-between text-sm text-slate-700 hover:text-slate-900 cursor-pointer group py-1"
               >
                 <div className="flex items-center gap-2.5">
                   <div
                     className={cn(
                       'w-4 h-4 rounded border flex items-center justify-center transition-colors',
                       isChecked
-                        ? 'bg-[#F26522] border-[#F26522] text-white'
-                        : 'border-gray-300 group-hover:border-gray-400 bg-white'
+                        ? 'bg-amber-500 border-amber-500 text-slate-950'
+                        : 'border-slate-300 group-hover:border-slate-400 bg-white'
                     )}
                   >
                     {isChecked && <CheckIcon className="w-3 h-3 stroke-[3]" />}
                   </div>
-                  <span className={cn(isChecked && 'font-semibold text-[#F26522]')}>
+                  <span className={cn(isChecked && 'font-semibold text-amber-700')}>
                     {sub.label}
                   </span>
                 </div>
                 {sub.count !== undefined && (
-                  <span className="text-xs text-gray-400">({sub.count})</span>
+                  <span className="text-xs text-slate-400">({sub.count})</span>
                 )}
                 <input
                   type="checkbox"
@@ -214,9 +214,9 @@ export function FilterSidebar({
         <div className="space-y-4 pt-1">
           <div className="flex items-center justify-between gap-2">
             <div>
-              <span className="text-xs text-gray-400 block">Min Price</span>
+              <span className="text-xs text-slate-400 block">Min Price</span>
               <div className="relative">
-                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-gray-400">
+                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-slate-400">
                   ₹
                 </span>
                 <input
@@ -228,15 +228,15 @@ export function FilterSidebar({
                       filterState.priceRange[1]
                     )
                   }
-                  className="w-24 pl-6 pr-2 py-1 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F26522]"
+                  className="w-24 pl-6 pr-2 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-900 focus:outline-none focus:ring-1 focus:ring-amber-500"
                 />
               </div>
             </div>
-            <span className="text-gray-300 font-bold self-end pb-1.5">-</span>
+            <span className="text-slate-300 font-bold self-end pb-1.5">-</span>
             <div>
-              <span className="text-xs text-gray-400 block">Max Price</span>
+              <span className="text-xs text-slate-400 block">Max Price</span>
               <div className="relative">
-                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-gray-400">
+                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-slate-400">
                   ₹
                 </span>
                 <input
@@ -248,7 +248,7 @@ export function FilterSidebar({
                       Number(e.target.value)
                     )
                   }
-                  className="w-24 pl-6 pr-2 py-1 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F26522]"
+                  className="w-24 pl-6 pr-2 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-900 focus:outline-none focus:ring-1 focus:ring-amber-500"
                 />
               </div>
             </div>
@@ -263,7 +263,7 @@ export function FilterSidebar({
             onChange={(e) =>
               handlePriceChange(filterState.priceRange[0], Number(e.target.value))
             }
-            className="w-full accent-[#F26522] cursor-pointer"
+            className="w-full accent-amber-500 cursor-pointer"
           />
         </div>
       </AccordionSection>
@@ -281,8 +281,8 @@ export function FilterSidebar({
                   className={cn(
                     'px-3 py-2 text-xs font-medium rounded-xl border text-center transition-all',
                     isChecked
-                      ? 'bg-orange-50 border-[#F26522] text-[#F26522] font-semibold shadow-xs'
-                      : 'border-gray-200 text-gray-700 hover:border-gray-300 bg-white'
+                      ? 'bg-amber-50 border-amber-500 text-amber-700 font-semibold shadow-xs'
+                      : 'border-slate-200 text-slate-700 hover:border-slate-300 bg-white'
                   )}
                 >
                   {sz.label}
@@ -310,8 +310,8 @@ export function FilterSidebar({
                   className={cn(
                     'px-3 py-1.5 text-xs font-medium rounded-xl border transition-all',
                     isChecked
-                      ? 'bg-orange-50 border-[#F26522] text-[#F26522] font-semibold'
-                      : 'border-gray-200 text-gray-700 hover:border-gray-300 bg-white'
+                      ? 'bg-amber-50 border-amber-500 text-amber-700 font-semibold'
+                      : 'border-slate-200 text-slate-700 hover:border-slate-300 bg-white'
                   )}
                 >
                   {th.label}
@@ -334,16 +334,16 @@ export function FilterSidebar({
             return (
               <label
                 key={firm.value}
-                className="flex items-center justify-between text-sm text-gray-700 hover:text-gray-900 cursor-pointer py-1"
+                className="flex items-center justify-between text-sm text-slate-700 hover:text-slate-900 cursor-pointer py-1"
               >
                 <div className="flex items-center gap-2.5">
                   <input
                     type="checkbox"
                     checked={isChecked}
                     onChange={() => toggleArrayItem('firmness', firm.value)}
-                    className="w-4 h-4 text-[#F26522] rounded border-gray-300 focus:ring-[#F26522]"
+                    className="w-4 h-4 text-amber-500 rounded border-slate-300 focus:ring-amber-500"
                   />
-                  <span className={cn(isChecked && 'font-semibold text-[#F26522]')}>
+                  <span className={cn(isChecked && 'font-semibold text-amber-700')}>
                     {firm.label}
                   </span>
                 </div>
@@ -365,16 +365,16 @@ export function FilterSidebar({
             return (
               <label
                 key={mat.value}
-                className="flex items-center justify-between text-sm text-gray-700 hover:text-gray-900 cursor-pointer py-1"
+                className="flex items-center justify-between text-sm text-slate-700 hover:text-slate-900 cursor-pointer py-1"
               >
                 <div className="flex items-center gap-2.5">
                   <input
                     type="checkbox"
                     checked={isChecked}
                     onChange={() => toggleArrayItem('material', mat.value)}
-                    className="w-4 h-4 text-[#F26522] rounded border-gray-300 focus:ring-[#F26522]"
+                    className="w-4 h-4 text-amber-500 rounded border-slate-300 focus:ring-amber-500"
                   />
-                  <span className={cn(isChecked && 'font-semibold text-[#F26522]')}>
+                  <span className={cn(isChecked && 'font-semibold text-amber-700')}>
                     {mat.label}
                   </span>
                 </div>
@@ -390,14 +390,14 @@ export function FilterSidebar({
           {[0, 10, 30, 50].map((disc) => (
             <label
               key={disc}
-              className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer"
+              className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer"
             >
               <input
                 type="radio"
                 name="discount-filter"
                 checked={filterState.minDiscount === disc}
                 onChange={() => onFilterChange({ ...filterState, minDiscount: disc })}
-                className="text-[#F26522] focus:ring-[#F26522]"
+                className="text-amber-500 focus:ring-amber-500"
               />
               <span>{disc === 0 ? 'All Discounts' : `${disc}% OFF or more`}</span>
             </label>
@@ -411,14 +411,14 @@ export function FilterSidebar({
           {[0, 4, 4.5].map((rating) => (
             <label
               key={rating}
-              className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer"
+              className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer"
             >
               <input
                 type="radio"
                 name="rating-filter"
                 checked={filterState.minRating === rating}
                 onChange={() => onFilterChange({ ...filterState, minRating: rating })}
-                className="text-[#F26522] focus:ring-[#F26522]"
+                className="text-amber-500 focus:ring-amber-500"
               />
               <span className="flex items-center gap-1">
                 {rating === 0 ? (
@@ -438,14 +438,14 @@ export function FilterSidebar({
       {/* ─── 10. Availability ─── */}
       <div className="py-4">
         <label className="flex items-center justify-between cursor-pointer">
-          <span className="text-sm font-semibold text-gray-900">In Stock Only</span>
+          <span className="text-sm font-semibold text-slate-900">In Stock Only</span>
           <input
             type="checkbox"
             checked={filterState.inStockOnly}
             onChange={(e) =>
               onFilterChange({ ...filterState, inStockOnly: e.target.checked })
             }
-            className="w-4 h-4 text-[#F26522] rounded border-gray-300 focus:ring-[#F26522]"
+            className="w-4 h-4 text-amber-500 rounded border-slate-300 focus:ring-amber-500"
           />
         </label>
       </div>
@@ -456,7 +456,7 @@ export function FilterSidebar({
     <>
       {/* Desktop Sticky Sidebar */}
       <aside className="hidden lg:block w-72 flex-shrink-0 pr-6">
-        <div className="sticky top-28 bg-white rounded-2xl border border-gray-100 p-5 shadow-xs max-h-[calc(100vh-140px)] overflow-y-[#scroll] scrollbar-thin">
+        <div className="sticky top-28 bg-white rounded-2xl border border-slate-200 p-5 shadow-sm max-h-[calc(100vh-140px)] overflow-y-auto scrollbar-thin">
           {sidebarContent}
         </div>
       </aside>
@@ -474,11 +474,11 @@ export function FilterSidebar({
           {/* Drawer Container */}
           <div className="fixed inset-y-0 left-0 w-full max-w-xs bg-white shadow-xl flex flex-col z-50">
             {/* Drawer Header */}
-            <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-900 text-white">
+            <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-900 text-white">
               <h2 className="font-bold text-lg">Filters</h2>
               <button
                 onClick={onCloseMobile}
-                className="p-1 rounded-lg hover:bg-gray-800 text-gray-300"
+                className="p-1 rounded-lg hover:bg-slate-800 text-slate-300"
                 aria-label="Close filters"
               >
                 <XIcon className="w-5 h-5" />
@@ -489,16 +489,16 @@ export function FilterSidebar({
             <div className="flex-1 overflow-y-auto p-5">{sidebarContent}</div>
 
             {/* Drawer Footer */}
-            <div className="p-4 border-t border-gray-100 bg-gray-50 flex gap-3">
+            <div className="p-4 border-t border-slate-100 bg-slate-50 flex gap-3">
               <button
                 onClick={onResetFilters}
-                className="flex-1 py-2.5 border border-gray-300 text-gray-700 font-semibold text-sm rounded-xl hover:bg-gray-100"
+                className="flex-1 py-2.5 border border-slate-300 text-slate-700 font-semibold text-sm rounded-xl hover:bg-slate-100"
               >
                 Clear All
               </button>
               <button
                 onClick={onCloseMobile}
-                className="flex-1 py-2.5 bg-[#F26522] text-white font-bold text-sm rounded-xl hover:bg-[#d85519]"
+                className="flex-1 py-2.5 bg-amber-500 text-slate-950 font-bold text-sm rounded-xl hover:bg-amber-600"
               >
                 Apply Filters
               </button>
@@ -511,3 +511,4 @@ export function FilterSidebar({
 }
 
 export default FilterSidebar;
+
