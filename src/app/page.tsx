@@ -37,7 +37,7 @@ const FOOTER_NAV_SECTIONS = [
 ];
 
 const WHY_FEATURES = homepageData.whyWakefit.features.map((f) => ({
-  icon: f.icon.replace(/Icon$/, '') as unknown as React.ReactNode,
+  icon: f.icon.replace(/Icon$/, ''),
   title: f.title,
   description: f.description,
   highlight: f.highlight,
@@ -124,10 +124,11 @@ export default function HomePage() {
       {/* ─── Floating Sleep Assistant Chat Button (Bottom Right) ─── */}
       <a
         href="/mattress-selector"
-        className="fixed bottom-6 right-6 z-40 w-14 h-14 bg-[#3B0764] text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-[#F26522] hover:scale-110 transition-all cursor-pointer group"
+        className="fixed bottom-6 right-6 z-40 w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 rounded-full flex items-center justify-center shadow-2xl hover:from-amber-300 hover:to-amber-500 hover:scale-110 transition-all cursor-pointer group border-2 border-slate-950/20"
         title="Find My Mattress Assistant"
+        aria-label="Launch Interactive Sleep Assistant Quiz"
       >
-        <MessageSquarePlusIcon className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+        <MessageSquarePlusIcon className="w-6 h-6 text-slate-950 group-hover:rotate-12 transition-transform" />
       </a>
 
       {/* ─── Footer ─── */}

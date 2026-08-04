@@ -90,49 +90,49 @@ export function Hero() {
                   {/* Left Column: Headline & Subtitle */}
                   <div className="max-w-xl space-y-4">
                     {activeSlide.badge && (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F26522] text-white text-xs font-black rounded-full uppercase tracking-wider shadow-sm">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500 text-slate-950 text-xs font-black rounded-full uppercase tracking-wider shadow-sm">
                         <SparklesIcon className="w-3.5 h-3.5" /> {activeSlide.badge}
                       </span>
                     )}
 
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-white drop-shadow-md">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white drop-shadow-md font-heading">
                       {activeSlide.title}
                     </h1>
 
                     <p
-                      className="text-sm sm:text-base md:text-lg text-gray-200 leading-relaxed drop-shadow-sm max-w-md"
+                      className="text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed drop-shadow-sm max-w-md"
                       dangerouslySetInnerHTML={{ __html: activeSlide.subtitle }}
                     />
 
                     <div className="pt-2">
                       <Link
                         href={activeSlide.ctaLink || '/products'}
-                        className="inline-flex items-center gap-2 px-7 py-3 bg-[#F26522] text-white font-extrabold text-sm rounded-xl hover:bg-[#d85519] transition-all shadow-md hover:scale-105"
+                        className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold text-sm rounded-xl hover:from-amber-400 hover:to-amber-500 transition-all shadow-lg hover:scale-105"
                       >
-                        {activeSlide.ctaText || 'Shop Now'} →
+                        {activeSlide.ctaText || 'Shop Collection'} →
                       </Link>
                     </div>
                   </div>
 
                   {/* Right Column: Offer Box (Dynamic per slide) */}
-                  <div className="hidden lg:flex flex-col items-center justify-center bg-purple-950/80 backdrop-blur-md text-white p-6 rounded-3xl border border-purple-500/30 shadow-2xl max-w-xs text-center space-y-3">
+                  <div className="hidden lg:flex flex-col items-center justify-center bg-slate-900/85 backdrop-blur-md text-white p-6 rounded-3xl border border-amber-500/30 shadow-2xl max-w-xs text-center space-y-3">
                     {activeSlide.offerCard ? (
                       <>
-                        <div className="flex items-center gap-2 border-b border-purple-500/30 pb-2 w-full justify-center">
-                          <ShieldCheckIcon className="w-7 h-7 text-purple-300" />
+                        <div className="flex items-center gap-2 border-b border-slate-700/80 pb-2.5 w-full justify-center">
+                          <ShieldCheckIcon className="w-7 h-7 text-amber-400" />
                           <div className="text-left">
-                            <span className="text-xs font-black uppercase text-purple-200 block leading-none">{activeSlide.offerCard.title}</span>
-                            <span className="text-[10px] font-bold text-purple-300">{activeSlide.offerCard.subtitle}</span>
+                            <span className="text-xs font-extrabold uppercase text-amber-300 block leading-none">{activeSlide.offerCard.title}</span>
+                            <span className="text-[10px] font-semibold text-slate-300">{activeSlide.offerCard.subtitle}</span>
                           </div>
                         </div>
 
                         <div>
-                          <span className="text-xs font-bold text-purple-300 uppercase block">{activeSlide.offerCard.price}</span>
+                          <span className="text-xs font-semibold text-slate-400 uppercase block">{activeSlide.offerCard.price}</span>
                         </div>
 
                         <Link
                           href={activeSlide.offerCard.ctaLink || "/products"}
-                          className="w-full py-2.5 px-4 bg-[#F26522] text-white font-bold text-xs rounded-xl hover:bg-[#d85519] transition-colors shadow-sm"
+                          className="w-full py-2.5 px-4 bg-amber-500 text-slate-950 font-extrabold text-xs rounded-xl hover:bg-amber-400 transition-colors shadow-sm"
                         >
                           {activeSlide.offerCard.ctaText}
                         </Link>
@@ -140,24 +140,24 @@ export function Hero() {
                     ) : (
                       /* Fallback for slides without offerCard */
                       <>
-                        <div className="flex items-center gap-2 border-b border-purple-500/30 pb-2 w-full justify-center">
-                          <ShieldCheckIcon className="w-7 h-7 text-purple-300" />
+                        <div className="flex items-center gap-2 border-b border-slate-700/80 pb-2.5 w-full justify-center">
+                          <ShieldCheckIcon className="w-7 h-7 text-amber-400" />
                           <div className="text-left">
-                            <span className="text-xs font-black uppercase text-purple-200 block leading-none">100 Days</span>
-                            <span className="text-[10px] font-bold text-purple-300">Risk-Free Return</span>
+                            <span className="text-xs font-extrabold uppercase text-amber-300 block leading-none">100-Night Trial</span>
+                            <span className="text-[10px] font-semibold text-slate-300">Free White-Glove Setup</span>
                           </div>
                         </div>
 
                         <div>
-                          <span className="text-xs font-bold text-purple-300 uppercase block">Starting @</span>
-                          <span className="text-3xl font-black text-white">₹6,580</span>
+                          <span className="text-xs font-semibold text-slate-400 uppercase block">Starting @</span>
+                          <span className="text-3xl font-extrabold text-white">₹6,580</span>
                         </div>
 
                         <Link
                           href="/products"
-                          className="w-full py-2.5 px-4 bg-[#F26522] text-white font-bold text-xs rounded-xl hover:bg-[#d85519] transition-colors shadow-sm"
+                          className="w-full py-2.5 px-4 bg-amber-500 text-slate-950 font-extrabold text-xs rounded-xl hover:bg-amber-400 transition-colors shadow-sm"
                         >
-                          Explore Offer Products
+                          Explore Royal Offers
                         </Link>
                       </>
                     )}
@@ -172,7 +172,7 @@ export function Hero() {
       {/* Navigation Arrows */}
       <button
         onClick={handlePrev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-[#F26522] transition-colors z-20 focus:outline-none"
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/70 text-white flex items-center justify-center hover:bg-amber-500 hover:text-slate-950 transition-colors z-20 focus:outline-none border border-slate-700"
         aria-label="Previous slide"
       >
         <ChevronLeftIcon className="w-6 h-6" />
@@ -180,7 +180,7 @@ export function Hero() {
 
       <button
         onClick={handleNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-[#F26522] transition-colors z-20 focus:outline-none"
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-900/70 text-white flex items-center justify-center hover:bg-amber-500 hover:text-slate-950 transition-colors z-20 focus:outline-none border border-slate-700"
         aria-label="Next slide"
       >
         <ChevronRightIcon className="w-6 h-6" />
@@ -194,7 +194,7 @@ export function Hero() {
             onClick={() => setCurrentIndex(idx)}
             className={cn(
               'h-2.5 rounded-full transition-all cursor-pointer',
-              currentIndex === idx ? 'w-8 bg-[#F26522]' : 'w-2.5 bg-white/50 hover:bg-white'
+              currentIndex === idx ? 'w-8 bg-amber-400' : 'w-2.5 bg-white/40 hover:bg-white'
             )}
             aria-label={`Go to slide ${idx + 1}`}
           />

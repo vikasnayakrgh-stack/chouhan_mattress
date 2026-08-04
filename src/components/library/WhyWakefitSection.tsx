@@ -52,20 +52,23 @@ export function WhyChooseUsSection({
 
   return (
     <section
-      className={cn('py-20 bg-white', className)}
+      className={cn('py-20 bg-[#FAF9F6] border-t border-b border-slate-200/80', className)}
       data-testid={testId}
-      aria-labelledby="why-choose-us-heading"
+      aria-labelledby="why-chouhan-heading"
     >
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 max-w-3xl mx-auto">
+          <span className="text-xs font-bold uppercase tracking-[0.25em] text-amber-600 mb-2 block">
+            The Science of Better Sleep
+          </span>
           <h2
-            id="why-wakefit-heading"
-            className="text-3xl md:text-4xl font-bold text-wakefit-dark mb-4"
+            id="why-chouhan-heading"
+            className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 font-heading"
           >
             {headline}
           </h2>
-          <p className="text-lg md:text-xl text-wakefit-gray max-w-2xl mx-auto" dangerouslySetInnerHTML={{ __html: subheadline }} />
-          <p className="text-wakefit-gray mt-6 max-w-3xl mx-auto">{description}</p>
+          <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto font-medium" dangerouslySetInnerHTML={{ __html: subheadline }} />
+          <p className="text-slate-600 mt-4 max-w-3xl mx-auto text-sm leading-relaxed">{description}</p>
         </div>
 
         {/* Features Grid */}
@@ -76,15 +79,15 @@ export function WhyChooseUsSection({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.4 }}
-              className="flex flex-col items-center gap-4 text-center"
+              className="flex flex-col items-center gap-4 text-center p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
             >
-              <div className="w-14 h-14 flex items-center justify-center rounded-xl bg-wakefit-orange/10 text-wakefit-orange">
+              <div className="w-14 h-14 flex items-center justify-center rounded-2xl bg-amber-500/15 text-amber-600 border border-amber-500/30">
                 {iconComponents[feature.icon as keyof typeof iconComponents] || feature.icon}
               </div>
-              <h3 className="font-semibold text-wakefit-dark">{feature.title}</h3>
-              <p className="text-wakefit-gray text-sm">{feature.description}</p>
+              <h3 className="font-bold text-slate-900 text-base">{feature.title}</h3>
+              <p className="text-slate-600 text-xs leading-relaxed">{feature.description}</p>
               {feature.highlight && (
-                <span className="mt-2 inline-flex items-center gap-1 px-3 py-1 text-xs font-semibold rounded-full bg-wakefit-orange/10 text-wakefit-orange">
+                <span className="mt-1 inline-flex items-center gap-1 px-3 py-1 text-[11px] font-bold rounded-full bg-amber-100 text-amber-800 border border-amber-300">
                   {feature.highlight}
                 </span>
               )}
@@ -93,17 +96,17 @@ export function WhyChooseUsSection({
         </div>
 
         {/* Stats */}
-        <div className="flex flex-col items-center gap-8 md:flex-row md:justify-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 + index * 0.1, duration: 0.4 }}
-              className="flex flex-col items-center gap-2 text-center"
+              className="p-6 rounded-2xl bg-slate-900 text-white shadow-lg border border-slate-800"
             >
-              <p className="text-4xl md:text-5xl font-bold text-brand-dark">{stat.value}</p>
-              <p className="text-brand-gray text-sm">{stat.label}</p>
+              <p className="text-3xl md:text-4xl font-extrabold text-amber-400 mb-1">{stat.value}</p>
+              <p className="text-slate-300 text-xs font-medium uppercase tracking-wider">{stat.label}</p>
             </motion.div>
           ))}
         </div>

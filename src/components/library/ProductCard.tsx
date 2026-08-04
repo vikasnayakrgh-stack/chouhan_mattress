@@ -61,19 +61,19 @@ export function ProductCard({
     return (
       <motion.article
         className={cn(
-          'group relative bg-white rounded-xl border border-wakefit-gray/20 overflow-hidden',
-          'transition-all duration-300 hover:shadow-xl hover:border-wakefit-orange/30',
+          'group relative bg-white rounded-2xl border border-slate-200 overflow-hidden',
+          'transition-all duration-300 hover:shadow-xl hover:border-amber-500/50',
           loading && 'animate-pulse pointer-events-none',
           className
         )}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        whileHover={{ y: -4, boxShadow: '0 20px 40px -10px rgba(0,0,0,0.1)' }}
+        whileHover={{ y: -4, boxShadow: '0 20px 40px -10px rgba(15,23,42,0.12)' }}
         data-testid={testId}
         onClick={handleClick}
       >
         {/* Product Image */}
-        <div className="relative aspect-square overflow-hidden bg-wakefit-gray/50">
+        <div className="relative aspect-square overflow-hidden bg-slate-100">
           <Link
             href={productLink}
             className="block h-full"
@@ -103,12 +103,12 @@ export function ProductCard({
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.1 }}
                     className={cn(
-                      'inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full',
-                      variant === 'primary' && 'bg-wakefit-orange text-white',
-                      variant === 'secondary' && 'bg-wakefit-dark text-white',
-                      variant === 'success' && 'bg-green-600 text-white',
-                      variant === 'warning' && 'bg-yellow-500 text-white',
-                      variant === 'outline' && 'border-2 border-wakefit-orange text-wakefit-orange bg-transparent'
+                      'inline-flex items-center px-2.5 py-1 text-xs font-bold rounded-full shadow-xs',
+                      variant === 'primary' && 'bg-amber-500 text-slate-950',
+                      variant === 'secondary' && 'bg-slate-900 text-white',
+                      variant === 'success' && 'bg-emerald-600 text-white',
+                      variant === 'warning' && 'bg-amber-600 text-white',
+                      variant === 'outline' && 'border border-amber-500 text-amber-600 bg-white/90'
                     )}
                   >
                     {text}
@@ -123,9 +123,9 @@ export function ProductCard({
             <motion.span
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute top-3 right-3 inline-flex items-center px-2 py-1 text-xs font-bold text-white bg-red-500 rounded-full"
+              className="absolute top-3 right-3 inline-flex items-center px-2.5 py-1 text-xs font-extrabold text-white bg-rose-600 rounded-full shadow-md"
             >
-              -{discountPercent}%
+              -{discountPercent}% OFF
             </motion.span>
           )}
 
@@ -141,7 +141,7 @@ export function ProductCard({
               className={cn(
                 'absolute bottom-3 right-3 p-2 rounded-full bg-white/90 backdrop-blur-sm shadow-md',
                 'transition-all duration-200 hover:bg-white',
-                isInWishlist ? 'text-wakefit-orange' : 'text-wakefit-gray hover:text-wakefit-orange'
+                isInWishlist ? 'text-amber-500' : 'text-slate-400 hover:text-amber-500'
               )}
               aria-label={isInWishlist ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
               aria-pressed={isInWishlist}
@@ -158,12 +158,12 @@ export function ProductCard({
             </motion.button>
           )}
 
-          {/* Quick View */}
+          {/* Quick View / Add to Cart */}
           {showActions && (
             <motion.button
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="absolute bottom-3 left-1/2 -translate-x-1/2 px-4 py-2 text-sm font-medium text-white bg-wakefit-orange rounded-lg shadow-md opacity-0 group-hover:opacity-100 transition-all duration-200"
+              className="absolute bottom-3 left-1/2 -translate-x-1/2 px-5 py-2 text-xs font-bold text-slate-950 bg-amber-500 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-200 hover:bg-amber-400"
               onClick={handleAddToCart}
               aria-label={`Add ${product.name} to cart`}
             >

@@ -33,14 +33,40 @@ export function Footer({
   return (
     <footer
       className={cn(
-        'bg-wakefit-dark text-white',
+        'bg-[#090D16] text-white border-t border-slate-800',
         className
       )}
       role="contentinfo"
       data-testid={testId}
     >
+      {/* Trust Badges Bar */}
+      <div className="border-b border-slate-800 bg-[#0F172A] py-8">
+        <div className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80">
+            <span className="text-2xl mb-1 block">🛡️</span>
+            <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider">100-Night Trial</h4>
+            <p className="text-[11px] text-slate-400 mt-1">100% Risk-free sleep guarantee at home</p>
+          </div>
+          <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80">
+            <span className="text-2xl mb-1 block">📜</span>
+            <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider">10-Year Warranty</h4>
+            <p className="text-[11px] text-slate-400 mt-1">Direct sagging replacement coverage</p>
+          </div>
+          <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80">
+            <span className="text-2xl mb-1 block">🚚</span>
+            <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider">White-Glove Delivery</h4>
+            <p className="text-[11px] text-slate-400 mt-1">Free unboxing & setup in 150+ cities</p>
+          </div>
+          <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80">
+            <span className="text-2xl mb-1 block">💳</span>
+            <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider">Zero-Cost EMI</h4>
+            <p className="text-[11px] text-slate-400 mt-1">Instant bank EMI starting ₹1,249/mo</p>
+          </div>
+        </div>
+      </div>
+
       {/* Main Footer Content */}
-      <div className="container mx-auto px-4 py-16 md:py-24">
+      <div className="container mx-auto px-4 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 md:gap-12">
           {/* Brand Column */}
           <motion.div
@@ -49,22 +75,31 @@ export function Footer({
             transition={{ duration: 0.4 }}
             className="lg:col-span-2"
           >
-            <Link href="/" className="block mb-6" aria-label={`${brandName} - Home`}>
+            <Link href="/" className="block mb-4" aria-label={`${brandName} - Home`}>
               {logo || (
-                <span className="text-2xl md:text-3xl font-bold text-wakefit-orange">
-                  {brandName}
-                </span>
+                <div className="flex flex-col">
+                  <span className="text-2xl md:text-3xl font-extrabold text-white tracking-tight font-heading">
+                    CHOUHAN
+                  </span>
+                  <span className="text-xs font-bold text-amber-400 uppercase tracking-[0.2em]">
+                    MATTRESS
+                  </span>
+                </div>
               )}
             </Link>
-            {brandDescription && (
-              <p className="text-wakefit-gray/70 mb-6 max-w-xs leading-relaxed">
+            {brandDescription ? (
+              <p className="text-slate-400 mb-6 max-w-xs text-xs leading-relaxed">
                 {brandDescription}
+              </p>
+            ) : (
+              <p className="text-slate-400 mb-6 max-w-xs text-xs leading-relaxed">
+                Engineered sleep systems handcrafted for royal comfort. Designed with spine-alignment memory foam, zero-motion pocket springs, and 100% natural organic latex.
               </p>
             )}
 
             {/* Social Links */}
             {socialLinks.length > 0 && (
-              <div className="flex gap-4" role="list" aria-label="Social media links">
+              <div className="flex gap-3" role="list" aria-label="Social media links">
                 {socialLinks.map((link, index) => (
                   <motion.a
                     key={index}
@@ -73,12 +108,12 @@ export function Footer({
                     rel="noopener noreferrer"
                     aria-label={link.label || link.platform}
                     className={cn(
-                      'flex items-center justify-center w-10 h-10 rounded-full',
-                      'bg-white/10 hover:bg-wakefit-orange transition-all duration-300',
-                      'text-wakefit-gray/70 hover:text-white'
+                      'flex items-center justify-center w-9 h-9 rounded-xl',
+                      'bg-slate-900 hover:bg-amber-500 hover:text-slate-950 transition-all duration-300',
+                      'text-slate-400 border border-slate-800'
                     )}
                     role="listitem"
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     {link.icon}
@@ -102,7 +137,7 @@ export function Footer({
                   }
                   e.currentTarget.reset();
                 }}
-                className="mt-8 max-w-xs"
+                className="mt-6 max-w-xs"
                 role="search"
               >
                 <label htmlFor="footer-email" className="sr-only">
@@ -113,13 +148,13 @@ export function Footer({
                     id="footer-email"
                     type="email"
                     name="email"
-                    placeholder={newsletter.placeholder || 'Enter your email'}
+                    placeholder={newsletter.placeholder || 'Enter email for VIP offers'}
                     required
                     className={cn(
-                      'flex-1 px-4 py-3 rounded-lg',
-                      'bg-white/5 border border-white/10',
-                      'text-white placeholder:text-wakefit-gray/50',
-                      'focus:outline-none focus:ring-2 focus:ring-wakefit-orange/50 focus:border-transparent',
+                      'flex-1 px-3.5 py-2.5 rounded-xl text-xs',
+                      'bg-slate-900 border border-slate-800',
+                      'text-white placeholder:text-slate-500',
+                      'focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500',
                       'transition-all duration-200'
                     )}
                     autoComplete="email"
@@ -127,21 +162,15 @@ export function Footer({
                   <button
                     type="submit"
                     className={cn(
-                      'px-4 py-3 rounded-lg font-semibold text-white',
-                      'bg-wakefit-orange hover:bg-wakefit-orange/90',
-                      'transition-all duration-200',
-                      'focus:outline-none focus:ring-2 focus:ring-wakefit-orange/50 focus:ring-offset-2 focus:ring-offset-wakefit-dark'
+                      'px-4 py-2.5 rounded-xl font-bold text-xs text-slate-950',
+                      'bg-amber-500 hover:bg-amber-400',
+                      'transition-all duration-200 shadow-md'
                     )}
                     aria-label={newsletter.buttonText || 'Subscribe'}
                   >
-                    {newsletter.buttonText || 'Subscribe'}
+                    {newsletter.buttonText || 'Join'}
                   </button>
                 </div>
-                {newsletter.disclaimer && (
-                  <p className="text-xs text-wakefit-gray/50 mt-2 text-center">
-                    {newsletter.disclaimer}
-                  </p>
-                )}
               </motion.form>
             )}
           </motion.div>
@@ -155,15 +184,15 @@ export function Footer({
               transition={{ delay: 0.1 * (sectionIndex + 1), duration: 0.4 }}
               aria-label={section.title}
             >
-              <h3 className="font-semibold text-lg mb-4">{section.title}</h3>
-              <ul className="space-y-3" role="list">
+              <h3 className="font-bold text-sm text-amber-400 mb-4 uppercase tracking-wider">{section.title}</h3>
+              <ul className="space-y-2.5" role="list">
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
                     <Link
                       href={link.href}
                       target={link.external ? '_blank' : undefined}
                       rel={link.external ? 'noopener noreferrer' : undefined}
-                      className="text-wakefit-gray/70 hover:text-wakefit-orange transition-colors duration-200 text-sm"
+                      className="text-slate-400 hover:text-amber-400 transition-colors duration-200 text-xs font-medium"
                     >
                       {link.label}
                     </Link>
@@ -181,14 +210,14 @@ export function Footer({
               transition={{ delay: 0.3, duration: 0.4 }}
               className="lg:col-span-2"
             >
-              <h3 className="font-semibold text-lg mb-4">Contact Us</h3>
-              <address className="not-italic space-y-3 text-wakefit-gray/70 text-sm">
+              <h3 className="font-bold text-sm text-amber-400 mb-4 uppercase tracking-wider">Sleep Concierge</h3>
+              <address className="not-italic space-y-3 text-slate-400 text-xs">
                 {contactInfo.email && (
                   <a
                     href={`mailto:${contactInfo.email}`}
-                    className="flex items-center gap-2 hover:text-wakefit-orange transition-colors"
+                    className="flex items-center gap-2 hover:text-amber-400 transition-colors"
                   >
-                    <svg className="h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg className="h-4 w-4 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                     {contactInfo.email}
@@ -197,9 +226,9 @@ export function Footer({
                 {contactInfo.phone && (
                   <a
                     href={`tel:${contactInfo.phone}`}
-                    className="flex items-center gap-2 hover:text-wakefit-orange transition-colors"
+                    className="flex items-center gap-2 hover:text-amber-400 transition-colors"
                   >
-                    <svg className="h-5 w-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg className="h-4 w-4 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                     {contactInfo.phone}
@@ -207,78 +236,27 @@ export function Footer({
                 )}
                 {contactInfo.address && (
                   <div className="flex gap-2">
-                    <svg className="h-5 w-5 flex-shrink-0 mt-0.5 text-wakefit-gray/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg className="h-4 w-4 text-amber-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
                     <span>{contactInfo.address}</span>
                   </div>
                 )}
-                {contactInfo.hours && (
-                  <div className="flex gap-2">
-                    <svg className="h-5 w-5 flex-shrink-0 mt-0.5 text-wakefit-gray/50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>{contactInfo.hours}</span>
-                  </div>
-                )}
               </address>
             </motion.div>
           )}
         </div>
-
-        {/* Payment Methods & Certifications */}
-        {(paymentMethods && paymentMethods.length > 0) || (certifications && certifications.length > 0) ? (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.4 }}
-            className="mt-12 pt-8 border-t border-white/10"
-          >
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 flex-wrap">
-              {paymentMethods && paymentMethods.length > 0 && (
-                <div className="flex items-center gap-4 flex-wrap" role="list" aria-label="Accepted payment methods">
-                  <span className="text-wakefit-gray/70 text-sm font-medium">Payments:</span>
-                  <div className="flex items-center gap-3" role="list">
-                    {paymentMethods.map((method, index) => (
-                      <span key={index} role="listitem" className="h-6" aria-label={method.name}>
-                        {method.icon}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {certifications && certifications.length > 0 && (
-                <div className="flex items-center gap-4 flex-wrap" role="list" aria-label="Certifications">
-                  <span className="text-wakefit-gray/70 text-sm font-medium">Certifications:</span>
-                  <div className="flex items-center gap-3" role="list">
-                    {certifications.map((cert, index) => (
-                      <span key={index} role="listitem" className="h-6" aria-label={cert.name || 'Certification'}>
-                        {cert.icon}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        ) : null}
       </div>
 
       {/* Copyright & Legal Links */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.4 }}
-        className="border-t border-white/10"
-      >
+      <div className="border-t border-slate-800 bg-[#070B19]">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Copyright */}
             {showCopyright && (
-              <p className="text-wakefit-gray/60 text-sm text-center md:text-left">
-                {copyrightText || `© ${currentYear} ${brandName}. All rights reserved.`}
+              <p className="text-slate-400 text-xs text-center md:text-left">
+                {copyrightText || `© ${currentYear} Chouhan Mattress. Engineered For Royal Sleep. All rights reserved.`}
               </p>
             )}
 
@@ -289,7 +267,7 @@ export function Footer({
                   <Link
                     key={index}
                     href={link.href}
-                    className="text-wakefit-gray/60 hover:text-wakefit-orange transition-colors text-sm"
+                    className="text-slate-400 hover:text-amber-400 transition-colors text-xs"
                   >
                     {link.label}
                   </Link>
@@ -298,7 +276,7 @@ export function Footer({
             )}
           </div>
         </div>
-      </motion.div>
+      </div>
     </footer>
   );
 }

@@ -70,6 +70,12 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-amber-500 focus:text-slate-950 focus:font-extrabold focus:rounded-lg focus:shadow-xl"
+        >
+          Skip to main content
+        </a>
         <CartProvider>
           {children}
         </CartProvider>

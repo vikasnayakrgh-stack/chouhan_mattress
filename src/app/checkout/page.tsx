@@ -45,13 +45,13 @@ function CheckoutPageContent() {
 
   // Step 1: Address Form State
   const [address, setAddress] = useState<DeliveryAddress>({
-    fullName: 'Rahul Sharma',
-    phone: '9876543210',
-    pincode: '110020',
-    houseNo: 'Flat 402, Block B',
-    street: 'Industrial Area, Phase 2',
-    city: 'New Delhi',
-    state: 'Delhi',
+    fullName: '',
+    phone: '',
+    pincode: '',
+    houseNo: '',
+    street: '',
+    city: '',
+    state: '',
     addressType: 'Home',
   });
 

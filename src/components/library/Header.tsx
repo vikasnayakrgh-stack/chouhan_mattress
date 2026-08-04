@@ -1,11 +1,12 @@
 /**
- * Chouhan Mattress - Official Wakefit-Inspired Header Component
- * Pixel-perfect purple brand header with inline search bar, quick links, and category sub-nav
+ * Chouhan Mattress - Luxury Header Component
+ * Deep Royal Slate Navy header with Imperial Gold accents, inline search modal trigger,
+ * cart counter sync, and category mega menu sub-navigation.
  */
 
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -16,16 +17,17 @@ import {
   UserIcon,
   ShoppingCartIcon,
   HeartIcon,
-  MapPinIcon,
   SparklesIcon,
-  HomeIcon,
+  ShieldCheckIcon,
+  AwardIcon,
+  CrownIcon,
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
 interface HeaderProps {
   brandName?: string;
   brandLink?: string;
-  navItems?: Array<{ label: string; href: string }>;
+  navItems?: Array<{ label: string; href: string; children?: Array<{ label: string; href: string }> }>;
   showCart?: boolean;
   showSearch?: boolean;
   showAccount?: boolean;
@@ -34,15 +36,14 @@ interface HeaderProps {
 }
 
 const CATEGORIES_SUBNAV = [
-  { label: 'Zense', tag: 'Sleep Tech', href: '/zense', isSpecial: true },
-  { label: 'Mattress', href: '/category/mattresses' },
-  { label: 'Furniture', href: '/category/sofas' },
-  { label: 'Bedroom', href: '/category/beds' },
-  { label: 'Living', href: '/category/sofas' },
-  { label: 'Study & Work', href: '/category/sofas' },
-  { label: 'Dining & Kitchen', href: '/category/sofas' },
-  { label: 'Decor & Gifting', href: '/category/accessories' },
-  { label: 'Pillows & Bedding', href: '/category/pillows' },
+  { label: 'Royal Ortho Hybrid', tag: 'Spine Tech', href: '/category/mattresses', isSpecial: true },
+  { label: 'Mattresses', href: '/category/mattresses' },
+  { label: 'Custom Sized Beds', href: '/category/beds' },
+  { label: 'Solid Wood Frames', href: '/category/beds' },
+  { label: 'Luxury Sofas', href: '/category/sofas' },
+  { label: 'Contour Pillows', href: '/category/pillows' },
+  { label: 'Protectors & Linen', href: '/category/accessories' },
+  { label: 'Sleep Quiz', href: '/mattress-selector', isSpecial: false },
 ];
 
 export function Header({
@@ -52,79 +53,87 @@ export function Header({
 }: HeaderProps) {
   const { cartCount, openDrawer } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
 
   const triggerSearch = () => {
     window.dispatchEvent(new CustomEvent('open-search'));
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full shadow-md font-sans">
-      {/* ─── Top Black Announcement Bar ─── */}
-      <div className="bg-[#121212] text-white py-2 px-4 text-center text-xs sm:text-sm font-medium tracking-wide">
-        <span>Use code <strong className="text-[#F26522] uppercase">HOME</strong> (till 30th Jul) to Get up to <strong>65% OFF</strong> + Additional 11% OFF with bank offers.</span>
+    <header className="sticky top-0 z-50 w-full shadow-lg font-sans" data-testid={testId}>
+      {/* ─── Top Luxury Gold Announcement Bar ─── */}
+      <div className="bg-[#090D16] text-amber-200 py-2 px-4 text-center text-xs font-medium tracking-wide border-b border-amber-900/30 flex items-center justify-center gap-3">
+        <span className="hidden md:inline-flex items-center gap-1 text-amber-400 font-semibold text-[11px] uppercase tracking-wider">
+          <CrownIcon className="w-3.5 h-3.5 text-amber-400" /> Royal Sleep Engineering
+        </span>
+        <span className="text-gray-300">
+          Exclusive Royal Festival Offer: Use Code <strong className="text-amber-400 font-bold uppercase">ROYALBED</strong> for <strong>Up to 55% OFF</strong> + Free White-Glove Installation
+        </span>
       </div>
 
-      {/* ─── Main Deep Purple Header ─── */}
-      <div className="bg-[#3B0764] text-white py-3 px-4 md:px-8 border-b border-purple-900/40">
+      {/* ─── Main Deep Royal Navy Slate Header ─── */}
+      <div className="bg-[#0F172A] text-white py-3.5 px-4 md:px-8 border-b border-slate-800">
         <div className="container mx-auto flex items-center justify-between gap-4">
           
           {/* Left: Mobile Toggle & Brand Logo */}
           <div className="flex items-center gap-3 flex-shrink-0">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-white focus:outline-none"
+              className="p-1.5 rounded-lg hover:bg-slate-800 transition-colors text-slate-300 focus:outline-none md:hidden"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
             </button>
 
-            <Link href={brandLink} className="flex items-center gap-2 group">
-              <div className="w-9 h-9 rounded-xl bg-[#F26522] text-white flex items-center justify-center font-black text-lg shadow-sm group-hover:scale-105 transition-transform">
-                <HomeIcon className="w-5 h-5 fill-white" />
+            <Link href={brandLink} className="flex items-center gap-3 group">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 text-slate-950 flex items-center justify-center font-black text-xl shadow-md group-hover:scale-105 transition-transform border border-amber-400/40">
+                <CrownIcon className="w-6 h-6 text-slate-950 fill-slate-950" />
               </div>
               <div className="flex flex-col">
-                <span className="text-xl md:text-2xl font-black text-white tracking-tight leading-none group-hover:text-purple-200 transition-colors">
-                  Chouhan
+                <span className="text-xl md:text-2xl font-bold tracking-tight text-white leading-none font-heading group-hover:text-amber-300 transition-colors">
+                  CHOUHAN
                 </span>
-                <span className="text-[10px] font-bold text-[#F26522] uppercase tracking-widest leading-none mt-0.5">
-                  Mattress
+                <span className="text-[10px] font-semibold text-amber-400 uppercase tracking-[0.25em] leading-none mt-1">
+                  MATTRESS
                 </span>
               </div>
             </Link>
           </div>
 
-          {/* Center: Search Input Bar */}
-          <div className="flex-1 max-w-2xl mx-2 hidden sm:block relative">
+          {/* Center: Search Trigger Input Bar */}
+          <div className="flex-1 max-w-2xl mx-4 hidden sm:block relative">
             <button
               onClick={triggerSearch}
-              className="w-full h-11 bg-white rounded-lg pl-10 pr-4 text-left text-xs sm:text-sm text-gray-500 flex items-center justify-between border border-transparent hover:border-purple-300 transition-all shadow-xs cursor-pointer"
+              className="w-full h-11 bg-slate-900/90 rounded-xl pl-10 pr-4 text-left text-xs sm:text-sm text-slate-400 flex items-center justify-between border border-slate-700/70 hover:border-amber-500/50 transition-all shadow-inner cursor-pointer group"
             >
-              <div className="flex items-center gap-2">
-                <SearchIcon className="w-4 h-4 text-gray-400" />
-                <span>Search for Mattress, Sofas, Beds, Pillows...</span>
+              <div className="flex items-center gap-2.5">
+                <SearchIcon className="w-4 h-4 text-slate-400 group-hover:text-amber-400 transition-colors" />
+                <span className="text-slate-300">Search Royal Ortho, Custom Beds, Latex, Pillows...</span>
               </div>
-              <span className="text-[10px] font-bold bg-purple-100 text-purple-900 px-2 py-0.5 rounded">
+              <span className="text-[10px] font-bold bg-slate-800 text-amber-300 px-2 py-0.5 rounded border border-amber-500/20">
                 ⌘K
               </span>
             </button>
           </div>
 
           {/* Right: Quick Links & Actions */}
-          <div className="flex items-center gap-4 sm:gap-6 flex-shrink-0 text-xs font-semibold">
-            <div className="hidden lg:flex items-center gap-4 text-purple-100">
-              <Link href="/products" className="hover:text-white transition-colors">Home Interiors</Link>
-              <Link href="/reviews" className="hover:text-white transition-colors">Retail Stores</Link>
-              <Link href="/mattress-selector" className="hover:text-white transition-colors flex items-center gap-1">
-                <SparklesIcon className="w-3.5 h-3.5 text-[#F26522]" /> Sleep Wizard
+          <div className="flex items-center gap-4 sm:gap-6 flex-shrink-0 text-xs font-medium">
+            <div className="hidden lg:flex items-center gap-5 text-slate-300">
+              <Link href="/products" className="hover:text-amber-400 transition-colors flex items-center gap-1">
+                <AwardIcon className="w-3.5 h-3.5 text-amber-400" /> Catalog
+              </Link>
+              <Link href="/reviews" className="hover:text-amber-400 transition-colors flex items-center gap-1">
+                <ShieldCheckIcon className="w-3.5 h-3.5 text-emerald-400" /> 100-Night Trial
+              </Link>
+              <Link href="/mattress-selector" className="hover:text-amber-400 transition-colors flex items-center gap-1 bg-amber-500/10 px-3 py-1.5 rounded-full border border-amber-500/30 text-amber-300">
+                <SparklesIcon className="w-3.5 h-3.5 text-amber-400 animate-pulse" /> Sleep Quiz
               </Link>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <Link
                 href="/account"
                 aria-label="Account"
-                className="p-2 rounded-full hover:bg-white/10 transition-colors text-white"
+                className="p-2 rounded-xl hover:bg-slate-800 transition-colors text-slate-300 hover:text-white"
                 title="Account"
               >
                 <UserIcon className="w-5 h-5" />
@@ -133,7 +142,7 @@ export function Header({
               <Link
                 href="/wishlist"
                 aria-label="Wishlist"
-                className="p-2 rounded-full hover:bg-white/10 transition-colors text-white hidden sm:flex"
+                className="p-2 rounded-xl hover:bg-slate-800 transition-colors text-slate-300 hover:text-amber-400 hidden sm:flex"
                 title="Wishlist"
               >
                 <HeartIcon className="w-5 h-5" />
@@ -142,12 +151,13 @@ export function Header({
               <button
                 onClick={openDrawer}
                 aria-label="Cart"
-                className="relative p-2 rounded-full hover:bg-white/10 transition-colors text-white"
-                title="Cart"
+                className="relative p-2 rounded-xl hover:bg-slate-800 transition-colors text-slate-300 hover:text-white flex items-center gap-2 bg-slate-900 border border-slate-700/60 px-3"
+                title="Shopping Cart"
               >
-                <ShoppingCartIcon className="w-5 h-5" />
+                <ShoppingCartIcon className="w-5 h-5 text-amber-400" />
+                <span className="hidden sm:inline-block font-semibold text-xs text-slate-200">Cart</span>
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[#F26522] text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
+                  <span className="bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 text-[11px] font-extrabold px-1.5 py-0.5 rounded-full shadow-md min-w-[1.25rem] text-center">
                     {cartCount}
                   </span>
                 )}
@@ -157,20 +167,20 @@ export function Header({
         </div>
 
         {/* Mobile Search Row */}
-        <div className="mt-2 sm:hidden">
+        <div className="mt-2.5 sm:hidden">
           <button
             onClick={triggerSearch}
-            className="w-full h-10 bg-white rounded-lg px-3 text-left text-xs text-gray-500 flex items-center gap-2"
+            className="w-full h-10 bg-slate-900 rounded-lg px-3 text-left text-xs text-slate-400 flex items-center gap-2 border border-slate-700"
           >
-            <SearchIcon className="w-4 h-4 text-gray-400" />
-            <span>Search for Mattress, Sofas, Beds...</span>
+            <SearchIcon className="w-4 h-4 text-slate-400" />
+            <span>Search Royal Ortho, Custom Beds, Pillows...</span>
           </button>
         </div>
       </div>
 
       {/* ─── Secondary Sub-Navigation Category Bar ─── */}
-      <div className="bg-[#2E0552] text-white overflow-x-auto scrollbar-none py-2 px-4 md:px-8 border-t border-purple-900/30">
-        <div className="container mx-auto flex items-center gap-6 text-xs font-semibold whitespace-nowrap">
+      <div className="bg-[#0B132B] text-white overflow-x-auto scrollbar-none py-2.5 px-4 md:px-8 border-t border-slate-800/80">
+        <div className="container mx-auto flex items-center gap-6 text-xs font-medium whitespace-nowrap">
           {CATEGORIES_SUBNAV.map((cat, idx) => (
             <Link
               key={idx}
@@ -178,11 +188,11 @@ export function Header({
               className={cn(
                 'transition-colors py-1 flex items-center gap-1.5',
                 cat.isSpecial
-                  ? 'text-amber-300 font-bold bg-amber-400/20 px-2.5 py-0.5 rounded-full border border-amber-300/40 hover:bg-amber-400/30'
-                  : 'text-purple-100 hover:text-white'
+                  ? 'text-amber-300 font-bold bg-amber-500/15 px-3 py-1 rounded-full border border-amber-500/40 hover:bg-amber-500/25'
+                  : 'text-slate-300 hover:text-amber-400'
               )}
             >
-              {cat.tag && <span className="text-[9px] bg-amber-400 text-purple-950 font-black px-1.5 py-0.2 rounded uppercase">{cat.tag}</span>}
+              {cat.tag && <span className="text-[9px] bg-amber-500 text-slate-950 font-extrabold px-1.5 py-0.2 rounded uppercase">{cat.tag}</span>}
               <span>{cat.label}</span>
             </Link>
           ))}
@@ -196,22 +206,22 @@ export function Header({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="bg-[#2E0552] text-white p-6 space-y-4 border-t border-purple-800"
+            className="bg-[#0B132B] text-white p-6 space-y-4 border-t border-slate-800 md:hidden"
           >
-            <div className="grid grid-cols-2 gap-3 text-sm font-bold">
+            <div className="grid grid-cols-2 gap-3 text-sm font-medium">
               {CATEGORIES_SUBNAV.map((c, i) => (
                 <Link
                   key={i}
                   href={c.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2.5 rounded-xl bg-purple-900/40 hover:bg-purple-800 text-purple-100"
+                  className="p-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-800 text-xs font-semibold"
                 >
                   {c.label}
                 </Link>
               ))}
             </div>
 
-            <div className="pt-4 border-t border-purple-800 flex justify-between text-xs font-semibold text-purple-200">
+            <div className="pt-4 border-t border-slate-800 flex justify-between text-xs font-medium text-slate-300">
               <Link href="/account" onClick={() => setIsMobileMenuOpen(false)}>My Account</Link>
               <Link href="/wishlist" onClick={() => setIsMobileMenuOpen(false)}>Wishlist</Link>
               <Link href="/compare" onClick={() => setIsMobileMenuOpen(false)}>Compare</Link>
