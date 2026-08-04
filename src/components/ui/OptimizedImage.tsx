@@ -136,8 +136,8 @@ const RESPONSIVE_CONFIGS: Record<string, ResponsiveImageConfig> = {
 };
 
 const PLACEHOLDERS = {
-  heroBlur: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
-  product: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
+  heroBlur: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN88v7dfwAJegPfrY8sYQAAAABJRU5ErkJggg==',
+  product: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN88v7dfwAJegPfrY8sYQAAAABJRU5ErkJggg==',
 };
 
 function getResponsiveConfig(preset: string): ResponsiveImageConfig {
@@ -209,6 +209,8 @@ export function OptimizedImage({
   'data-testid': testId,
   ...props
 }: OptimizedImageProps) {
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
   // Get responsive config
   const config = getResponsiveConfig(preset);
   const mergedConfig: ResponsiveImageConfig = {
@@ -231,8 +233,18 @@ export function OptimizedImage({
     placeholder: mergedConfig.placeholder || placeholder,
     blurDataURL: mergedConfig.placeholder === 'blur' ? placeholderData : undefined,
     quality: mergedConfig.quality,
-    onLoad,
+    onLoad: (e: any) => {
+      setIsLoaded(true);
+      if (onLoad) {
+        try {
+          onLoad();
+        } catch {
+          // ignore
+        }
+      }
+    },
     onError: (e: any) => {
+      setIsLoaded(true);
       if (onError) {
         try {
           (onError as any)(e);
@@ -286,25 +298,22 @@ export function OptimizedImage({
       data-testid={testId}
     >
       <Image
-        className={cn('transition-opacity duration-300', className)}
+        className={cn(
+          'transition-opacity duration-300',
+          !isLoaded && showSkeleton ? 'opacity-0' : 'opacity-100',
+          className
+        )}
         {...imageProps}
         {...props}
       />
-      {showSkeleton && mergedConfig.placeholder === 'blur' && (
+      {showSkeleton && !isLoaded && (
         <div
-          className="absolute inset-0 bg-muted animate-pulse"
-          style={{
-            backgroundImage: `url("${placeholderData}")`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'blur(20px)',
-            transform: 'scale(1.1)',
-          }}
+          className="absolute inset-0 bg-slate-200/80 animate-pulse transition-opacity duration-300"
           aria-hidden="true"
         />
       )}
-      {fallback && (
-        <div className="absolute inset-0 flex items-center justify-center bg-muted" aria-hidden="true">
+      {fallback && !isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center bg-slate-100 text-slate-400 text-xs" aria-hidden="true">
           {fallback}
         </div>
       )}

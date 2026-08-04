@@ -59,11 +59,11 @@ export function CategoriesSection({
         >
           <h2
             id="categories-heading"
-            className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight"
+            className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight font-heading"
           >
             Shop By Categories
           </h2>
-          <div className="w-16 h-1 bg-[#3B0764] rounded-full mt-2" />
+          <div className="w-16 h-1 bg-amber-500 rounded-full mt-2" />
         </motion.div>
 
         {/* Categories Grid */}
@@ -84,7 +84,7 @@ export function CategoriesSection({
             >
               <Link
                 href={item.href}
-                className="group relative overflow-hidden rounded-xl border border-brand-gray/20 bg-white hover:border-brand-primary/50 transition-all duration-300"
+                className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white hover:border-amber-500/50 shadow-sm hover:shadow-xl transition-all duration-300 block"
               >
                 <div className="relative h-48 w-full overflow-hidden">
                   <OptimizedImage
@@ -95,11 +95,11 @@ export function CategoriesSection({
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     containerClassName="h-full"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-transparent to-black/30 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
                 </div>
                 <div className="p-6">
-                  <h3 className="mb-2 font-semibold text-brand-dark">{item.name}</h3>
-                  <div className="mt-3 h-1 w-16 bg-[#F26522] rounded-full group-hover:w-24 transition-all duration-300" />
+                  <h3 className="mb-2 font-bold text-slate-900 group-hover:text-amber-600 transition-colors text-base">{item.name}</h3>
+                  <div className="mt-3 h-1 w-12 bg-amber-500 rounded-full group-hover:w-20 transition-all duration-300" />
                 </div>
               </Link>
             </motion.div>
