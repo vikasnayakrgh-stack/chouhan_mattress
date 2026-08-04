@@ -106,67 +106,83 @@ export function CategoriesSection({
           ))}
         </motion.div>
 
-        {/* CTA Banner */}
+        {/* CTA Sale Banner - Luxury Overhaul */}
         {cta && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.4 }}
-            className="mt-16 relative overflow-hidden rounded-xl border border-wakefit-gray/20 bg-white"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            className="mt-20 relative overflow-hidden rounded-3xl border border-amber-500/30 bg-[#0B132B] shadow-2xl"
           >
-            <div className="relative h-[300px] md:h-[400px] lg:h-[500px] overflow-hidden">
-              <OptimizedImage
-                src={cta.backgroundImage}
-                alt="Home Sweet Home Sale"
-                preset="hero"
-                placeholder="blur"
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
-              <div className="absolute inset-0 flex items-end pb-10">
-                <div className="container mx-auto px-4 w-full max-w-4xl">
-                  <div className="text-white text-center">
-                    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-wakefit-orange/90 text-sm font-semibold mb-4">
-                      Sale Ends In
+            {/* Ambient Gold Radial Spotlight Glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-500/25 via-slate-900/60 to-slate-950 pointer-events-none" />
+
+            {/* Background Texture Overlay */}
+            <div className="absolute inset-0 opacity-20 mix-blend-overlay bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+
+            <div className="relative min-h-[380px] md:min-h-[460px] flex items-center justify-center p-8 sm:p-12 md:p-16 text-center">
+              <div className="max-w-3xl mx-auto flex flex-col items-center">
+                {/* Badge */}
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-300 text-xs font-extrabold uppercase tracking-widest mb-6 backdrop-blur-md shadow-inner"
+                >
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+                  ✦ ROYAL FESTIVAL OFFER — LIMITED TIME
+                </motion.div>
+
+                {/* Headline */}
+                <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4 leading-tight font-heading">
+                  <span className="bg-gradient-to-r from-amber-200 via-amber-400 to-amber-100 bg-clip-text text-transparent">
+                    {cta.title}
+                  </span>
+                </h2>
+
+                {/* Description */}
+                <p
+                  className="text-base sm:text-xl text-slate-300 mb-8 max-w-2xl font-medium leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: cta.description }}
+                />
+
+                {/* Glassmorphism Countdown Timer */}
+                <div className="grid grid-cols-4 gap-3 sm:gap-6 mb-10 w-full max-w-md">
+                  <div className="flex flex-col items-center p-3 sm:p-4 rounded-2xl bg-slate-900/90 border border-amber-500/30 backdrop-blur-xl shadow-xl">
+                    <span className="text-2xl sm:text-4xl font-extrabold text-amber-400 font-mono tracking-tight">
+                      {String(cta.countdown?.days || 0).padStart(2, '0')}
                     </span>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                      {cta.title}
-                    </h1>
-                    <p className="text-lg md:text-xl mb-6 max-w-2xl" dangerouslySetInnerHTML={{ __html: cta.description }} />
-                    <div className="flex items-center gap-4 mb-8 justify-center">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium">Days:</span>
-                        <span className="w-12 h-12 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-lg font-mono text-xl font-bold">
-                          {cta.countdown?.days || 0}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium">Hours:</span>
-                        <span className="w-12 h-12 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-lg font-mono text-xl font-bold">
-                          {cta.countdown?.hours || 0}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium">Minutes:</span>
-                        <span className="w-12 h-12 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-lg font-mono text-xl font-bold">
-                          {cta.countdown?.minutes || 0}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium">Seconds:</span>
-                        <span className="w-12 h-12 flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-lg font-mono text-xl font-bold">
-                          {cta.countdown?.seconds || 0}
-                        </span>
-                      </div>
-                    </div>
-                    <Link
-                      href={cta.ctaLink}
-                      className="inline-flex items-center gap-2 px-8 py-4 bg-wakefit-orange text-white font-semibold rounded-lg hover:bg-wakefit-orange/90 transition-colors"
-                    >
-                      {cta.ctaText}
-                    </Link>
+                    <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Days</span>
+                  </div>
+                  <div className="flex flex-col items-center p-3 sm:p-4 rounded-2xl bg-slate-900/90 border border-amber-500/30 backdrop-blur-xl shadow-xl">
+                    <span className="text-2xl sm:text-4xl font-extrabold text-amber-400 font-mono tracking-tight">
+                      {String(cta.countdown?.hours || 0).padStart(2, '0')}
+                    </span>
+                    <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Hours</span>
+                  </div>
+                  <div className="flex flex-col items-center p-3 sm:p-4 rounded-2xl bg-slate-900/90 border border-amber-500/30 backdrop-blur-xl shadow-xl">
+                    <span className="text-2xl sm:text-4xl font-extrabold text-amber-400 font-mono tracking-tight">
+                      {String(cta.countdown?.minutes || 0).padStart(2, '0')}
+                    </span>
+                    <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Mins</span>
+                  </div>
+                  <div className="flex flex-col items-center p-3 sm:p-4 rounded-2xl bg-slate-900/90 border border-amber-500/30 backdrop-blur-xl shadow-xl">
+                    <span className="text-2xl sm:text-4xl font-extrabold text-amber-400 font-mono tracking-tight">
+                      {String(cta.countdown?.seconds || 0).padStart(2, '0')}
+                    </span>
+                    <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider mt-1">Secs</span>
                   </div>
                 </div>
+
+                {/* Primary CTA Button */}
+                <Link
+                  href={cta.ctaLink}
+                  className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 text-slate-950 font-extrabold text-base rounded-2xl shadow-xl shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105 transition-all duration-300 group border border-amber-300/40"
+                >
+                  <span>{cta.ctaText}</span>
+                  <span className="text-xl group-hover:translate-x-1 transition-transform">→</span>
+                </Link>
               </div>
             </div>
           </motion.div>

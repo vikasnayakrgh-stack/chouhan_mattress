@@ -82,50 +82,53 @@ export function TestimonialsSection({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14"
+          className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-1.5 bg-orange-50 text-orange-600 text-sm font-semibold rounded-full mb-4 tracking-wide uppercase">
-            Customer Stories
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-700 text-xs font-extrabold rounded-full mb-4 tracking-widest uppercase">
+            ✦ VERIFIED SLEEP REVIEWS
           </span>
           <h2
             id="testimonials-heading"
-            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight font-heading"
           >
             Loved by{' '}
-            <span className="text-[#F26522]">{summary.totalReviews.toLocaleString()}+</span>{' '}
-            Happy Customers
+            <span className="bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent">
+              {summary.totalReviews.toLocaleString()}+
+            </span>{' '}
+            Happy Sleepers
           </h2>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Real stories from real customers who transformed their homes and sleep quality with
-            Chouhan Mattress.
+          <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto font-medium">
+            Real stories from real customers who transformed their homes and sleep quality with Chouhan Mattress.
           </p>
 
-          {/* Summary Stats */}
-          <div className="flex flex-wrap items-center justify-center gap-6 mt-8">
-            <div className="flex items-center gap-2">
-              <StarRating rating={Math.round(summary.averageRating)} size="md" />
-              <span className="text-2xl font-bold text-gray-900">{summary.averageRating}</span>
-              <span className="text-gray-400 text-sm">/ 5</span>
+          {/* Summary Stats Bar */}
+          <div className="flex flex-wrap items-center justify-center gap-6 mt-10 p-6 rounded-3xl bg-slate-900 text-white max-w-3xl mx-auto shadow-xl border border-amber-500/20">
+            <div className="flex items-center gap-3">
+              <StarRating rating={Math.round(summary.averageRating)} size="lg" />
+              <div>
+                <span className="text-2xl font-extrabold text-amber-400 font-mono">{summary.averageRating}</span>
+                <span className="text-slate-400 text-xs font-bold"> / 5.0 Rating</span>
+              </div>
             </div>
-            <div className="w-px h-8 bg-gray-200 hidden sm:block" />
+            <div className="w-px h-10 bg-slate-800 hidden sm:block" />
             <div className="text-center">
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-2xl font-extrabold text-amber-400 font-mono">
                 {summary.recommendPercentage}%
               </div>
-              <div className="text-xs text-gray-400">Would recommend</div>
+              <div className="text-xs text-slate-300 font-bold uppercase tracking-wider">Would Recommend</div>
             </div>
-            <div className="w-px h-8 bg-gray-200 hidden sm:block" />
+            <div className="w-px h-10 bg-slate-800 hidden sm:block" />
             <div className="text-center">
-              <div className="text-2xl font-bold text-gray-900">
+              <div className="text-2xl font-extrabold text-amber-400 font-mono">
                 {summary.totalReviews.toLocaleString()}+
               </div>
-              <div className="text-xs text-gray-400">Verified reviews</div>
+              <div className="text-xs text-slate-300 font-bold uppercase tracking-wider">Verified Reviews</div>
             </div>
           </div>
         </motion.div>
 
         {/* Reviews Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {visibleTestimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.id}
@@ -133,23 +136,23 @@ export function TestimonialsSection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
-              className="relative bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col"
+              className="relative bg-white rounded-3xl p-7 border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-amber-500/50 transition-all duration-300 flex flex-col hover:-translate-y-1"
             >
               {/* Quote Mark */}
               <div
-                className="absolute top-5 right-6 text-5xl font-serif text-gray-100 leading-none select-none"
+                className="absolute top-5 right-7 text-6xl font-serif text-slate-100 leading-none select-none pointer-events-none"
                 aria-hidden="true"
               >
-                "
+                ”
               </div>
 
-              {/* Rating */}
-              <div className="flex items-center gap-2 mb-3">
-                <StarRating rating={testimonial.rating} />
+              {/* Rating & Verified Badge */}
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <StarRating rating={testimonial.rating} size="md" />
                 {testimonial.verified && (
-                  <span className="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-50 px-2 py-0.5 rounded-full">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-2.5 py-0.5 rounded-full shadow-xs">
                     <svg
-                      className="w-3 h-3"
+                      className="w-3.5 h-3.5 text-emerald-600"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       aria-hidden="true"
@@ -160,39 +163,38 @@ export function TestimonialsSection({
                         clipRule="evenodd"
                       />
                     </svg>
-                    Verified
+                    Verified Buyer
                   </span>
                 )}
               </div>
 
               {/* Content */}
-              <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-4">
+              <p className="text-slate-700 text-sm leading-relaxed font-medium flex-1 mb-5 relative z-10">
                 "{testimonial.content}"
               </p>
 
-              {/* Product */}
-              <div className="text-xs text-[#F26522] font-medium mb-4 truncate">
-                📦 {testimonial.product}
+              {/* Product Chip */}
+              <div className="mb-5">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-900 border border-amber-200/80 text-xs font-bold rounded-full">
+                  📦 {testimonial.product}
+                </span>
               </div>
 
-              {/* Author */}
-              <div className="flex items-center gap-3 pt-4 border-t border-gray-50">
+              {/* Author Footer */}
+              <div className="flex items-center gap-3.5 pt-4 border-t border-slate-100">
                 <div
-                  className={cn(
-                    'w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0',
-                    avatarColors[index % avatarColors.length]
-                  )}
+                  className="w-11 h-11 rounded-full bg-slate-900 text-amber-400 border border-amber-500/40 flex items-center justify-center text-sm font-extrabold flex-shrink-0 shadow-md"
                   aria-hidden="true"
                 >
                   {testimonial.name.charAt(0)}
                 </div>
-                <div className="min-w-0">
-                  <div className="font-semibold text-gray-900 text-sm truncate">
+                <div className="min-w-0 flex-1">
+                  <div className="font-bold text-slate-900 text-sm truncate">
                     {testimonial.name}
                   </div>
-                  <div className="text-xs text-gray-400 flex items-center gap-1">
+                  <div className="text-xs text-slate-500 font-medium flex items-center gap-1">
                     <svg
-                      className="w-3 h-3"
+                      className="w-3 h-3 text-amber-500"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -214,7 +216,7 @@ export function TestimonialsSection({
                     {testimonial.location}
                   </div>
                 </div>
-                <div className="ml-auto text-xs text-gray-300">
+                <div className="text-[11px] text-slate-400 font-medium">
                   {new Date(testimonial.date).toLocaleDateString('en-IN', {
                     month: 'short',
                     year: 'numeric',
@@ -231,13 +233,13 @@ export function TestimonialsSection({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.3 }}
-          className="text-center mt-12"
+          className="text-center mt-14"
         >
           <a
             href="/reviews"
-            className="inline-flex items-center gap-2 text-[#F26522] font-semibold border-2 border-[#F26522] rounded-xl px-8 py-3 hover:bg-[#F26522] hover:text-white transition-all duration-200"
+            className="inline-flex items-center gap-2 text-amber-700 font-extrabold border-2 border-amber-500 rounded-2xl px-10 py-3.5 hover:bg-amber-500 hover:text-slate-950 transition-all duration-300 shadow-md hover:shadow-xl hover:scale-105"
           >
-            Read All Reviews
+            Read All 12,500+ Reviews
             <svg
               className="w-4 h-4"
               fill="none"
@@ -248,7 +250,7 @@ export function TestimonialsSection({
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
+                strokeWidth={2.5}
                 d="M17 8l4 4m0 0l-4 4m4-4H3"
               />
             </svg>

@@ -52,23 +52,26 @@ export function WhyChooseUsSection({
 
   return (
     <section
-      className={cn('py-20 bg-[#FAF9F6] border-t border-b border-slate-200/80', className)}
+      className={cn('py-24 bg-gradient-to-b from-[#FAF9F6] via-white to-[#FAF9F6] border-t border-b border-slate-200/80 relative overflow-hidden', className)}
       data-testid={testId}
       aria-labelledby="why-chouhan-heading"
     >
-      <div className="container mx-auto px-4">
+      {/* Background Accent Grid */}
+      <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none" />
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 max-w-3xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-[0.25em] text-amber-600 mb-2 block">
-            The Science of Better Sleep
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 text-xs font-extrabold uppercase tracking-widest mb-3">
+            ✦ THE SCIENCE OF ROYAL SLEEP
           </span>
           <h2
             id="why-chouhan-heading"
-            className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 font-heading"
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight leading-tight font-heading"
           >
             {headline}
           </h2>
           <p className="text-lg md:text-xl text-slate-700 max-w-2xl mx-auto font-medium" dangerouslySetInnerHTML={{ __html: subheadline }} />
-          <p className="text-slate-600 mt-4 max-w-3xl mx-auto text-sm leading-relaxed">{description}</p>
+          <p className="text-slate-600 mt-4 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">{description}</p>
         </div>
 
         {/* Features Grid */}
@@ -76,18 +79,22 @@ export function WhyChooseUsSection({
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.4 }}
-              className="flex flex-col items-center gap-4 text-center p-6 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
+              className="group flex flex-col items-center gap-5 text-center p-8 rounded-3xl bg-white border border-slate-200/90 shadow-sm hover:shadow-2xl hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-2 relative overflow-hidden"
             >
-              <div className="w-14 h-14 flex items-center justify-center rounded-2xl bg-amber-500/15 text-amber-600 border border-amber-500/30">
+              {/* Subtle Card Highlight Bar */}
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-slate-900 text-amber-400 border border-amber-500/30 shadow-md group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-slate-950 transition-all duration-300">
                 {iconComponents[feature.icon as keyof typeof iconComponents] || feature.icon}
               </div>
-              <h3 className="font-bold text-slate-900 text-base">{feature.title}</h3>
-              <p className="text-slate-600 text-xs leading-relaxed">{feature.description}</p>
+              <h3 className="font-extrabold text-slate-900 text-lg group-hover:text-amber-600 transition-colors">{feature.title}</h3>
+              <p className="text-slate-600 text-xs leading-relaxed font-medium">{feature.description}</p>
               {feature.highlight && (
-                <span className="mt-1 inline-flex items-center gap-1 px-3 py-1 text-[11px] font-bold rounded-full bg-amber-100 text-amber-800 border border-amber-300">
+                <span className="mt-auto inline-flex items-center gap-1.5 px-3.5 py-1 text-[11px] font-bold rounded-full bg-amber-50 text-amber-800 border border-amber-300/80 shadow-xs">
                   {feature.highlight}
                 </span>
               )}
@@ -95,18 +102,19 @@ export function WhyChooseUsSection({
           ))}
         </div>
 
-        {/* Stats */}
+        {/* Stats Bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 + index * 0.1, duration: 0.4 }}
-              className="p-6 rounded-2xl bg-slate-900 text-white shadow-lg border border-slate-800"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 + index * 0.1, duration: 0.4 }}
+              className="p-8 rounded-3xl bg-[#0B132B] text-white shadow-xl border border-amber-500/20 hover:border-amber-500/50 transition-all duration-300 group"
             >
-              <p className="text-3xl md:text-4xl font-extrabold text-amber-400 mb-1">{stat.value}</p>
-              <p className="text-slate-300 text-xs font-medium uppercase tracking-wider">{stat.label}</p>
+              <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-amber-400 mb-2 font-mono tracking-tight group-hover:scale-105 transition-transform">{stat.value}</p>
+              <p className="text-slate-300 text-xs font-bold uppercase tracking-widest">{stat.label}</p>
             </motion.div>
           ))}
         </div>
