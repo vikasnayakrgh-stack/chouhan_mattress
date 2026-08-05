@@ -15,7 +15,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Defense-in-depth: Protect all `/admin` routes and `/api/admin/*` API routes
-  if (pathname.startsWith('/admin') || pathname.startsWith('/api/admin')) {
+  if ((pathname.startsWith('/admin') || pathname.startsWith('/api/admin')) && !pathname.startsWith('/admin/login')) {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
