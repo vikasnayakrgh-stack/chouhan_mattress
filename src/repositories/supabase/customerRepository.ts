@@ -57,12 +57,12 @@ export class SupabaseCustomerRepository implements ICustomerRepository {
     return (await this.getById(customerId))?.notes.find((n) => n.id === noteId) ?? null
   }
 
-  async deleteNote(customerId: string, noteId: string): Promise<boolean> {
-    await this.patchJsonArray(customerId, 'notes', (arr) =>
-      (arr as CustomerNote[]).filter((n) => n.id !== noteId),
-    )
-    return true
-  }
+  async deleteNote(customerId: string, noteId: string): Promise<CustomerNote | null> {
+      await this.patchJsonArray(customerId, 'notes', (arr) =>
+        (arr as CustomerNote[]).filter((n) => n.id !== noteId),
+      )
+      return null
+    }
 
   async addAddress(
     customerId: string,

@@ -43,13 +43,13 @@ export class MockCustomerRepository implements ICustomerRepository {
     return c.notes[idx]
   }
 
-  async deleteNote(customerId: string, noteId: string): Promise<boolean> {
-    const c = find(customerId)
-    if (!c) return false
-    const before = c.notes.length
-    c.notes = c.notes.filter((n) => n.id !== noteId)
-    return c.notes.length < before
-  }
+  async deleteNote(customerId: string, noteId: string): Promise<CustomerNote | null> {
+      const c = find(customerId)
+      if (!c) return null
+      const before = c.notes.length
+      c.notes = c.notes.filter((n) => n.id !== noteId)
+      return null
+    }
 
   async addAddress(customerId: string, address: Omit<CustomerAddress, 'id'>): Promise<CustomerAddress | null> {
     const c = find(customerId)

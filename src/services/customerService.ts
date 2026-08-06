@@ -78,9 +78,9 @@ export const customerService = {
     return getRepositories().customers.updateNote(customerId, noteId, content)
   },
 
-  async deleteNote(customerId: string, noteId: string): Promise<boolean> {
-    return getRepositories().customers.deleteNote(customerId, noteId)
-  },
+  async deleteNote(customerId: string, noteId: string): Promise<CustomerNote | null> {
+      return getRepositories().customers.deleteNote(customerId, noteId)
+    },
 
   async addAddress(customerId: string, address: Omit<CustomerAddress, 'id'>): Promise<CustomerAddress | null> {
     return getRepositories().customers.addAddress(customerId, address)

@@ -28,6 +28,10 @@ import type {
 import type { AuditLog, AuditFilters } from '@/features/audit/types'
 import type { AdminUser, AdminRole } from '@/features/staff/types'
 import type { Integration } from '@/features/integrations/types'
+import type { CustomerProfile } from '@/repositories/supabase/customerTypes'
+import type { CustomerAddress as CustomerAddressType } from '@/repositories/supabase/customerTypes'
+import type { Cart, CartItem } from '@/repositories/supabase/customerTypes'
+import type { Wishlist } from '@/repositories/supabase/customerTypes'
 
 export interface IProductRepository {
   getAll(): Promise<ProductWithVariants[]>
@@ -42,7 +46,7 @@ export interface IProductRepository {
     pageSize?: number
   }): Promise<{ products: ProductWithVariants[]; total: number }>
   create(product: ProductWithVariants): Promise<ProductWithVariants>
-  update(id: string, updates: Partial<ProductWithVariants>): Promise<ProductWithVariants | null>
+  update(id: string, updates: Partial<ProductWithVariants>): Promise<ProductWithVariants | null>;
   archive(id: string): Promise<boolean>
   duplicate(id: string): Promise<ProductWithVariants | null>
   getVariants(productId: string): Promise<ProductVariant[]>
@@ -62,11 +66,45 @@ export interface ICustomerRepository {
   getById(id: string): Promise<Customer | null>
   addNote(customerId: string, content: string, author: string): Promise<CustomerNote | null>
   updateNote(customerId: string, noteId: string, content: string): Promise<CustomerNote | null>
-  deleteNote(customerId: string, noteId: string): Promise<boolean>
+  deleteNote(customerId: string, noteId: string): Promise<CustomerNote | null>
   addAddress(customerId: string, address: Omit<CustomerAddress, 'id'>): Promise<CustomerAddress | null>
   updateAddress(customerId: string, addressId: string, updates: Partial<Omit<CustomerAddress, 'id'>>): Promise<CustomerAddress | null>
   deleteAddress(customerId: string, addressId: string): Promise<boolean>
   setDefaultAddress(customerId: string, addressId: string, kind: 'shipping' | 'billing'): Promise<boolean>
+}
+
+// New customer-facing repository interfaces
+export interface ICustomerProfileRepository {
+  getById(id: string): Promise<CustomerProfile | null>
+  upsert(profile: CustomerProfile): Promise<CustomerProfile>
+}
+
+export interface ICustomerAddressRepository {
+  getByCustomerId(customerId: string): Promise<CustomerAddressType[]>
+  getById(id: string): Promise<CustomerAddressType | null>
+  create(address: Omit<CustomerAddressType, 'id' | 'created_at' | 'updated_at'>): Promise<CustomerAddressType>
+  update(id: string, address: Partial<CustomerAddressType>): Promise<CustomerAddressType>
+  delete(id: string): Promise<void>
+  setDefault(customerId: string, addressId: string, type: 'shipping' | 'billing'): Promise<void>
+}
+
+export interface ICartRepository {
+  getByCustomerId(customerId: string): Promise<Cart | null>
+  upsert(cart: Cart): Promise<Cart>
+  clear(customerId: string): Promise<void>
+  addItem(customerId: string, item: Omit<CartItem, 'id'>): Promise<Cart>
+  updateItem(customerId: string, itemId: string, quantity: number): Promise<Cart>
+  removeItem(customerId: string, itemId: string): Promise<Cart>
+  applyCoupon(customerId: string, couponCode: string | null): Promise<Cart>
+}
+
+export interface IWishlistRepository {
+  getByCustomerId(customerId: string): Promise<Wishlist | null>
+  upsert(wishlist: Wishlist): Promise<Wishlist>
+  addProduct(customerId: string, productId: string): Promise<Wishlist>
+  removeProduct(customerId: string, productId: string): Promise<Wishlist>
+  clear(customerId: string): Promise<void>
+  isInWishlist(customerId: string, productId: string): Promise<boolean>
 }
 
 export interface IReturnRepository {

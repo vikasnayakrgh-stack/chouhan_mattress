@@ -15,6 +15,10 @@ import type {
   IAnalyticsRepository,
   IAuditRepository,
   IIntegrationRepository,
+  ICustomerProfileRepository,
+  ICustomerAddressRepository,
+  ICartRepository,
+  IWishlistRepository,
 } from '@/repositories/types'
 
 // Mock repositories (no server-only, works in client components)
@@ -52,6 +56,11 @@ import { SupabaseStaffRepository } from '@/repositories/supabase/staffRepository
 import { SupabaseAnalyticsRepository } from '@/repositories/supabase/analyticsRepository'
 import { SupabaseAuditRepository } from '@/repositories/supabase/auditRepository'
 import { SupabaseIntegrationRepository } from '@/repositories/supabase/integrationRepository'
+// New customer-facing Supabase repositories
+import { SupabaseCustomerProfileRepository } from '@/repositories/supabase/customerProfileRepository'
+import { SupabaseCustomerAddressRepository } from '@/repositories/supabase/customerAddressRepository'
+import { SupabaseCartRepository } from '@/repositories/supabase/cartRepository'
+import { SupabaseWishlistRepository } from '@/repositories/supabase/wishlistRepository'
 
 export interface Repositories {
   products: IProductRepository
@@ -70,6 +79,11 @@ export interface Repositories {
   analytics: IAnalyticsRepository
   audit: IAuditRepository
   integrations: IIntegrationRepository
+  // New customer-facing repositories
+  customerProfiles: ICustomerProfileRepository
+  customerAddresses: ICustomerAddressRepository
+  carts: ICartRepository
+  wishlists: IWishlistRepository
 }
 
 let cached: Repositories | null = null
@@ -78,9 +92,34 @@ function isMockMode(): boolean {
   return process.env.NEXT_PUBLIC_DATA_SOURCE === 'mock'
 }
 
-export function getRepositories(): Repositories {
-  if (cached) return cached
-  
+export function getRepositories(accessToken?: string): Repositories {
+  // For production, always create new instances with accessToken if available
+  if (accessToken) {
+    return {
+      products: new SupabaseProductRepository(accessToken),
+      orders: new SupabaseOrderRepository(),
+      customers: new SupabaseCustomerRepository(),
+      returns: new SupabaseReturnRepository(),
+      discounts: new SupabaseDiscountRepository(),
+      categories: new SupabaseCategoryRepository(),
+      collections: new SupabaseCollectionRepository(),
+      inventory: new SupabaseInventoryRepository(),
+      dashboard: new SupabaseDashboardRepository(),
+      cms: new SupabaseCMSRepository(),
+      reviews: new SupabaseReviewRepository(),
+      settings: new SupabaseSettingsRepository(),
+      staff: new SupabaseStaffRepository(),
+      analytics: new SupabaseAnalyticsRepository(),
+      audit: new SupabaseAuditRepository(),
+      integrations: new SupabaseIntegrationRepository(),
+      // New customer-facing repositories
+      customerProfiles: new SupabaseCustomerProfileRepository(accessToken),
+      customerAddresses: new SupabaseCustomerAddressRepository(accessToken),
+      carts: new SupabaseCartRepository(accessToken),
+      wishlists: new SupabaseWishlistRepository(accessToken),
+    }
+  }
+
   if (isMockMode()) {
     cached = {
       products: new MockProductRepository(),
@@ -99,26 +138,41 @@ export function getRepositories(): Repositories {
       analytics: new MockAnalyticsRepository(),
       audit: new MockAuditRepository(),
       integrations: new MockIntegrationRepository(),
+      // Mock implementations for new repos (return mock data)
+      customerProfiles: {
+        getById: async (id: string) => null,
+        upsert: async (profile: any) => profile,
+      } as any,
+      customerAddresses: {
+        getByCustomerId: async () => [],
+        getById: async () => null,
+        create: async (address: any) => ({ ...address, id: 'mock-id' }),
+        update: async (id: string, address: any) => ({ ...address, id }),
+        delete: async () => {},
+        setDefault: async () => {},
+      } as any,
+      carts: {
+        getByCustomerId: async () => null,
+        upsert: async (cart: any) => cart,
+        clear: async () => {},
+        addItem: async (customerId: string, item: any) => ({ customer_id: customerId, items: [item] }),
+        updateItem: async () => ({ items: [] }),
+        removeItem: async () => ({ items: [] }),
+        applyCoupon: async () => ({ applied_coupon_code: null }),
+      } as any,
+      wishlists: {
+        getByCustomerId: async () => null,
+        upsert: async (wishlist: any) => wishlist,
+        addProduct: async () => ({ product_ids: [] }),
+        removeProduct: async () => ({ product_ids: [] }),
+        clear: async () => {},
+        isInWishlist: async () => false,
+      } as any,
     }
   } else {
-    cached = {
-      products: new SupabaseProductRepository(),
-      orders: new SupabaseOrderRepository(),
-      customers: new SupabaseCustomerRepository(),
-      returns: new SupabaseReturnRepository(),
-      discounts: new SupabaseDiscountRepository(),
-      categories: new SupabaseCategoryRepository(),
-      collections: new SupabaseCollectionRepository(),
-      inventory: new SupabaseInventoryRepository(),
-      dashboard: new SupabaseDashboardRepository(),
-      cms: new SupabaseCMSRepository(),
-      reviews: new SupabaseReviewRepository(),
-      settings: new SupabaseSettingsRepository(),
-      staff: new SupabaseStaffRepository(),
-      analytics: new SupabaseAnalyticsRepository(),
-      audit: new SupabaseAuditRepository(),
-      integrations: new SupabaseIntegrationRepository(),
-    }
+    // For production without accessToken, we need a way to get the token
+    // This will be called from server components that have access to the token
+    throw new Error('getRepositories() requires accessToken in production mode. Call from a Server Component with auth context.')
   }
   return cached
 }
@@ -141,4 +195,8 @@ export type {
   IAnalyticsRepository,
   IAuditRepository,
   IIntegrationRepository,
+  ICustomerProfileRepository,
+  ICustomerAddressRepository,
+  ICartRepository,
+  IWishlistRepository,
 } from '@/repositories/types'

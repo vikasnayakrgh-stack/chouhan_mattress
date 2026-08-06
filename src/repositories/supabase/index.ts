@@ -53,12 +53,9 @@ export interface Repositories {
   integrations: IIntegrationRepository
 }
 
-let cached: Repositories | null = null
-
-export function getRepositories(): Repositories {
-  if (cached) return cached
-  cached = {
-    products: new SupabaseProductRepository(),
+export function getRepositories(accessToken?: string): Repositories {
+  return {
+    products: new SupabaseProductRepository(accessToken),
     orders: new SupabaseOrderRepository(),
     customers: new SupabaseCustomerRepository(),
     returns: new SupabaseReturnRepository(),
@@ -75,5 +72,4 @@ export function getRepositories(): Repositories {
     audit: new SupabaseAuditRepository(),
     integrations: new SupabaseIntegrationRepository(),
   }
-  return cached
 }

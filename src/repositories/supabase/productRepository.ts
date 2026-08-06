@@ -1,11 +1,24 @@
 import type { IProductRepository } from '@/repositories/types'
 import type { ProductWithVariants, ProductVariant } from '@/features/products/types'
+import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { supabaseMappers } from './mappers'
 
 export class SupabaseProductRepository implements IProductRepository {
+  private client: SupabaseClient
+
+  constructor(accessToken?: string) {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL!
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    this.client = createClient(url, key, {
+      global: {
+        headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
+      },
+      auth: { persistSession: false, autoRefreshToken: false },
+    })
+  }
+
   async getAll(): Promise<ProductWithVariants[]> {
-    const sb = supabaseMappers.getClient()
-    const { data, error } = await sb
+    const { data, error } = await this.client
       .from('products')
       .select('*, variants:product_variants(*)')
       .order('created_at', { ascending: false })
@@ -20,8 +33,7 @@ export class SupabaseProductRepository implements IProductRepository {
   }
 
   async getById(id: string): Promise<ProductWithVariants | null> {
-    const sb = supabaseMappers.getClient()
-    const { data, error } = await sb
+    const { data, error } = await this.client
       .from('products')
       .select('*, variants:product_variants(*)')
       .eq('id', id)
@@ -36,8 +48,7 @@ export class SupabaseProductRepository implements IProductRepository {
   }
 
   async getBySlug(slug: string): Promise<ProductWithVariants | null> {
-    const sb = supabaseMappers.getClient()
-    const { data, error } = await sb
+    const { data, error } = await this.client
       .from('products')
       .select('*, variants:product_variants(*)')
       .eq('slug', slug)
@@ -59,8 +70,7 @@ export class SupabaseProductRepository implements IProductRepository {
     page?: number
     pageSize?: number
   }): Promise<{ products: ProductWithVariants[]; total: number }> {
-    const sb = supabaseMappers.getClient()
-    let query = sb.from('products').select('*, variants:product_variants(*)', { count: 'exact' })
+    let query = this.client.from('products').select('*, variants:product_variants(*)', { count: 'exact' })
     if (filters.categoryId) query = query.eq('category_id', filters.categoryId)
     if (filters.status) query = query.eq('status', filters.status)
     if (filters.query) query = query.ilike('name', `%${filters.query}%`)
@@ -80,9 +90,8 @@ export class SupabaseProductRepository implements IProductRepository {
   }
 
   async create(product: ProductWithVariants): Promise<ProductWithVariants> {
-    const sb = supabaseMappers.getClient()
     const { id, variants, createdAt, updatedAt, ...rest } = product
-    const { data, error } = await sb
+    const { data, error } = await this.client
       .from('products')
       .insert({
         ...rest,
@@ -94,7 +103,7 @@ export class SupabaseProductRepository implements IProductRepository {
     if (error) throw error
     const created = supabaseMappers.rowToProduct(data as Record<string, unknown>)
     if (variants?.length) {
-      const { error: vErr } = await sb
+      const { error: vErr } = await this.client
         .from('product_variants')
         .insert(variants.map((v) => ({ ...v, product_id: data.id })))
       if (vErr) throw vErr
@@ -104,12 +113,11 @@ export class SupabaseProductRepository implements IProductRepository {
   }
 
   async update(id: string, updates: Partial<ProductWithVariants>): Promise<ProductWithVariants | null> {
-    const sb = supabaseMappers.getClient()
     const { variants, collectionIds, mattressAttributes, ...rest } = updates
     const patch: Record<string, unknown> = { ...rest }
     if (collectionIds) patch.collection_ids = collectionIds
     if (mattressAttributes) patch.mattress_attributes = mattressAttributes
-    const { data, error } = await sb
+    const { data, error } = await this.client
       .from('products')
       .update(patch)
       .eq('id', id)
@@ -120,8 +128,7 @@ export class SupabaseProductRepository implements IProductRepository {
   }
 
   async archive(id: string): Promise<boolean> {
-    const sb = supabaseMappers.getClient()
-    const { error } = await sb.from('products').update({ status: 'archived' }).eq('id', id)
+    const { error } = await this.client.from('products').update({ status: 'archived' }).eq('id', id)
     if (error) throw error
     return true
   }
@@ -141,8 +148,7 @@ export class SupabaseProductRepository implements IProductRepository {
   }
 
   async getVariants(productId: string): Promise<ProductVariant[]> {
-    const sb = supabaseMappers.getClient()
-    const { data, error } = await sb
+    const { data, error } = await this.client
       .from('product_variants')
       .select('*')
       .eq('product_id', productId)
