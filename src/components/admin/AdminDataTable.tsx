@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useMemo, useState } from 'react'
-import { ChevronUp, ChevronDown, ChevronsUpDown, Search, ChevronLeft, ChevronRight, Inbox } from 'lucide-react'
+import { ChevronUp, ChevronDown, ChevronsUpDown, Search, ChevronLeft, ChevronRight, Inbox, Download, CheckSquare } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export interface ColumnDef<T> {
@@ -35,6 +35,7 @@ interface AdminDataTableProps<T> {
   emptyState?: React.ReactNode
   pageSize?: number
   toolbar?: React.ReactNode
+  exportFilename?: string
 }
 
 export function AdminDataTable<T>({
@@ -43,7 +44,7 @@ export function AdminDataTable<T>({
   getRowId,
   loading = false,
   searchable = true,
-  searchPlaceholder = 'Search…',
+  searchPlaceholder = 'Quick search records...',
   searchFn,
   selectable = false,
   bulkActions = [],
@@ -51,6 +52,7 @@ export function AdminDataTable<T>({
   emptyState,
   pageSize = 10,
   toolbar,
+  exportFilename = 'chouhan-mattress-export.csv',
 }: AdminDataTableProps<T>) {
   const [query, setQuery] = useState('')
   const [sortKey, setSortKey] = useState<string | null>(null)
@@ -111,92 +113,129 @@ export function AdminDataTable<T>({
     })
   }
 
+  const handleExportCSV = () => {
+    if (!data.length) return
+    const headers = columns.map((c) => c.header).join(',')
+    const rows = filtered.map((row) =>
+      columns.map((c) => {
+        const val = c.sortValue ? c.sortValue(row) : getRowId(row)
+        return `"${String(val).replace(/"/g, '""')}"`
+      }).join(',')
+    )
+    const csvContent = 'data:text/csv;charset=utf-8,' + [headers, ...rows].join('\n')
+    const encodedUri = encodeURI(csvContent)
+    const link = document.createElement('a')
+    link.setAttribute('href', encodedUri)
+    link.setAttribute('download', exportFilename)
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   const selectedIds = Array.from(selected)
 
   return (
-    <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
-      {/* Toolbar */}
+    <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-xl text-slate-100">
+      {/* Toolbar & Action Bar */}
       {(searchable || toolbar || (selectable && selectedIds.length > 0)) && (
-        <div className="flex flex-wrap items-center gap-2 border-b border-gray-200 p-3">
-          {searchable && (
-            <div className="relative">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => {
-                  setQuery(e.target.value)
-                  setPage(0)
-                }}
-                placeholder={searchPlaceholder}
-                className="h-9 w-56 rounded-lg border border-gray-200 bg-gray-50 pl-9 pr-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"
-              />
-            </div>
-          )}
-          {toolbar}
-          {selectable && selectedIds.length > 0 && (
-            <div className="ml-auto flex items-center gap-2">
-              <span className="text-sm text-gray-500">{selectedIds.length} selected</span>
-              {bulkActions.map((action) => {
-                const Icon = action.icon
-                return (
-                  <button
-                    key={action.label}
-                    type="button"
-                    onClick={() => {
-                      action.onClick(selectedIds)
-                      setSelected(new Set())
-                    }}
-                    className={cn(
-                      'inline-flex h-8 items-center gap-1.5 rounded-lg border px-3 text-sm font-medium',
-                      action.variant === 'danger'
-                        ? 'border-red-200 bg-red-50 text-red-700 hover:bg-red-100'
-                        : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50'
-                    )}
-                  >
-                    {Icon && <Icon className="h-3.5 w-3.5" />}
-                    {action.label}
-                  </button>
-                )
-              })}
-            </div>
-          )}
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 p-4 bg-slate-950/60">
+          <div className="flex items-center gap-3 flex-1 min-w-[240px]">
+            {searchable && (
+              <div className="relative flex-1 max-w-md">
+                <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+                <input
+                  type="search"
+                  value={query}
+                  onChange={(e) => {
+                    setQuery(e.target.value)
+                    setPage(0)
+                  }}
+                  placeholder={searchPlaceholder}
+                  className="h-10 w-full rounded-xl border border-slate-800 bg-slate-900 pl-10 pr-4 text-xs text-white placeholder:text-slate-500 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/20 font-medium transition-all"
+                />
+              </div>
+            )}
+            {toolbar}
+          </div>
+
+          <div className="flex items-center gap-2">
+            {selectable && selectedIds.length > 0 && (
+              <div className="flex items-center gap-2 pr-2 border-r border-slate-800">
+                <span className="text-xs font-bold text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/30 flex items-center gap-1.5">
+                  <CheckSquare className="w-3.5 h-3.5" />
+                  {selectedIds.length} Selected
+                </span>
+                {bulkActions.map((action) => {
+                  const Icon = action.icon
+                  return (
+                    <button
+                      key={action.label}
+                      type="button"
+                      onClick={() => {
+                        action.onClick(selectedIds)
+                        setSelected(new Set())
+                      }}
+                      className={cn(
+                        'inline-flex h-9 items-center gap-1.5 rounded-xl border px-3 text-xs font-bold transition-all cursor-pointer',
+                        action.variant === 'danger'
+                          ? 'border-rose-500/30 bg-rose-500/10 text-rose-300 hover:bg-rose-500/20'
+                          : 'border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700'
+                      )}
+                    >
+                      {Icon && <Icon className="h-3.5 w-3.5" />}
+                      {action.label}
+                    </button>
+                  )
+                })}
+              </div>
+            )}
+
+            <button
+              type="button"
+              onClick={handleExportCSV}
+              className="inline-flex h-9 items-center gap-1.5 rounded-xl border border-slate-800 bg-slate-900 px-3 text-xs font-bold text-slate-300 hover:border-amber-500/40 hover:text-amber-400 transition-all cursor-pointer"
+              title="Export filtered records to CSV"
+            >
+              <Download className="h-3.5 w-3.5 text-amber-400" />
+              <span>Export CSV</span>
+            </button>
+          </div>
         </div>
       )}
 
-      {/* Table */}
+      {/* Table Container */}
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-sm">
-          <thead className="border-b border-gray-200 bg-gray-50 text-xs uppercase tracking-wider text-gray-500">
+        <table className="w-full text-left text-xs">
+          <thead className="border-b border-slate-800 bg-slate-950 text-[11px] font-extrabold uppercase tracking-wider text-slate-400 sticky top-0 z-10">
             <tr>
               {selectable && (
-                <th className="w-10 px-4 py-3">
+                <th className="w-12 px-4 py-3.5">
                   <input
                     type="checkbox"
                     checked={allPageSelected}
                     onChange={toggleAll}
-                    className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    className="h-4 w-4 rounded border-slate-800 bg-slate-950 text-amber-500 focus:ring-amber-500/40"
                     aria-label="Select all rows"
                   />
                 </th>
               )}
               {columns.map((col) => (
-                <th key={col.key} className={cn('px-4 py-3 font-medium', col.className)}>
+                <th key={col.key} className={cn('px-4 py-3.5 font-extrabold text-slate-300', col.className)}>
                   {col.sortable ? (
                     <button
                       type="button"
                       onClick={() => toggleSort(col.key)}
-                      className="inline-flex items-center gap-1 hover:text-gray-900"
+                      className="inline-flex items-center gap-1 hover:text-amber-400 transition-colors cursor-pointer"
                     >
                       {col.header}
                       {sortKey === col.key ? (
                         sortDir === 'asc' ? (
-                          <ChevronUp className="h-3.5 w-3.5" />
+                          <ChevronUp className="h-3.5 w-3.5 text-amber-400" />
                         ) : (
-                          <ChevronDown className="h-3.5 w-3.5" />
+                          <ChevronDown className="h-3.5 w-3.5 text-amber-400" />
                         )
                       ) : (
-                        <ChevronsUpDown className="h-3.5 w-3.5 text-gray-300" />
+                        <ChevronsUpDown className="h-3.5 w-3.5 text-slate-600" />
                       )}
                     </button>
                   ) : (
@@ -206,18 +245,18 @@ export function AdminDataTable<T>({
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-slate-800/60 font-medium">
             {loading ? (
               Array.from({ length: 5 }).map((_, i) => (
                 <tr key={i}>
                   {selectable && (
-                    <td className="px-4 py-3.5">
-                      <div className="h-4 w-4 animate-pulse rounded bg-gray-200" />
+                    <td className="px-4 py-4">
+                      <div className="h-4 w-4 animate-pulse rounded bg-slate-800" />
                     </td>
                   )}
                   {columns.map((col) => (
-                    <td key={col.key} className="px-4 py-3.5">
-                      <div className="h-4 w-3/4 animate-pulse rounded bg-gray-200" />
+                    <td key={col.key} className="px-4 py-4">
+                      <div className="h-4 w-3/4 animate-pulse rounded bg-slate-800" />
                     </td>
                   ))}
                 </tr>
@@ -226,18 +265,18 @@ export function AdminDataTable<T>({
               <tr>
                 <td colSpan={columns.length + (selectable ? 1 : 0)} className="px-4 py-16 text-center">
                   {emptyState ?? (
-                    <div className="flex flex-col items-center gap-2 text-gray-500">
-                      <Inbox className="h-8 w-8 text-gray-300" />
-                      <p className="text-sm font-medium">
-                        {query ? 'No results match your search' : 'No records found'}
+                    <div className="flex flex-col items-center justify-center gap-2 text-slate-400">
+                      <Inbox className="h-10 w-10 text-slate-600 stroke-[1.5]" />
+                      <p className="text-sm font-bold text-slate-300">
+                        {query ? 'No matching records found' : 'No entries available'}
                       </p>
                       {query && (
                         <button
                           type="button"
                           onClick={() => setQuery('')}
-                          className="text-sm text-blue-600 hover:underline"
+                          className="text-xs font-bold text-amber-400 hover:underline mt-1"
                         >
-                          Clear search
+                          Clear search filter
                         </button>
                       )}
                     </div>
@@ -252,24 +291,24 @@ export function AdminDataTable<T>({
                     key={id}
                     onClick={() => onRowClick?.(row)}
                     className={cn(
-                      'transition-colors',
-                      onRowClick && 'cursor-pointer hover:bg-gray-50',
-                      selected.has(id) && 'bg-blue-50/50'
+                      'transition-colors duration-150',
+                      onRowClick && 'cursor-pointer hover:bg-slate-800/60',
+                      selected.has(id) && 'bg-amber-500/10'
                     )}
                   >
                     {selectable && (
-                      <td className="px-4 py-3.5" onClick={(e) => e.stopPropagation()}>
+                      <td className="px-4 py-4" onClick={(e) => e.stopPropagation()}>
                         <input
                           type="checkbox"
                           checked={selected.has(id)}
                           onChange={() => toggleRow(id)}
-                          className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          className="h-4 w-4 rounded border-slate-800 bg-slate-950 text-amber-500 focus:ring-amber-500/40 cursor-pointer"
                           aria-label={`Select row ${id}`}
                         />
                       </td>
                     )}
                     {columns.map((col) => (
-                      <td key={col.key} className={cn('px-4 py-3.5', col.className)}>
+                      <td key={col.key} className={cn('px-4 py-4 text-slate-200', col.className)}>
                         {col.render(row)}
                       </td>
                     ))}
@@ -281,31 +320,32 @@ export function AdminDataTable<T>({
         </table>
       </div>
 
-      {/* Pagination */}
+      {/* Pagination Bar */}
       {!loading && filtered.length > 0 && (
-        <div className="flex items-center justify-between border-t border-gray-200 px-4 py-3 text-sm text-gray-500">
+        <div className="flex items-center justify-between border-t border-slate-800 px-4 py-3 text-xs text-slate-400 bg-slate-950/60">
           <span>
-            Showing {safePage * pageSize + 1}–{Math.min((safePage + 1) * pageSize, filtered.length)} of{' '}
-            {filtered.length}
+            Showing <strong className="text-slate-200">{safePage * pageSize + 1}</strong> to{' '}
+            <strong className="text-slate-200">{Math.min((safePage + 1) * pageSize, filtered.length)}</strong> of{' '}
+            <strong className="text-slate-200">{filtered.length}</strong> entries
           </span>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1.5">
             <button
               type="button"
               disabled={safePage === 0}
               onClick={() => setPage((p) => Math.max(0, p - 1))}
-              className="rounded-md p-1.5 hover:bg-gray-100 disabled:opacity-40"
+              className="rounded-lg border border-slate-800 p-1.5 text-slate-400 hover:border-amber-500/40 hover:text-amber-400 disabled:opacity-30 disabled:hover:border-slate-800 disabled:hover:text-slate-400 transition-colors cursor-pointer"
               aria-label="Previous page"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
-            <span className="px-2">
+            <span className="px-3 font-bold text-slate-300">
               Page {safePage + 1} of {pageCount}
             </span>
             <button
               type="button"
               disabled={safePage >= pageCount - 1}
               onClick={() => setPage((p) => Math.min(pageCount - 1, p + 1))}
-              className="rounded-md p-1.5 hover:bg-gray-100 disabled:opacity-40"
+              className="rounded-lg border border-slate-800 p-1.5 text-slate-400 hover:border-amber-500/40 hover:text-amber-400 disabled:opacity-30 disabled:hover:border-slate-800 disabled:hover:text-slate-400 transition-colors cursor-pointer"
               aria-label="Next page"
             >
               <ChevronRight className="h-4 w-4" />
