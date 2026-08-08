@@ -256,32 +256,36 @@ export function Header({
           })}
         </div>
 
-        {/* ─── 3-Column Luxury Mega Menu Overlay ─── */}
+        {/* ─── 3-Column Luxury Mega Menu Overlay (100% Solid Opaque Background) ─── */}
         <AnimatePresence>
           {activeMegaMenu && MEGA_MENUS[activeMegaMenu] && (
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 right-0 bg-slate-900/98 backdrop-blur-md border-b border-slate-800 text-white shadow-2xl z-50 p-8"
+              exit={{ opacity: 0, y: 6 }}
+              transition={{ duration: 0.15 }}
+              className="absolute top-full left-0 right-0 bg-[#0B132B] text-white shadow-2xl z-50 p-8 border-b-2 border-amber-500/30 pointer-events-auto"
             >
               <div className="container mx-auto grid grid-cols-3 gap-8">
                 {/* Column 1: Mattress Types */}
                 <div>
-                  <h4 className="text-xs font-extrabold text-amber-400 uppercase tracking-widest mb-4 border-b border-slate-800 pb-2">
-                    {MEGA_MENUS[activeMegaMenu].title}
+                  <h4 className="text-xs font-black text-amber-400 uppercase tracking-widest mb-4 border-b border-slate-800 pb-2.5 flex items-center justify-between">
+                    <span>{MEGA_MENUS[activeMegaMenu].title}</span>
+                    <span className="text-[10px] text-amber-500/80 font-normal">Explore Types</span>
                   </h4>
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     {MEGA_MENUS[activeMegaMenu].types.map((t, i) => (
                       <Link
                         key={i}
                         href={t.href}
                         onClick={() => setActiveMegaMenu(null)}
-                        className="block p-2 rounded-xl hover:bg-slate-800/80 transition-colors group"
+                        className="block p-3 rounded-2xl bg-slate-900/60 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/40 transition-all group shadow-xs"
                       >
-                        <div className="text-xs font-bold text-slate-200 group-hover:text-amber-300">{t.label}</div>
-                        <div className="text-[11px] text-slate-400 mt-0.5">{t.desc}</div>
+                        <div className="text-xs font-black text-white group-hover:text-amber-300 transition-colors flex items-center justify-between">
+                          <span>{t.label}</span>
+                          <span className="text-slate-500 group-hover:text-amber-400 text-xs">→</span>
+                        </div>
+                        <div className="text-[11px] text-slate-300 font-medium mt-1 leading-snug">{t.desc}</div>
                       </Link>
                     ))}
                   </div>
@@ -289,43 +293,54 @@ export function Header({
 
                 {/* Column 2: Dimensions & Calculator */}
                 <div>
-                  <h4 className="text-xs font-extrabold text-amber-400 uppercase tracking-widest mb-4 border-b border-slate-800 pb-2">
-                    Popular Sizes & Custom Tools
+                  <h4 className="text-xs font-black text-amber-400 uppercase tracking-widest mb-4 border-b border-slate-800 pb-2.5 flex items-center justify-between">
+                    <span>Popular Sizes & Custom Tools</span>
+                    <span className="text-[10px] text-amber-500/80 font-normal">Standard Sizes</span>
                   </h4>
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
                     {MEGA_MENUS[activeMegaMenu].sizes.map((s, i) => (
                       <Link
                         key={i}
                         href={s.href}
                         onClick={() => setActiveMegaMenu(null)}
-                        className="block p-2 rounded-xl hover:bg-slate-800/80 transition-colors group"
+                        className="block p-3 rounded-2xl bg-slate-900/60 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/40 transition-all group shadow-xs"
                       >
-                        <div className="text-xs font-bold text-slate-200 group-hover:text-amber-300">{s.label}</div>
-                        <div className="text-[11px] text-amber-500/80 font-mono mt-0.5">{s.dims}</div>
+                        <div className="text-xs font-black text-white group-hover:text-amber-300 transition-colors flex items-center justify-between">
+                          <span>{s.label}</span>
+                          <span className="text-slate-500 group-hover:text-amber-400 text-xs">→</span>
+                        </div>
+                        <div className="text-[11px] text-amber-400 font-mono font-bold mt-1">{s.dims}</div>
                       </Link>
                     ))}
                   </div>
                 </div>
 
                 {/* Column 3: Featured Spotlight Card */}
-                <div className="bg-slate-800/60 p-4 rounded-2xl border border-slate-700/60 flex flex-col justify-between">
+                <div className="bg-slate-950 p-5 rounded-3xl border border-amber-500/30 flex flex-col justify-between shadow-xl">
                   <div>
-                    <span className="text-[10px] font-black uppercase text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">
-                      Spotlight Bestseller
-                    </span>
-                    <h5 className="font-bold text-slate-100 text-xs mt-2 line-clamp-1">
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-[10px] font-black uppercase text-slate-950 bg-amber-400 px-2.5 py-1 rounded-full shadow-xs">
+                        Spotlight Bestseller
+                      </span>
+                      <span className="text-[11px] font-bold text-emerald-400">Free Doorstep Delivery</span>
+                    </div>
+
+                    <h5 className="font-extrabold text-white text-sm mt-2 leading-snug line-clamp-2">
                       {MEGA_MENUS[activeMegaMenu].spotlight.title}
                     </h5>
-                    <div className="flex items-baseline gap-2 mt-1">
-                      <span className="text-sm font-black text-white">{MEGA_MENUS[activeMegaMenu].spotlight.price}</span>
-                      <span className="text-[10px] text-emerald-400 font-bold">{MEGA_MENUS[activeMegaMenu].spotlight.discount}</span>
+
+                    <div className="flex items-baseline gap-2.5 mt-3 pt-3 border-t border-slate-800">
+                      <span className="text-xl font-black text-amber-400">{MEGA_MENUS[activeMegaMenu].spotlight.price}</span>
+                      <span className="text-xs text-emerald-400 font-extrabold bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">
+                        {MEGA_MENUS[activeMegaMenu].spotlight.discount}
+                      </span>
                     </div>
                   </div>
 
                   <Link
                     href={MEGA_MENUS[activeMegaMenu].spotlight.href}
                     onClick={() => setActiveMegaMenu(null)}
-                    className="mt-4 w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs rounded-xl text-center transition-colors shadow-sm"
+                    className="mt-5 w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs rounded-xl text-center transition-all shadow-lg active:scale-98"
                   >
                     Shop Bestseller Series →
                   </Link>
