@@ -26,15 +26,34 @@ export function ImageGallery({
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
-  const [zoomPos, setZoomPos] = useState({ x: 0, y: 0 });
+  const [lensPos, setLensPos] = useState({ x: 0, y: 0 });
+  const [bgPos, setBgPos] = useState({ x: 0, y: 0 });
 
   const activeImage = images[selectedIndex] || images[0] || '';
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - left) / width) * 100;
-    const y = ((e.clientY - top) / height) * 100;
-    setZoomPos({ x, y });
+    const x = e.clientX - left;
+    const y = e.clientY - top;
+
+    // Center the lens on the cursor
+    setLensPos({ x, y });
+
+    // Calculate background zoom coordinates for the lens display
+    const bgX = (x / width) * 100;
+    const bgY = (y / height) * 100;
+    setBgPos({ x: bgX, y: bgY });
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (!e.touches[0]) return;
+    const touch = e.touches[0];
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+
+    setLensPos({ x, y });
+    setBgPos({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
   };
 
   return (
@@ -98,6 +117,9 @@ export function ImageGallery({
           onMouseEnter={() => setIsZoomed(true)}
           onMouseLeave={() => setIsZoomed(false)}
           onMouseMove={handleMouseMove}
+          onTouchStart={() => setIsZoomed(true)}
+          onTouchEnd={() => setIsZoomed(false)}
+          onTouchMove={handleTouchMove}
           onClick={() => setLightboxOpen(true)}
         >
           <OptimizedImage
@@ -106,16 +128,25 @@ export function ImageGallery({
             preset="hero"
             priority
             containerClassName="w-full h-full"
-            className="w-full h-full object-cover transition-transform duration-200"
-            style={
-              isZoomed
-                ? {
-                    transform: 'scale(1.8)',
-                    transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
-                  }
-                : undefined
-            }
+            className="w-full h-full object-cover"
           />
+
+          {/* Premium Magnifying Glass Lens Overlay */}
+          {isZoomed && (
+            <div
+              className="absolute pointer-events-none w-36 h-36 rounded-full border-2 border-white bg-no-repeat shadow-2xl shadow-black/40 ring-4 ring-amber-500/20"
+              style={{
+                left: `${lensPos.x - 72}px`,
+                top: `${lensPos.y - 72}px`,
+                backgroundImage: `url(${activeImage})`,
+                backgroundSize: '250%',
+                backgroundPosition: `${bgPos.x}% ${bgPos.y}%`,
+              }}
+            >
+              {/* Refraction Reflection Glare */}
+              <div className="w-full h-full rounded-full bg-gradient-to-tr from-transparent via-white/5 to-white/20 pointer-events-none" />
+            </div>
+          )}
         </div>
       </div>
 
