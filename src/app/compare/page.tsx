@@ -1,6 +1,7 @@
 /**
  * Chouhan Mattress - Side-by-Side Product Comparison Tool (/compare)
  * Interactive spec matrix comparing firmness, thickness, layers, trial, warranty, and pricing
+ * Features responsive table view for desktop & swipable horizontal cards view for mobile
  */
 
 'use client';
@@ -13,12 +14,13 @@ import { Footer } from '@/components/library/Footer';
 import { SearchModal } from '@/components/search/SearchModal';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { Breadcrumbs } from '@/components/plp/Breadcrumbs';
+import { MobileBottomNav } from '@/components/library/MobileBottomNav';
 
 import { useCart } from '@/context/CartContext';
 import productsData from '@/data/products.json';
 import footerData from '@/data/footer.json';
 import navigationData from '@/data/navigation.json';
-import { StarIcon, ShoppingCartIcon, CheckIcon, XIcon } from 'lucide-react';
+import { StarIcon, ShoppingCartIcon, CheckIcon, XIcon, ArrowRightIcon, ArrowLeftIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const NAV_ITEMS = navigationData.primary.map((item) => ({
@@ -60,7 +62,7 @@ function ComparePageContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50/50">
+    <div className="min-h-screen flex flex-col bg-gray-50/50 font-sans">
       <CartDrawer />
       <SearchModal />
 
@@ -75,16 +77,16 @@ function ComparePageContent() {
         data-testid="main-header"
       />
 
-      <main id="main-content" className="flex-1 pb-16">
+      <main id="main-content" className="flex-1 pb-20">
         <div className="container mx-auto px-4 py-6">
           <Breadcrumbs items={[{ label: 'Product Comparison', isCurrent: true }]} />
 
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-3xl font-extrabold text-gray-900">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 font-heading">
                 Compare Products Side-by-Side
               </h1>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-xs sm:text-sm text-gray-500 mt-1">
                 Compare specs, firmness, warranty, layer materials, and prices to find the perfect fit.
               </p>
             </div>
@@ -92,15 +94,108 @@ function ComparePageContent() {
             {selectedIds.length < 4 && (
               <button
                 onClick={handleAddColumn}
-                className="px-4 py-2.5 bg-gray-900 text-white font-bold text-xs sm:text-sm rounded-xl hover:bg-gray-800 transition-colors self-start sm:self-auto"
+                className="px-4 py-2.5 bg-gray-900 text-white font-bold text-xs rounded-xl hover:bg-gray-800 transition-colors self-start sm:self-auto shadow-xs"
               >
                 + Add Product to Compare
               </button>
             )}
           </div>
 
-          {/* ─── Comparison Matrix Table ─── */}
-          <div className="bg-white rounded-3xl border border-gray-200/80 shadow-xs overflow-hidden overflow-x-auto scrollbar-thin">
+          {/* ─── Mobile Swipable Cards View (< sm screens) ─── */}
+          <div className="block sm:hidden mb-8">
+            <div className="flex items-center justify-between text-xs text-slate-500 font-bold mb-3 px-1">
+              <span>Swipe cards horizontally to compare ↔</span>
+              <span className="text-amber-600">{comparedProducts.length} items</span>
+            </div>
+
+            <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory py-2 scrollbar-none">
+              {comparedProducts.map((p, idx) => (
+                <div
+                  key={p.id}
+                  className="snap-center flex-shrink-0 w-[280px] bg-white rounded-3xl border border-slate-200 p-5 shadow-lg relative flex flex-col justify-between"
+                >
+                  {comparedProducts.length > 1 && (
+                    <button
+                      onClick={() => handleRemoveColumn(String(p.id))}
+                      className="absolute top-3 right-3 p-1.5 text-slate-400 hover:text-red-500 rounded-full bg-slate-100"
+                    >
+                      <XIcon className="w-4 h-4" />
+                    </button>
+                  )}
+
+                  <div>
+                    {/* Selector */}
+                    <select
+                      value={String(p.id)}
+                      onChange={(e) => handleSelectProduct(idx, e.target.value)}
+                      className="w-full mb-3 text-xs font-bold bg-slate-50 border border-slate-200 rounded-xl p-2"
+                    >
+                      {productsData.map((item) => (
+                        <option key={item.id} value={item.id}>
+                          {item.name}
+                        </option>
+                      ))}
+                    </select>
+
+                    <div className="relative w-full h-36 mb-3 rounded-2xl overflow-hidden bg-slate-50 border border-slate-100">
+                      <Image src={p.thumbnail} alt={p.name} fill className="object-cover" />
+                    </div>
+
+                    <h3 className="font-bold text-slate-900 text-sm mb-2 line-clamp-2">{p.name}</h3>
+
+                    <div className="flex items-baseline gap-2 mb-4">
+                      <span className="text-lg font-black text-slate-900">₹{p.price.toLocaleString()}</span>
+                      <span className="text-xs text-emerald-600 font-bold">{p.discount}% OFF</span>
+                    </div>
+
+                    {/* Spec List Pills */}
+                    <div className="space-y-2 text-xs border-t border-slate-100 pt-3">
+                      <div className="flex justify-between py-1 border-b border-slate-50">
+                        <span className="text-slate-400 font-bold">Rating:</span>
+                        <span className="font-bold text-amber-600">★ {p.rating} ({p.reviewCount})</span>
+                      </div>
+                      <div className="flex justify-between py-1 border-b border-slate-50">
+                        <span className="text-slate-400 font-bold">Firmness:</span>
+                        <span className="font-bold text-slate-900">{p.firmness || 'Medium Firm'}</span>
+                      </div>
+                      <div className="flex justify-between py-1 border-b border-slate-50">
+                        <span className="text-slate-400 font-bold">Material:</span>
+                        <span className="font-semibold text-slate-700 truncate max-w-[140px]">{p.material || 'Orthopedic Foam'}</span>
+                      </div>
+                      <div className="flex justify-between py-1 border-b border-slate-50">
+                        <span className="text-slate-400 font-bold">Trial:</span>
+                        <span className="font-bold text-emerald-600">{p.trial || '100 Nights'}</span>
+                      </div>
+                      <div className="flex justify-between py-1">
+                        <span className="text-slate-400 font-bold">Warranty:</span>
+                        <span className="font-bold text-slate-900">{p.warranty || '10 Years'}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() =>
+                      addItem({
+                        productId: String(p.id),
+                        name: p.name,
+                        price: p.price,
+                        originalPrice: p.originalPrice,
+                        quantity: 1,
+                        image: p.thumbnail,
+                      })
+                    }
+                    className="w-full mt-5 py-3 bg-amber-500 text-slate-950 font-black text-xs rounded-xl hover:bg-amber-400 transition-colors flex items-center justify-center gap-1.5 shadow-sm"
+                  >
+                    <ShoppingCartIcon className="w-4 h-4" />
+                    <span>Add to Cart</span>
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ─── Desktop Comparison Matrix Table (>= sm screens) ─── */}
+          <div className="hidden sm:block bg-white rounded-3xl border border-gray-200/80 shadow-xs overflow-hidden overflow-x-auto scrollbar-thin">
             <table className="w-full text-left border-collapse min-w-[700px]">
               <thead>
                 <tr className="border-b border-gray-100 bg-gray-50/50">
@@ -119,7 +214,6 @@ function ComparePageContent() {
                         </button>
                       )}
 
-                      {/* Product Selector Dropdown */}
                       <select
                         value={String(p.id)}
                         onChange={(e) => handleSelectProduct(idx, e.target.value)}
@@ -171,7 +265,6 @@ function ComparePageContent() {
               </thead>
 
               <tbody className="divide-y divide-gray-100 text-xs sm:text-sm text-gray-700">
-                {/* Rating */}
                 <tr>
                   <td className="p-5 font-bold text-gray-900 bg-gray-50/30">Customer Rating</td>
                   {comparedProducts.map((p) => (
@@ -184,7 +277,6 @@ function ComparePageContent() {
                   ))}
                 </tr>
 
-                {/* Firmness Level */}
                 <tr>
                   <td className="p-5 font-bold text-gray-900 bg-gray-50/30">Firmness Scale</td>
                   {comparedProducts.map((p) => (
@@ -194,7 +286,6 @@ function ComparePageContent() {
                   ))}
                 </tr>
 
-                {/* Thickness Options */}
                 <tr>
                   <td className="p-5 font-bold text-gray-900 bg-gray-50/30">Available Thickness</td>
                   {comparedProducts.map((p) => (
@@ -204,7 +295,6 @@ function ComparePageContent() {
                   ))}
                 </tr>
 
-                {/* Primary Material */}
                 <tr>
                   <td className="p-5 font-bold text-gray-900 bg-gray-50/30">Primary Layer Material</td>
                   {comparedProducts.map((p) => (
@@ -214,7 +304,6 @@ function ComparePageContent() {
                   ))}
                 </tr>
 
-                {/* Trial Period */}
                 <tr>
                   <td className="p-5 font-bold text-gray-900 bg-gray-50/30">Risk-Free Trial</td>
                   {comparedProducts.map((p) => (
@@ -224,7 +313,6 @@ function ComparePageContent() {
                   ))}
                 </tr>
 
-                {/* Warranty */}
                 <tr>
                   <td className="p-5 font-bold text-gray-900 bg-gray-50/30">Warranty Period</td>
                   {comparedProducts.map((p) => (
@@ -234,7 +322,6 @@ function ComparePageContent() {
                   ))}
                 </tr>
 
-                {/* Free Installation */}
                 <tr>
                   <td className="p-5 font-bold text-gray-900 bg-gray-50/30">Free Assembly / Setup</td>
                   {comparedProducts.map((p) => (
@@ -249,6 +336,7 @@ function ComparePageContent() {
         </div>
       </main>
 
+      <MobileBottomNav />
       <Footer
         brandName="Chouhan Mattress"
         brandDescription={footerData.company.description}
@@ -259,20 +347,9 @@ function ComparePageContent() {
           label: s.platform,
           icon: <span className="sr-only">{s.platform}</span>,
         }))}
-        newsletter={{
-          placeholder: 'Enter your email',
-          buttonText: 'Subscribe',
-        }}
-        contactInfo={{
-          phone: footerData.company.phone,
-          email: footerData.company.email,
-          address: footerData.company.address,
-          hours: footerData.company.hours,
-        }}
         legalLinks={footerData.links.policies}
         showCopyright
-        copyrightText={`© ${new Date().getFullYear()} Chouhan Mattress Private Limited. CIN: ${footerData.company.cin}`}
-        data-testid="main-footer"
+        copyrightText={`© ${new Date().getFullYear()} Chouhan Mattress Private Limited.`}
       />
     </div>
   );

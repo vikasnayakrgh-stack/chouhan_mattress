@@ -6,6 +6,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { toast } from 'sonner';
 
 export interface CartItem {
   id: string;
@@ -171,6 +172,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       const id = `cart-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`;
       return [...prevItems, { ...newItem, id }];
     });
+
+    toast.success(`${newItem.name} Added!`, {
+      description: `₹${newItem.price.toLocaleString('en-IN')} ${newItem.size ? `• ${newItem.size}` : ''}`,
+      action: {
+        label: 'View Cart',
+        onClick: () => setIsDrawerOpen(true),
+      },
+    });
+
     openDrawer();
   };
 

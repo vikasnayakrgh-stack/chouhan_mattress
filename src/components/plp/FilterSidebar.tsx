@@ -461,46 +461,56 @@ export function FilterSidebar({
         </div>
       </aside>
 
-      {/* Mobile Slide-Over Drawer */}
+      {/* Mobile Slide-Up Bottom Sheet Drawer */}
       {isOpenMobile && (
-        <div className="fixed inset-0 z-50 lg:hidden">
+        <div className="fixed inset-0 z-50 lg:hidden flex items-end justify-center">
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/50 transition-opacity"
+            className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"
             onClick={onCloseMobile}
             aria-hidden="true"
           />
 
-          {/* Drawer Container */}
-          <div className="fixed inset-y-0 left-0 w-full max-w-xs bg-white shadow-xl flex flex-col z-50">
-            {/* Drawer Header */}
-            <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-900 text-white">
-              <h2 className="font-bold text-lg">Filters</h2>
-              <button
-                onClick={onCloseMobile}
-                className="p-1 rounded-lg hover:bg-slate-800 text-slate-300"
-                aria-label="Close filters"
-              >
-                <XIcon className="w-5 h-5" />
-              </button>
+          {/* Bottom Sheet Container */}
+          <div className="relative w-full max-w-md bg-white rounded-t-3xl shadow-2xl flex flex-col z-50 max-h-[85vh] overflow-hidden border-t border-slate-100">
+            {/* Top Drag Handle Bar */}
+            <div className="pt-3 pb-1 bg-slate-900 text-white flex flex-col items-center">
+              <div className="w-12 h-1.5 bg-slate-600 rounded-full mb-3" />
+              <div className="w-full px-5 pb-3 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <h2 className="font-bold text-base">Filter Catalog</h2>
+                  {activeCount > 0 && (
+                    <span className="px-2 py-0.5 rounded-full bg-amber-500 text-slate-950 font-black text-xs">
+                      {activeCount} active
+                    </span>
+                  )}
+                </div>
+                <button
+                  onClick={onCloseMobile}
+                  className="p-1.5 rounded-full bg-slate-800 text-slate-300 hover:text-white"
+                  aria-label="Close filters"
+                >
+                  <XIcon className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
-            {/* Drawer Body */}
+            {/* Sheet Body */}
             <div className="flex-1 overflow-y-auto p-5">{sidebarContent}</div>
 
-            {/* Drawer Footer */}
-            <div className="p-4 border-t border-slate-100 bg-slate-50 flex gap-3">
+            {/* Sheet Footer CTA */}
+            <div className="p-4 border-t border-slate-100 bg-slate-50 flex gap-3 pb-[calc(env(safe-area-inset-bottom,0px)+1rem)]">
               <button
                 onClick={onResetFilters}
-                className="flex-1 py-2.5 border border-slate-300 text-slate-700 font-semibold text-sm rounded-xl hover:bg-slate-100"
+                className="flex-1 py-3 border border-slate-300 text-slate-700 font-bold text-xs rounded-xl hover:bg-slate-100"
               >
                 Clear All
               </button>
               <button
                 onClick={onCloseMobile}
-                className="flex-1 py-2.5 bg-amber-500 text-slate-950 font-bold text-sm rounded-xl hover:bg-amber-600"
+                className="flex-1 py-3 bg-amber-500 text-slate-950 font-black text-xs rounded-xl hover:bg-amber-400 shadow-sm"
               >
-                Apply Filters
+                Apply Filters {activeCount > 0 ? `(${activeCount})` : ''}
               </button>
             </div>
           </div>

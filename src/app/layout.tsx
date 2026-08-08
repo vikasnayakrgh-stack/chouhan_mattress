@@ -51,6 +51,7 @@ export const viewport: Viewport = {
 }
 
 import { CartProvider } from '@/context/CartContext'
+import { Toaster } from 'sonner'
 
 export default function RootLayout({
   children,
@@ -78,6 +79,7 @@ export default function RootLayout({
         </a>
         <CartProvider>
           {children}
+          <Toaster position="bottom-center" expand={false} richColors closeButton duration={3500} />
         </CartProvider>
       </body>
     </html>

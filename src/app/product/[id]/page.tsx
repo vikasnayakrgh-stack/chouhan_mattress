@@ -22,6 +22,7 @@ import { PincodeChecker } from '@/components/pdp/PincodeChecker';
 import { ProductTabs } from '@/components/pdp/ProductTabs';
 import { ReviewsSection } from '@/components/pdp/ReviewsSection';
 import { StickyAddToCartBar } from '@/components/pdp/StickyAddToCartBar';
+import { VariantBottomSheet } from '@/components/pdp/VariantBottomSheet';
 
 import { CustomDimension, ProductVariantOption } from '@/types/pdp';
 import productsData from '@/data/products.json';
@@ -87,6 +88,7 @@ function ProductDetailPageContent() {
   const [customDimension, setCustomDimension] = useState<CustomDimension | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
   const [addedToast, setAddedToast] = useState<boolean>(false);
+  const [isVariantSheetOpen, setIsVariantSheetOpen] = useState<boolean>(false);
 
   // Computed current price
   const displayPrice = isCustomSelected && customPrice ? customPrice : selectedVariant.price;
@@ -365,14 +367,6 @@ function ProductDetailPageContent() {
                   products={relatedProducts}
                   columns={4}
                   gap="md"
-                  variant="grid"
-                  showActions
-                  showBadges
-                  showRating
-                />
-              </div>
-            )}
-          </div>
         </div>
       </main>
 
@@ -384,8 +378,35 @@ function ProductDetailPageContent() {
         selectedThickness={selectedThickness}
         price={displayPrice}
         originalPrice={displayOriginalPrice}
+        onAddToCart={() => {
+          if (window.innerWidth < 768) {
+            setIsVariantSheetOpen(true);
+          } else {
+            handleAddToCart();
+          }
+        }}
+        onBuyNow={() => {
+          if (window.innerWidth < 768) {
+            setIsVariantSheetOpen(true);
+          } else {
+            handleBuyNow();
+          }
+        }}
+      />
+
+      {/* Native Mobile Variant Selector Bottom Sheet */}
+      <VariantBottomSheet
+        isOpen={isVariantSheetOpen}
+        onClose={() => setIsVariantSheetOpen(false)}
+        productName={product.name}
+        productImage={product.thumbnail}
+        variants={defaultVariants}
+        selectedVariant={selectedVariant}
+        onSelectVariant={setSelectedVariant}
+        thicknesses={product.thickness || ['6 Inch', '8 Inch']}
+        selectedThickness={selectedThickness}
+        onSelectThickness={setSelectedThickness}
         onAddToCart={handleAddToCart}
-        onBuyNow={handleBuyNow}
       />
 
       {/* Footer */}
