@@ -367,6 +367,14 @@ function ProductDetailPageContent() {
                   products={relatedProducts}
                   columns={4}
                   gap="md"
+                  variant="grid"
+                  showActions
+                  showBadges
+                  showRating
+                />
+              </div>
+            )}
+          </div>
         </div>
       </main>
 
