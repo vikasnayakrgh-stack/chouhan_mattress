@@ -16,13 +16,15 @@ import homepageData from '@/data/homepage.json';
 export function Hero() {
   const slides = homepageData.hero.slides;
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
+    if (isHovered) return;
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % slides.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, [slides.length]);
+  }, [slides.length, isHovered]);
 
   const activeSlide = slides[currentIndex] as any;
 
@@ -35,7 +37,15 @@ export function Hero() {
   };
 
   return (
-    <section className="relative w-full bg-gray-950 text-white overflow-hidden group">
+    <section
+      className="relative w-full bg-slate-950 text-white overflow-hidden group font-sans"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Slide Counter Badge (Desktop Only) */}
+      <div className="hidden md:flex absolute top-4 right-6 z-30 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-full border border-slate-700/70 text-[11px] font-mono text-amber-300">
+        0{currentIndex + 1} / 0{slides.length}
+      </div>
       {/* Slider Container */}
       <div className="relative h-[360px] sm:h-[440px] md:h-[500px] lg:h-[560px] w-full">
         <AnimatePresence mode="wait">

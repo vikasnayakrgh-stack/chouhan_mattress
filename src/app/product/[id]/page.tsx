@@ -193,8 +193,8 @@ function ProductDetailPageContent() {
               />
             </div>
 
-            {/* Right: Product Purchase Box (5 Columns) */}
-            <div className="lg:col-span-5 space-y-6">
+            {/* Right: Product Purchase Box (5 Columns - Sticky on Desktop) */}
+            <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-24 lg:self-start">
               {/* Product Title & Ratings */}
               <div>
                 <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight mb-2">

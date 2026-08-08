@@ -5,11 +5,13 @@
 
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { EyeIcon } from 'lucide-react';
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { Button } from '@/components/ui/Button';
+import { QuickViewModal } from '@/components/pdp/QuickViewModal';
 import { cn } from '@/lib/utils';
 import { ProductCardProps, Product, ProductBadge, ProductPrice } from '@/types';
 
@@ -29,6 +31,7 @@ export function ProductCard({
   loading = false,
   'data-testid': testId,
 }: ProductCardProps & { priority?: boolean }) {
+  const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const currentPrice = typeof product.price === 'number' ? product.price : (product.price?.current || 0);
   const origPrice = product.originalPrice || (typeof product.price === 'object' ? product.price?.original : undefined);
   const priceUnit = typeof product.price === 'object' ? product.price?.unit : undefined;
@@ -145,6 +148,20 @@ export function ProductCard({
                 </svg>
               </button>
             )}
+
+            {/* Desktop Quick View Button on Image Hover */}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsQuickViewOpen(true);
+              }}
+              className="hidden md:flex absolute bottom-2 right-2 px-3 py-1.5 rounded-xl bg-slate-900/90 text-white text-xs font-bold shadow-lg hover:bg-amber-500 hover:text-slate-950 transition-all opacity-0 group-hover:opacity-100 items-center gap-1.5 z-20 border border-slate-700/80 cursor-pointer"
+              title="Quick View Product Details"
+            >
+              <EyeIcon className="w-3.5 h-3.5" />
+              <span>Quick View</span>
+            </button>
           </div>
 
           {/* Product Info */}
@@ -200,6 +217,21 @@ export function ProductCard({
             </button>
           )}
         </div>
+
+        {/* Desktop Quick View Modal */}
+        <QuickViewModal
+          product={{
+            id: product.id,
+            name: product.name,
+            price: currentPrice,
+            originalPrice: origPrice,
+            rating: ratingValue,
+            reviewCount: reviewCountValue,
+            thumbnail: product.primaryImage || (product.images && product.images[0]) || '',
+          }}
+          isOpen={isQuickViewOpen}
+          onClose={() => setIsQuickViewOpen(false)}
+        />
       </article>
     );
   }

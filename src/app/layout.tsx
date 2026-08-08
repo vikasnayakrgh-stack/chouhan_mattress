@@ -53,6 +53,7 @@ export const viewport: Viewport = {
 import { CartProvider } from '@/context/CartContext'
 import { Toaster } from 'sonner'
 import { MobileBottomNav } from '@/components/library/MobileBottomNav'
+import { FloatingDesktopTools } from '@/components/ui/FloatingDesktopTools'
 
 export default function RootLayout({
   children,
@@ -81,6 +82,7 @@ export default function RootLayout({
         <CartProvider>
           {children}
           <MobileBottomNav />
+          <FloatingDesktopTools />
           <Toaster position="bottom-center" expand={false} richColors closeButton duration={3500} />
         </CartProvider>
       </body>

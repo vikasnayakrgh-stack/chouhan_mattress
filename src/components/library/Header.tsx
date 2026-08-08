@@ -46,6 +46,56 @@ const CATEGORIES_SUBNAV = [
   { label: 'Sleep Quiz', href: '/mattress-selector', isSpecial: false },
 ];
 
+const MEGA_MENUS: Record<string, {
+  title: string;
+  types: Array<{ label: string; desc: string; href: string }>;
+  sizes: Array<{ label: string; dims: string; href: string }>;
+  spotlight: { title: string; price: string; discount: string; image: string; href: string };
+}> = {
+  'Mattresses': {
+    title: 'Mattress Collection',
+    types: [
+      { label: 'Orthopedic Support Foam', desc: 'Ergonomic spine alignment for back pain relief', href: '/category/mattresses' },
+      { label: 'ShapeSense Memory Foam', desc: 'Zero partner disturbance & pressure relief', href: '/category/mattresses' },
+      { label: 'Natural Latex Hybrid', desc: '100% Organic eco-breathable bounce', href: '/category/mattresses' },
+      { label: 'Pocket Spring Luxury', desc: 'Individual pocketed coils for adaptive bounce', href: '/category/mattresses' },
+    ],
+    sizes: [
+      { label: 'King Size Mattress', dims: '72" x 78" (182x198 cm)', href: '/category/mattresses?size=King' },
+      { label: 'Queen Size Mattress', dims: '60" x 78" (152x198 cm)', href: '/category/mattresses?size=Queen' },
+      { label: 'Single Size Mattress', dims: '36" x 75" (91x190 cm)', href: '/category/mattresses?size=Single' },
+      { label: 'Custom Dimension Calculator', dims: 'Handcrafted to exact bed frame', href: '/size-guide' },
+    ],
+    spotlight: {
+      title: 'ShapeSense Orthopedic Essential Mattress',
+      price: '₹6,229',
+      discount: '50% OFF',
+      image: 'https://ik.imagekit.io/chouhan/mattress_hero1.jpg',
+      href: '/product/1',
+    },
+  },
+  'Custom Sized Beds': {
+    title: 'Wooden Beds & Frames',
+    types: [
+      { label: 'Sheesham Solid Wood Bed', desc: 'Handcrafted solid hardwood bed frames', href: '/category/beds' },
+      { label: 'Hydraulic Storage Beds', desc: 'Spacious under-bed storage space', href: '/category/beds' },
+      { label: 'Upholstered Designer Beds', desc: 'Plush padded headboards', href: '/category/beds' },
+    ],
+    sizes: [
+      { label: 'King Size Bed Frame', dims: 'For 72x78 in mattresses', href: '/category/beds' },
+      { label: 'Queen Size Bed Frame', dims: 'For 60x78 in mattresses', href: '/category/beds' },
+      { label: 'Custom Bed Frame Size', dims: 'Tailored dimensions', href: '/size-guide' },
+    ],
+    spotlight: {
+      title: 'Royal Sheesham Wood King Bed',
+      price: '₹18,999',
+      discount: '45% OFF',
+      image: 'https://ik.imagekit.io/chouhan/sofa_hero1.jpg',
+      href: '/category/beds',
+    },
+  },
+};
+
 export function Header({
   brandName = 'Chouhan Mattress',
   brandLink = '/',
@@ -53,6 +103,7 @@ export function Header({
 }: HeaderProps) {
   const { cartCount, openDrawer } = useCart();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
 
   const triggerSearch = () => {
     window.dispatchEvent(new CustomEvent('open-search'));
@@ -177,25 +228,112 @@ export function Header({
         </div>
       </div>
 
-      {/* ─── Secondary Sub-Navigation Category Bar (Desktop Only) ─── */}
-      <div className="hidden md:block bg-[#0B132B] text-white overflow-x-auto scrollbar-none py-2.5 px-4 md:px-8 border-t border-slate-800/80">
+      {/* ─── Secondary Sub-Navigation Category Bar (Desktop Only with Mega Menu) ─── */}
+      <div
+        className="hidden md:block bg-[#0B132B] text-white relative py-2.5 px-4 md:px-8 border-t border-slate-800/80"
+        onMouseLeave={() => setActiveMegaMenu(null)}
+      >
         <div className="container mx-auto flex items-center gap-6 text-xs font-medium whitespace-nowrap">
-          {CATEGORIES_SUBNAV.map((cat, idx) => (
-            <Link
-              key={idx}
-              href={cat.href}
-              className={cn(
-                'transition-colors py-1 flex items-center gap-1.5',
-                cat.isSpecial
-                  ? 'text-amber-300 font-bold bg-amber-500/15 px-3 py-1 rounded-full border border-amber-500/40 hover:bg-amber-500/25'
-                  : 'text-slate-300 hover:text-amber-400'
-              )}
-            >
-              {cat.tag && <span className="text-[9px] bg-amber-500 text-slate-950 font-extrabold px-1.5 py-0.2 rounded uppercase">{cat.tag}</span>}
-              <span>{cat.label}</span>
-            </Link>
-          ))}
+          {CATEGORIES_SUBNAV.map((cat, idx) => {
+            const hasMegaMenu = MEGA_MENUS[cat.label];
+            return (
+              <div key={idx} className="relative py-1" onMouseEnter={() => hasMegaMenu && setActiveMegaMenu(cat.label)}>
+                <Link
+                  href={cat.href}
+                  className={cn(
+                    'transition-colors flex items-center gap-1.5',
+                    cat.isSpecial
+                      ? 'text-amber-300 font-bold bg-amber-500/15 px-3 py-1 rounded-full border border-amber-500/40 hover:bg-amber-500/25'
+                      : 'text-slate-300 hover:text-amber-400',
+                    activeMegaMenu === cat.label && 'text-amber-400 font-bold'
+                  )}
+                >
+                  {cat.tag && <span className="text-[9px] bg-amber-500 text-slate-950 font-extrabold px-1.5 py-0.2 rounded uppercase">{cat.tag}</span>}
+                  <span>{cat.label}</span>
+                </Link>
+              </div>
+            );
+          })}
         </div>
+
+        {/* ─── 3-Column Luxury Mega Menu Overlay ─── */}
+        <AnimatePresence>
+          {activeMegaMenu && MEGA_MENUS[activeMegaMenu] && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-full left-0 right-0 bg-slate-900/98 backdrop-blur-md border-b border-slate-800 text-white shadow-2xl z-50 p-8"
+            >
+              <div className="container mx-auto grid grid-cols-3 gap-8">
+                {/* Column 1: Mattress Types */}
+                <div>
+                  <h4 className="text-xs font-extrabold text-amber-400 uppercase tracking-widest mb-4 border-b border-slate-800 pb-2">
+                    {MEGA_MENUS[activeMegaMenu].title}
+                  </h4>
+                  <div className="space-y-3">
+                    {MEGA_MENUS[activeMegaMenu].types.map((t, i) => (
+                      <Link
+                        key={i}
+                        href={t.href}
+                        onClick={() => setActiveMegaMenu(null)}
+                        className="block p-2 rounded-xl hover:bg-slate-800/80 transition-colors group"
+                      >
+                        <div className="text-xs font-bold text-slate-200 group-hover:text-amber-300">{t.label}</div>
+                        <div className="text-[11px] text-slate-400 mt-0.5">{t.desc}</div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Column 2: Dimensions & Calculator */}
+                <div>
+                  <h4 className="text-xs font-extrabold text-amber-400 uppercase tracking-widest mb-4 border-b border-slate-800 pb-2">
+                    Popular Sizes & Custom Tools
+                  </h4>
+                  <div className="space-y-3">
+                    {MEGA_MENUS[activeMegaMenu].sizes.map((s, i) => (
+                      <Link
+                        key={i}
+                        href={s.href}
+                        onClick={() => setActiveMegaMenu(null)}
+                        className="block p-2 rounded-xl hover:bg-slate-800/80 transition-colors group"
+                      >
+                        <div className="text-xs font-bold text-slate-200 group-hover:text-amber-300">{s.label}</div>
+                        <div className="text-[11px] text-amber-500/80 font-mono mt-0.5">{s.dims}</div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Column 3: Featured Spotlight Card */}
+                <div className="bg-slate-800/60 p-4 rounded-2xl border border-slate-700/60 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-black uppercase text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/30">
+                      Spotlight Bestseller
+                    </span>
+                    <h5 className="font-bold text-slate-100 text-xs mt-2 line-clamp-1">
+                      {MEGA_MENUS[activeMegaMenu].spotlight.title}
+                    </h5>
+                    <div className="flex items-baseline gap-2 mt-1">
+                      <span className="text-sm font-black text-white">{MEGA_MENUS[activeMegaMenu].spotlight.price}</span>
+                      <span className="text-[10px] text-emerald-400 font-bold">{MEGA_MENUS[activeMegaMenu].spotlight.discount}</span>
+                    </div>
+                  </div>
+
+                  <Link
+                    href={MEGA_MENUS[activeMegaMenu].spotlight.href}
+                    onClick={() => setActiveMegaMenu(null)}
+                    className="mt-4 w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs rounded-xl text-center transition-colors shadow-sm"
+                  >
+                    Shop Bestseller Series →
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Mobile Drawer Menu */}
