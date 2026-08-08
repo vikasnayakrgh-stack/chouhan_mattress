@@ -9,15 +9,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { XIcon, ShoppingBagIcon, CheckIcon, SparklesIcon } from 'lucide-react';
 import { OptimizedImage } from '@/components/ui/OptimizedImage';
-
-interface ProductVariantOption {
-  id: string;
-  size: string;
-  dimensions?: string;
-  price: number;
-  originalPrice?: number;
-  stock?: number;
-}
+import { ProductVariantOption } from '@/types/pdp';
 
 interface VariantBottomSheetProps {
   isOpen: boolean;
