@@ -1,17 +1,21 @@
 /**
  * Chouhan Mattress - Floating Desktop Utility Cluster Component
  * Desktop-only floating tools (WhatsApp Live Support + Back-to-Top scroll trigger)
+ * Dynamic bottom offset on PDP when sticky add-to-cart bar is active to prevent overlap
  */
 
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { ChevronUpIcon, MessageCircleIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import footerData from '@/data/footer.json';
 
 export function FloatingDesktopTools() {
+  const pathname = usePathname();
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const isPDP = pathname?.startsWith('/product/');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,8 +37,16 @@ export function FloatingDesktopTools() {
   const whatsappPhone = footerData.company.phone.replace(/[^0-9]/g, '');
   const whatsappUrl = `https://wa.me/${whatsappPhone}?text=Hi%20Chouhan%20Mattress,%20I%20need%20assistance%20choosing%20the%20right%20mattress.`;
 
+  // Shift floating tools UP on PDP when StickyAddToCartBar is visible (scrolled > 400px)
+  const isStickyBarActive = isPDP && showBackToTop;
+
   return (
-    <div className="hidden md:flex flex-col items-center gap-3 fixed bottom-6 right-6 z-40 font-sans pointer-events-auto">
+    <div
+      className={cn(
+        'hidden md:flex flex-col items-end gap-3 fixed right-6 z-40 font-sans transition-all duration-300 pointer-events-auto',
+        isStickyBarActive ? 'bottom-20' : 'bottom-6'
+      )}
+    >
       {/* Back to Top Button */}
       {showBackToTop && (
         <button

@@ -83,7 +83,7 @@ export default function RootLayout({
           {children}
           <MobileBottomNav />
           <FloatingDesktopTools />
-          <Toaster position="bottom-center" expand={false} richColors closeButton duration={3500} />
+          <Toaster position="bottom-center" expand={false} richColors closeButton duration={3500} toastOptions={{ style: { marginBottom: '64px' } }} />
         </CartProvider>
       </body>
     </html>
