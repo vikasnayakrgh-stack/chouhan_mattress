@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Hermes Agent skills
 .agents/
+
+# 21st components reference
+.21st-components/
