@@ -1,16 +1,16 @@
 {
   "primary": [
-    { "label": "Mattresses", "href": "/mattresses", "hasMegaMenu": true },
-    { "label": "Beds", "href": "/beds", "hasMegaMenu": true },
-    { "label": "Sofas", "href": "/sofas", "hasMegaMenu": true },
-    { "label": "Furniture", "href": "/furniture", "hasMegaMenu": true },
-    { "label": "Pillows & Bedding", "href": "/bedding", "hasMegaMenu": true },
-    { "label": "Decor", "href": "/decor", "hasMegaMenu": false },
-    { "label": "Offers", "href": "/offers", "hasMegaMenu": false }
+    { "label": "Mattresses", "href": "/category/mattresses", "hasMegaMenu": true },
+    { "label": "Beds", "href": "/category/beds", "hasMegaMenu": true },
+    { "label": "Sofas", "href": "/category/sofas", "hasMegaMenu": true },
+    { "label": "Furniture", "href": "/category/furniture", "hasMegaMenu": true },
+    { "label": "Pillows & Bedding", "href": "/category/bedding", "hasMegaMenu": true },
+    { "label": "Decor", "href": "/category/decor", "hasMegaMenu": false },
+    { "label": "Offers", "href": "/products", "hasMegaMenu": false }
   ],
   "utility": [
-    { "label": "Track Order", "href": "/track-order" },
-    { "label": "Stores", "href": "/furniture-store" },
-    { "label": "Bulk Orders", "href": "/bulk-orders" }
+    { "label": "Track Order", "href": "/account" },
+    { "label": "Stores", "href": "/contact" },
+    { "label": "Bulk Orders", "href": "/contact" }
   ]
 }

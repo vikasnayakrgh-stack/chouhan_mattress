@@ -27,12 +27,12 @@
       { "label": "Size Guide", "href": "/size-guide" }
     ],
     "shop": [
-      { "label": "Mattresses", "href": "/mattresses" },
-      { "label": "Beds", "href": "/beds" },
-      { "label": "Sofas", "href": "/sofas" },
-      { "label": "Furniture", "href": "/furniture" },
-      { "label": "Pillows & Bedding", "href": "/bedding" },
-      { "label": "Home Decor", "href": "/decor" }
+      { "label": "Mattresses", "href": "/category/mattresses" },
+      { "label": "Beds", "href": "/category/beds" },
+      { "label": "Sofas", "href": "/category/sofas" },
+      { "label": "Furniture", "href": "/category/furniture" },
+      { "label": "Pillows & Bedding", "href": "/category/bedding" },
+      { "label": "Home Decor", "href": "/category/decor" }
     ],
     "policies": [
       { "label": "Privacy Policy", "href": "/privacy" },
