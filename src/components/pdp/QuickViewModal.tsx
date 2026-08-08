@@ -107,7 +107,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
               <OptimizedImage
                 src={product.thumbnail}
                 alt={product.name}
-                preset="card"
+                preset="productGrid"
                 className="w-full h-full object-cover"
               />
             </div>
