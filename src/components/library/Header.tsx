@@ -60,8 +60,8 @@ export function Header({
 
   return (
     <header className="sticky top-0 z-50 w-full shadow-lg font-sans" data-testid={testId}>
-      {/* ─── Top Luxury Gold Announcement Bar ─── */}
-      <div className="bg-[#090D16] text-amber-200 py-2 px-4 text-center text-xs font-medium tracking-wide border-b border-amber-900/30 flex items-center justify-center gap-3">
+      {/* ─── Top Luxury Gold Announcement Bar (Desktop Only) ─── */}
+      <div className="hidden md:flex bg-[#090D16] text-amber-200 py-2 px-4 text-center text-xs font-medium tracking-wide border-b border-amber-900/30 items-center justify-center gap-3">
         <span className="hidden md:inline-flex items-center gap-1 text-amber-400 font-semibold text-[11px] uppercase tracking-wider">
           <CrownIcon className="w-3.5 h-3.5 text-amber-400" /> Royal Sleep Engineering
         </span>
@@ -71,35 +71,35 @@ export function Header({
       </div>
 
       {/* ─── Main Deep Royal Navy Slate Header ─── */}
-      <div className="bg-[#0F172A] text-white py-3.5 px-4 md:px-8 border-b border-slate-800">
-        <div className="container mx-auto flex items-center justify-between gap-4">
+      <div className="bg-[#0F172A] text-white py-2.5 sm:py-3.5 px-3.5 md:px-8 border-b border-slate-800">
+        <div className="container mx-auto flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Left: Mobile Toggle & Brand Logo */}
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-1.5 rounded-lg hover:bg-slate-800 transition-colors text-slate-300 focus:outline-none md:hidden"
+              className="p-2 rounded-xl hover:bg-slate-800 transition-colors text-slate-300 focus:outline-none md:hidden min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
             </button>
 
-            <Link href={brandLink} className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 text-slate-950 flex items-center justify-center font-black text-xl shadow-md group-hover:scale-105 transition-transform border border-amber-400/40">
-                <CrownIcon className="w-6 h-6 text-slate-950 fill-slate-950" />
+            <Link href={brandLink} className="flex items-center gap-2 sm:gap-3 group">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 text-slate-950 flex items-center justify-center font-black text-lg sm:text-xl shadow-md group-hover:scale-105 transition-transform border border-amber-400/40">
+                <CrownIcon className="w-5 h-5 sm:w-6 sm:h-6 text-slate-950 fill-slate-950" />
               </div>
               <div className="flex flex-col">
-                <span className="text-xl md:text-2xl font-bold tracking-tight text-white leading-none font-heading group-hover:text-amber-300 transition-colors">
+                <span className="text-lg sm:text-2xl font-bold tracking-tight text-white leading-none font-heading group-hover:text-amber-300 transition-colors">
                   CHOUHAN
                 </span>
-                <span className="text-[10px] font-semibold text-amber-400 uppercase tracking-[0.25em] leading-none mt-1">
+                <span className="text-[9px] sm:text-[10px] font-semibold text-amber-400 uppercase tracking-[0.2em] sm:tracking-[0.25em] leading-none mt-0.5 sm:mt-1">
                   MATTRESS
                 </span>
               </div>
             </Link>
           </div>
 
-          {/* Center: Search Trigger Input Bar */}
+          {/* Center: Search Trigger Input Bar (Desktop/Tablet) */}
           <div className="flex-1 max-w-2xl mx-4 hidden sm:block relative">
             <button
               onClick={triggerSearch}
@@ -116,7 +116,7 @@ export function Header({
           </div>
 
           {/* Right: Quick Links & Actions */}
-          <div className="flex items-center gap-4 sm:gap-6 flex-shrink-0 text-xs font-medium">
+          <div className="flex items-center gap-2 sm:gap-6 flex-shrink-0 text-xs font-medium">
             <div className="hidden lg:flex items-center gap-5 text-slate-300">
               <Link href="/products" className="hover:text-amber-400 transition-colors flex items-center gap-1">
                 <AwardIcon className="w-3.5 h-3.5 text-amber-400" /> Catalog
@@ -129,11 +129,21 @@ export function Header({
               </Link>
             </div>
 
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1 sm:gap-3">
+              {/* Mobile Quick Search Button */}
+              <button
+                onClick={triggerSearch}
+                aria-label="Search Catalog"
+                className="p-2 rounded-xl hover:bg-slate-800 transition-colors text-slate-300 hover:text-amber-400 flex sm:hidden min-h-[44px] min-w-[44px] items-center justify-center"
+                title="Search"
+              >
+                <SearchIcon className="w-5 h-5" />
+              </button>
+
               <Link
                 href="/account"
                 aria-label="Account"
-                className="p-2 rounded-xl hover:bg-slate-800 transition-colors text-slate-300 hover:text-white"
+                className="p-2 rounded-xl hover:bg-slate-800 transition-colors text-slate-300 hover:text-white hidden sm:flex"
                 title="Account"
               >
                 <UserIcon className="w-5 h-5" />
@@ -151,7 +161,7 @@ export function Header({
               <button
                 onClick={openDrawer}
                 aria-label="Cart"
-                className="relative p-2 rounded-xl hover:bg-slate-800 transition-colors text-slate-300 hover:text-white flex items-center gap-2 bg-slate-900 border border-slate-700/60 px-3"
+                className="relative p-2 rounded-xl hover:bg-slate-800 transition-colors text-slate-300 hover:text-white flex items-center gap-2 bg-slate-900 border border-slate-700/60 px-2.5 sm:px-3 min-h-[44px]"
                 title="Shopping Cart"
               >
                 <ShoppingCartIcon className="w-5 h-5 text-amber-400" />
@@ -165,21 +175,10 @@ export function Header({
             </div>
           </div>
         </div>
-
-        {/* Mobile Search Row */}
-        <div className="mt-2.5 sm:hidden">
-          <button
-            onClick={triggerSearch}
-            className="w-full h-10 bg-slate-900 rounded-lg px-3 text-left text-xs text-slate-400 flex items-center gap-2 border border-slate-700"
-          >
-            <SearchIcon className="w-4 h-4 text-slate-400" />
-            <span>Search Royal Ortho, Custom Beds, Pillows...</span>
-          </button>
-        </div>
       </div>
 
-      {/* ─── Secondary Sub-Navigation Category Bar ─── */}
-      <div className="bg-[#0B132B] text-white overflow-x-auto scrollbar-none py-2.5 px-4 md:px-8 border-t border-slate-800/80">
+      {/* ─── Secondary Sub-Navigation Category Bar (Desktop Only) ─── */}
+      <div className="hidden md:block bg-[#0B132B] text-white overflow-x-auto scrollbar-none py-2.5 px-4 md:px-8 border-t border-slate-800/80">
         <div className="container mx-auto flex items-center gap-6 text-xs font-medium whitespace-nowrap">
           {CATEGORIES_SUBNAV.map((cat, idx) => (
             <Link

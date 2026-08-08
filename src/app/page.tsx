@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { Header } from '@/components/library/Header';
+import { MobileBottomNav } from '@/components/library/MobileBottomNav';
 import { Hero } from '@/components/library/Hero';
 import { CategoriesSection } from '@/components/library/CategoriesSection';
 import { WhyChooseUsSection } from '@/components/library/WhyWakefitSection';
@@ -124,12 +125,15 @@ export default function HomePage() {
       {/* ─── Floating Sleep Assistant Chat Button (Bottom Right) ─── */}
       <a
         href="/mattress-selector"
-        className="fixed bottom-6 right-6 z-40 w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 rounded-full flex items-center justify-center shadow-2xl hover:from-amber-300 hover:to-amber-500 hover:scale-110 transition-all cursor-pointer group border-2 border-slate-950/20"
+        className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-amber-400 to-amber-600 text-slate-950 rounded-full flex items-center justify-center shadow-2xl hover:from-amber-300 hover:to-amber-500 hover:scale-110 transition-all cursor-pointer group border-2 border-slate-950/20"
         title="Find My Mattress Assistant"
         aria-label="Launch Interactive Sleep Assistant Quiz"
       >
-        <MessageSquarePlusIcon className="w-6 h-6 text-slate-950 group-hover:rotate-12 transition-transform" />
+        <MessageSquarePlusIcon className="w-5 h-5 sm:w-6 sm:h-6 text-slate-950 group-hover:rotate-12 transition-transform" />
       </a>
+
+      {/* ─── Mobile Bottom Navigation Bar ─── */}
+      <MobileBottomNav />
 
       {/* ─── Footer ─── */}
       <Footer

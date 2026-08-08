@@ -54,7 +54,7 @@ export function StickyAddToCartBar({
   return (
     <div
       className={cn(
-        'fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-2xl py-3 px-4 transition-transform duration-300 transform translate-y-0',
+        'fixed bottom-0 md:bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-2xl py-2.5 sm:py-3 px-3.5 sm:px-4 transition-transform duration-300 transform translate-y-0 pb-[calc(env(safe-area-inset-bottom,0px)+3.5rem)] md:pb-3',
         className
       )}
       role="region"

@@ -57,184 +57,148 @@ export function ProductCard({
     onClick?.(product);
   };
 
-  // Grid variant
+  // Grid variant (Mobile 2-Column Compact Optimized)
   if (variant === 'grid') {
     return (
       <article
         className={cn(
-          'group relative bg-white rounded-2xl border border-slate-200 overflow-hidden',
-          'transition-all duration-300 hover:shadow-xl hover:border-amber-500/50 hover:-translate-y-1',
+          'group relative bg-white rounded-xl sm:rounded-2xl border border-slate-200 overflow-hidden flex flex-col justify-between',
+          'transition-all duration-300 hover:shadow-lg hover:border-amber-500/50',
           loading && 'animate-pulse pointer-events-none',
           className
         )}
         data-testid={testId}
         onClick={handleClick}
       >
-        {/* Product Image */}
-        <div className="relative aspect-square overflow-hidden bg-slate-100">
-          <Link
-            href={productLink}
-            className="block h-full"
-            onClick={(e) => e.stopPropagation()}
-            aria-label={`View ${product.name}`}
-          >
-            <OptimizedImage
-              src={product.primaryImage || product.images[0]}
-              alt={product.alt || product.name}
-              preset="productGrid"
-              priority={priority}
-              placeholder="blur"
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              containerClassName="h-full"
-            />
-          </Link>
-
-          {/* Badges */}
-          {showBadges && product.badges && product.badges.length > 0 && (
-            <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-              {product.badges.slice(0, 2).map((badge: any, index: number) => {
-                const text = typeof badge === 'string' ? badge : badge?.text || '';
-                const variant = typeof badge === 'string' ? 'primary' : badge?.variant || 'primary';
-                return (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1 }}
-                    className={cn(
-                      'inline-flex items-center px-2.5 py-1 text-xs font-bold rounded-full shadow-xs',
-                      variant === 'primary' && 'bg-amber-500 text-slate-950',
-                      variant === 'secondary' && 'bg-slate-900 text-white',
-                      variant === 'success' && 'bg-emerald-600 text-white',
-                      variant === 'warning' && 'bg-amber-600 text-white',
-                      variant === 'outline' && 'border border-amber-500 text-amber-600 bg-white/90'
-                    )}
-                  >
-                    {text}
-                  </motion.span>
-                );
-              })}
-            </div>
-          )}
-
-          {/* Discount Badge */}
-          {showBadges && discountPercent > 0 && !product.badges?.some((b: any) => (typeof b === 'string' ? b : b?.text || '').includes('%')) && (
-            <motion.span
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="absolute top-3 right-3 inline-flex items-center px-2.5 py-1 text-xs font-extrabold text-white bg-rose-600 rounded-full shadow-md"
+        <div>
+          {/* Product Image */}
+          <div className="relative aspect-[4/3] sm:aspect-square overflow-hidden bg-slate-100">
+            <Link
+              href={productLink}
+              className="block h-full"
+              onClick={(e) => e.stopPropagation()}
+              aria-label={`View ${product.name}`}
             >
-              -{discountPercent}% OFF
-            </motion.span>
-          )}
+              <OptimizedImage
+                src={product.primaryImage || product.images[0]}
+                alt={product.alt || product.name}
+                preset="productGrid"
+                priority={priority}
+                placeholder="blur"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                containerClassName="h-full"
+              />
+            </Link>
 
-          {/* Wishlist Button */}
-          {showWishlist && (
-            <motion.button
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleToggleWishlist}
-              className={cn(
-                'absolute bottom-3 right-3 p-2 rounded-full bg-white/90 backdrop-blur-sm shadow-md',
-                'transition-all duration-200 hover:bg-white',
-                isInWishlist ? 'text-amber-500' : 'text-slate-400 hover:text-amber-500'
-              )}
-              aria-label={isInWishlist ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
-              aria-pressed={isInWishlist}
-            >
-              <svg
-                className={cn('h-5 w-5', isInWishlist ? 'fill-current' : '')}
-                fill={isInWishlist ? 'currentColor' : 'none'}
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
+            {/* Badges */}
+            {showBadges && product.badges && product.badges.length > 0 && (
+              <div className="absolute top-2 left-2 flex flex-col gap-1 z-10">
+                {product.badges.slice(0, 1).map((badge: any, index: number) => {
+                  const text = typeof badge === 'string' ? badge : badge?.text || '';
+                  const variant = typeof badge === 'string' ? 'primary' : badge?.variant || 'primary';
+                  return (
+                    <span
+                      key={index}
+                      className={cn(
+                        'inline-flex items-center px-2 py-0.5 text-[9px] sm:text-xs font-bold rounded-md shadow-xs',
+                        variant === 'primary' && 'bg-amber-500 text-slate-950',
+                        variant === 'secondary' && 'bg-slate-900 text-white',
+                        variant === 'success' && 'bg-emerald-600 text-white',
+                        variant === 'warning' && 'bg-amber-600 text-white',
+                        variant === 'outline' && 'border border-amber-500 text-amber-600 bg-white/90'
+                      )}
+                    >
+                      {text}
+                    </span>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Discount Badge */}
+            {showBadges && discountPercent > 0 && !product.badges?.some((b: any) => (typeof b === 'string' ? b : b?.text || '').includes('%')) && (
+              <span className="absolute top-2 right-2 inline-flex items-center px-1.5 py-0.5 text-[9px] sm:text-xs font-extrabold text-white bg-rose-600 rounded-md shadow-sm">
+                -{discountPercent}%
+              </span>
+            )}
+
+            {/* Wishlist Button */}
+            {showWishlist && (
+              <button
+                onClick={handleToggleWishlist}
+                className={cn(
+                  'absolute bottom-2 left-2 p-1.5 rounded-full bg-white/90 backdrop-blur-sm shadow-md',
+                  'transition-all duration-200 hover:bg-white min-h-[32px] min-w-[32px] flex items-center justify-center',
+                  isInWishlist ? 'text-rose-500' : 'text-slate-400 hover:text-rose-500'
+                )}
+                aria-label={isInWishlist ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`}
+                aria-pressed={isInWishlist}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
-            </motion.button>
-          )}
-
-          {/* Quick View / Add to Cart */}
-          {showActions && (
-            <motion.button
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="absolute bottom-3 left-1/2 -translate-x-1/2 px-5 py-2 text-xs font-bold text-slate-950 bg-amber-500 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-200 hover:bg-amber-400"
-              onClick={handleAddToCart}
-              aria-label={`Add ${product.name} to cart`}
-            >
-              Add to Cart
-            </motion.button>
-          )}
-        </div>
-
-        {/* Product Info */}
-        <div className="p-4">
-          {/* Category */}
-          {product.category && (
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="inline-block px-2 py-0.5 text-xs font-medium text-wakefit-gray bg-wakefit-gray/10 rounded mb-2"
-            >
-              {product.category}
-            </motion.span>
-          )}
-
-          {/* Name */}
-          <Link
-            href={productLink}
-            className="block"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 className="font-semibold text-wakefit-dark mb-1 line-clamp-2 group-hover:text-wakefit-orange transition-colors">
-              {product.name}
-            </h3>
-          </Link>
-
-          {/* Short Description */}
-          {product.shortDesc && (
-            <p className="text-sm text-wakefit-gray mb-2 line-clamp-1">{product.shortDesc}</p>
-          )}
-
-          {/* Rating */}
-          {showRating && ratingValue > 0 && (
-            <div className="flex items-center gap-1 mb-2" role="img" aria-label={`${ratingValue} out of 5 stars, ${reviewCountValue} reviews`}>
-              {[...Array(5)].map((_, i) => (
                 <svg
-                  key={i}
-                  className={cn('h-4 w-4', i < Math.floor(ratingValue) ? 'text-yellow-400 fill-current' : 'text-brand-gray/30')}
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
+                  className={cn('h-4 w-4', isInWishlist ? 'fill-current' : '')}
+                  fill={isInWishlist ? 'currentColor' : 'none'}
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                   aria-hidden="true"
                 >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
-              ))}
-              {reviewCountValue > 0 && (
-                <span className="text-sm text-brand-gray ml-1">({reviewCountValue.toLocaleString()})</span>
-              )}
-            </div>
-          )}
+              </button>
+            )}
+          </div>
 
-          {/* Price */}
-          <div className="flex items-baseline gap-2">
-            <span className="text-xl font-bold text-brand-dark">
+          {/* Product Info */}
+          <div className="p-2.5 sm:p-4">
+            {/* Rating Pill */}
+            {showRating && ratingValue > 0 && (
+              <div className="flex items-center gap-1 mb-1" role="img" aria-label={`${ratingValue} out of 5 stars`}>
+                <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200/60">
+                  <span className="text-amber-500">★</span> {ratingValue.toFixed(1)}
+                  {reviewCountValue > 0 && <span className="text-slate-400 font-normal">({reviewCountValue})</span>}
+                </span>
+              </div>
+            )}
+
+            {/* Title */}
+            <Link
+              href={productLink}
+              className="block"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="font-bold text-slate-900 text-xs sm:text-sm leading-tight line-clamp-2 min-h-[2rem] sm:min-h-[2.25rem] group-hover:text-amber-600 transition-colors">
+                {product.name}
+              </h3>
+            </Link>
+
+            {/* Delivery SLA Tag */}
+            <div className="mt-1 text-[10px] sm:text-xs text-emerald-700 font-medium flex items-center gap-1">
+              <span>⚡ Free Delivery</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Card Footer: Price & Always-Visible Touch CTA */}
+        <div className="p-2.5 sm:p-4 pt-0 sm:pt-0 flex items-center justify-between gap-1 border-t border-slate-100/80 mt-1">
+          <div className="flex flex-col min-w-0">
+            <span className="text-xs sm:text-base font-extrabold text-slate-950 truncate">
               {currencySymbol}{currentPrice.toLocaleString()}
             </span>
             {origPrice && origPrice > currentPrice && (
-              <span className="text-sm text-brand-gray line-through">
+              <span className="text-[10px] sm:text-xs text-slate-400 line-through truncate">
                 {currencySymbol}{origPrice.toLocaleString()}
               </span>
             )}
-            {priceUnit && (
-              <span className="text-sm text-brand-gray">/{priceUnit}</span>
-            )}
           </div>
+
+          {showActions && (
+            <button
+              onClick={handleAddToCart}
+              className="px-2.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs font-extrabold text-slate-950 bg-amber-500 rounded-lg sm:rounded-xl shadow-xs hover:bg-amber-400 active:scale-95 transition-all flex items-center justify-center min-h-[32px] sm:min-h-[36px] flex-shrink-0 cursor-pointer"
+              aria-label={`Add ${product.name} to cart`}
+            >
+              + Add
+            </button>
+          )}
         </div>
       </article>
     );

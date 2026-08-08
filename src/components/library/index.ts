@@ -5,6 +5,7 @@
 
 // Layout Components
 export * from './Header';
+export * from './MobileBottomNav';
 export * from './Navigation';
 export * from './Footer';
 
