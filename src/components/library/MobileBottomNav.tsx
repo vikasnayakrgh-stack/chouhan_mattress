@@ -23,6 +23,10 @@ export function MobileBottomNav() {
   const pathname = usePathname();
   const { cartCount, openDrawer } = useCart();
 
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
+
   const triggerSearch = () => {
     window.dispatchEvent(new CustomEvent('open-search'));
   };

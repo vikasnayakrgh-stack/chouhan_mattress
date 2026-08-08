@@ -326,7 +326,7 @@ function ProductsPageContent() {
         data-testid="main-header"
       />
 
-      <main id="main-content" className="flex-1">
+      <main id="main-content" className="flex-1 pb-20">
         <div className="container mx-auto px-4 py-6">
           {/* Breadcrumbs */}
           <Breadcrumbs
