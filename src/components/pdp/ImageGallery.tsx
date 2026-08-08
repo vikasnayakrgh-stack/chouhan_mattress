@@ -67,7 +67,7 @@ export function ImageGallery({
       </div>
 
       {/* Main Large Image Box */}
-      <div className="relative flex-1 rounded-2xl overflow-hidden border border-gray-100 bg-gray-50 aspect-4/3 sm:aspect-Square lg:aspect-4/3 group">
+      <div className="relative flex-1 rounded-2xl overflow-hidden border border-gray-100 bg-gray-50 aspect-[4/3] sm:aspect-square lg:aspect-[4/3] min-h-[280px] sm:min-h-[400px] group">
         {/* Badges Overlay */}
         {badges.length > 0 && (
           <div className="absolute top-4 left-4 z-10 flex flex-col gap-1.5 pointer-events-none">
@@ -105,6 +105,7 @@ export function ImageGallery({
             alt={productName}
             preset="hero"
             priority
+            containerClassName="w-full h-full"
             className="w-full h-full object-cover transition-transform duration-200"
             style={
               isZoomed

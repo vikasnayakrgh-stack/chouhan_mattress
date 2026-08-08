@@ -291,7 +291,11 @@ export function OptimizedImage({
 
   return (
     <div
-      className={cn('relative overflow-hidden', containerClassName)}
+      className={cn(
+        'relative overflow-hidden',
+        mergedConfig.layout === 'fill' && 'w-full h-full',
+        containerClassName
+      )}
       style={layoutProps.style}
       role="img"
       aria-label={alt}
