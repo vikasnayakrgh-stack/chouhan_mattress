@@ -210,6 +210,7 @@ export function OptimizedImage({
   ...props
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = React.useState(false);
+  const [hasError, setHasError] = React.useState(false);
 
   // Get responsive config
   const config = getResponsiveConfig(preset);
@@ -226,7 +227,7 @@ export function OptimizedImage({
   // Determine layout props
   let layoutProps: React.HTMLAttributes<HTMLDivElement> = {};
   let imageProps: ImageProps = {
-    src,
+    src: hasError ? 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=800&auto=format&fit=crop&q=80' : src,
     alt,
     priority: mergedConfig.priority,
     loading: mergedConfig.loading,
@@ -245,6 +246,7 @@ export function OptimizedImage({
     },
     onError: (e: any) => {
       setIsLoaded(true);
+      setHasError(true);
       if (onError) {
         try {
           (onError as any)(e);

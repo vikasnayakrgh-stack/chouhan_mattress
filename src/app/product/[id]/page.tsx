@@ -47,9 +47,16 @@ function ProductDetailPageContent() {
   const router = useRouter();
   const id = (params?.id as string) || '1';
 
-  // Find product by id in productsData
+  // Find product by id or slug in productsData
   const product = useMemo(() => {
-    return productsData.find((p) => String(p.id) === String(id)) || productsData[0];
+    const rawId = String(id).toLowerCase();
+    return (
+      productsData.find((p) => String(p.id) === rawId) ||
+      productsData.find((p) => p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').includes(rawId)) ||
+      productsData.find((p) => rawId.includes(p.name.toLowerCase().split(' ')[0])) ||
+      productsData.find((p) => p.subcategory && rawId.includes(p.subcategory)) ||
+      productsData[0]
+    );
   }, [id]);
 
   // Map variants

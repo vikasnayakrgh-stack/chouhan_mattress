@@ -56,8 +56,8 @@ const TOP_PRODUCTS = homepageData.topSelling.products.map((p) => ({
   rating: p.rating,
   reviewCount: p.reviewCount,
   thumbnail: p.image,
-  images: [p.image],
-  href: p.href,
+  images: [p.image, p.image],
+  href: `/product/${p.id}`,
   badges: p.badges?.map((b: string) => ({
     text: b,
     variant: b.includes('%') ? ('warning' as const) : ('primary' as const),
