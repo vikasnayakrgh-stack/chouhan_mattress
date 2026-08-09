@@ -188,8 +188,17 @@ export function ProductCard({
             </Link>
 
             {/* Delivery SLA Tag */}
-            <div className="mt-1 text-[10px] sm:text-xs text-emerald-700 font-medium flex items-center gap-1">
+            <div className="mt-1 text-[10px] sm:text-xs text-emerald-700 font-medium flex items-center justify-between gap-1">
               <span>⚡ Free Delivery</span>
+            </div>
+
+            {/* Reveal Specs on Hover (21st.dev inspired pattern) */}
+            <div className="hidden md:block max-h-0 opacity-0 group-hover:max-h-16 group-hover:opacity-100 transition-all duration-300 overflow-hidden mt-1 pt-1 border-t border-slate-100">
+              <div className="flex flex-wrap gap-1.5 text-[9px] text-slate-500 font-bold">
+                {product.firmness && <span className="bg-slate-50 px-1.5 py-0.5 rounded border border-slate-100">{product.firmness}</span>}
+                {product.warranty && <span className="bg-slate-50 px-1.5 py-0.5 rounded border border-slate-100">{product.warranty} Warranty</span>}
+                {product.trial && <span className="bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded border border-emerald-100">{product.trial} Trial</span>}
+              </div>
             </div>
           </div>
         </div>

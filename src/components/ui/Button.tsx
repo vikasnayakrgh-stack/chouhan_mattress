@@ -28,6 +28,7 @@ const variantStyles: Record<ButtonVariant, string> = {
   ghost: 'text-wakefit-dark hover:bg-wakefit-gray/50 focus:ring-wakefit-gray/50',
   destructive: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500/50',
   link: 'text-wakefit-orange underline-offset-4 hover:underline focus:ring-wakefit-orange/50',
+  shiny: 'relative overflow-hidden bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 text-slate-950 hover:shadow-xl hover:shadow-amber-500/20 transition-all border border-amber-300/40 focus:ring-amber-500/50',
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -118,6 +119,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           <span className={cn('flex-shrink-0', iconSizeStyles[size])} aria-hidden="true">
             {rightIcon}
           </span>
+        )}
+        {variant === 'shiny' && (
+          <motion.span
+            initial={{ x: '-100%' }}
+            animate={{ x: '100%' }}
+            transition={{ repeat: Infinity, repeatType: 'loop', duration: 2.2, ease: 'linear' }}
+            className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 pointer-events-none"
+          />
         )}
       </motion.button>
     );

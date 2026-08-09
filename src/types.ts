@@ -7,7 +7,7 @@
 // Base/UI Types
 // ============================================
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link';
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link' | 'shiny';
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl' | 'icon';
 
 export interface BaseComponentProps {
@@ -168,6 +168,9 @@ export interface Product {
   variants?: ProductVariant[];
   specifications?: Record<string, string>;
   seo?: ProductSeo;
+  firmness?: string;
+  warranty?: string;
+  trial?: string;
 }
 
 export interface ProductVariant {

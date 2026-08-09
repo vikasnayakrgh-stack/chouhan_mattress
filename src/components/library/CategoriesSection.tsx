@@ -66,44 +66,59 @@ export function CategoriesSection({
           <div className="w-16 h-1 bg-amber-500 rounded-full mt-2" />
         </motion.div>
 
-        {/* Categories Grid */}
+        {/* Categories Bento Grid */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ staggerChildren: 0.05 }}
-          className="grid gap-8 md:grid-cols-2 lg:grid-cols-4"
+          className="grid gap-6 grid-cols-1 md:grid-cols-4 grid-rows-auto"
           role="list"
         >
-          {items.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              role="listitem"
-            >
-              <Link
-                href={item.href}
-                className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white hover:border-amber-500/50 shadow-sm hover:shadow-xl transition-all duration-300 block"
+          {items.map((item, index) => {
+            // Assign specific grid styles based on index for a bento box layout
+            let gridSpan = "md:col-span-1";
+            let imageHeight = "h-48";
+
+            if (index === 0) {
+              gridSpan = "md:col-span-2 md:row-span-2";
+              imageHeight = "h-72 md:h-[320px]";
+            } else if (index === 3) {
+              gridSpan = "md:col-span-2 md:row-span-1";
+              imageHeight = "h-48 md:h-[135px]";
+            }
+
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className={gridSpan}
+                role="listitem"
               >
-                <div className="relative h-48 w-full overflow-hidden">
-                  <OptimizedImage
-                    src={item.image}
-                    alt={item.alt || item.name}
-                    preset="productGrid"
-                    placeholder="blur"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    containerClassName="h-full"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
-                </div>
-                <div className="p-6">
-                  <h3 className="mb-2 font-bold text-slate-900 group-hover:text-amber-600 transition-colors text-base">{item.name}</h3>
-                  <div className="mt-3 h-1 w-12 bg-amber-500 rounded-full group-hover:w-20 transition-all duration-300" />
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+                <Link
+                  href={item.href}
+                  className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white hover:border-amber-500/50 shadow-sm hover:shadow-xl transition-all duration-300 block h-full flex flex-col justify-between"
+                >
+                  <div className={cn("relative w-full overflow-hidden flex-1", imageHeight)}>
+                    <OptimizedImage
+                      src={item.image}
+                      alt={item.alt || item.name}
+                      preset="productGrid"
+                      placeholder="blur"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      containerClassName="h-full"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
+                  </div>
+                  <div className="p-6 bg-white border-t border-slate-50 flex-shrink-0">
+                    <h3 className="font-extrabold text-slate-900 group-hover:text-amber-600 transition-colors text-base">{item.name}</h3>
+                    <div className="mt-2 h-1 w-12 bg-amber-500 rounded-full group-hover:w-20 transition-all duration-300" />
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         {/* CTA Sale Banner - Luxury Overhaul */}
