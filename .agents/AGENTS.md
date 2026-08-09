@@ -94,3 +94,30 @@
   - Full keyboard navigation, screen reader ARIA labels, focus trap modals, color contrast compliance.
 - **End-to-End Testing & Build Validation**:
   - Production build execution, Lighthouse ≥ 90 on mobile, cross-browser Chrome/Safari/Firefox, responsive from 375px–1920px.
+
+---
+
+### PHASE 6: Conversion Rate Optimization, Mobile UX & Desktop Overhaul (STATUS: COMPLETED ✅)
+- **Mobile-First UX Overhaul (5 High-Conversion Mobile Features)**:
+  - **Native Bottom-Sheet Variant Selector (`VariantBottomSheet.tsx`)**: Slide-up drawer for mobile size/thickness selection with spring physics (`vaul` / Framer Motion).
+  - **Mobile Catalog Filter Bottom Sheet (`FilterSidebar.tsx`)**: Mobile filter drawer refactored into a native slide-up bottom sheet with top drag handle and active filter counter badge.
+  - **Interactive Visual Mattress Size Guide (`/size-guide`)**: Visual bed top-view simulator with occupant silhouettes (1 Adult, 2 Adults, 2 Adults + Child) and live dimension callouts.
+  - **Sonner Mobile Cart Toasts (`layout.tsx` & `CartContext.tsx`)**: Mobile bottom-center rich toast notifications displaying product thumbnail, price, and direct "View Cart" CTA.
+  - **Swipable Mobile Product Comparison (`/compare`)**: Touch-swipe product card matrix for mobile viewports with sticky feature rows.
+- **Desktop-First Experience Overhaul (5 High-Impact Desktop Features)**:
+  - **Luxury 3-Column Desktop Mega Menu Header (`Header.tsx`)**: Animated 3-column dropdown on hovering category items (Subcategories, Sizes, Bestseller Spotlight Card) with 100% solid opaque dark navy backdrop (`#0B132B`).
+  - **Desktop Product Quick View Modal (`QuickViewModal.tsx` & `ProductCard.tsx`)**: Eye icon button on desktop card hover opening instant specs & size selection modal without page transition.
+  - **Sticky Right-Rail Buy Box on Desktop PDP (`src/app/product/[id]/page.tsx`)**: Sticky right column on desktop PDP (`lg:sticky lg:top-24 lg:self-start`) keeping purchase options visible while scrolling long reviews and specs.
+  - **Floating Desktop Utility Cluster (`FloatingDesktopTools.tsx`)**: WhatsApp Live Support button & Back-to-Top scroll button in the bottom-right corner, dynamically shifting UP (`bottom-20`) on PDP when sticky buy bar is active to prevent button collisions.
+  - **Desktop Parallax Hero Carousel (`Hero.tsx`)**: Auto-sliding hero controls with desktop hover pause, slide counter badge (`01 / 04`), and smooth arrow controls.
+- **21st.dev Component Registry Integrations**:
+  - **Interactive Bento Grid Categories (`CategoriesSection.tsx`)**: Flagship categories (e.g. Mattresses) occupy a large 2x2 featured grid block, accessories occupy a wide 2x1 block, creating an animated structural layout.
+  - **Border-Beam Shiny Buttons (`Button.tsx`)**: `'shiny'` button variant with Framer Motion infinitely looping gradient sweep effect.
+  - **Reveal-on-Hover Spec Product Cards (`ProductCard.tsx`)**: Desktop hover drawer revealing mattress firmness, warranty, and trial period.
+- **PDP Interactive Magnifying Lens Widget (`ImageGallery.tsx`)**:
+  - PDP image gallery interactive 140px circular magnifying lens with refraction glare & cursor/touch tracking.
+- **Global Mobile Navigation Fix (`MobileBottomNav.tsx` & `layout.tsx`)**:
+  - Mounted `MobileBottomNav` globally in `RootLayout` with admin route exclusion (`pathname?.startsWith('/admin')`) so mobile bottom navigation is 100% persistent across catalog and category pages.
+- **Site Infrastructure & Dedicated Static Pages**:
+  - Created 16 dedicated pages: `/about`, `/careers`, `/press`, `/blog`, `/sustainability`, `/contact`, `/faqs`, `/shipping`, `/returns`, `/warranty`, `/size-guide`, `/privacy`, `/terms`, `/cookies`, `/cancellation`, `/grievance`.
+  - Dedicated Legacy Product Catch-All Route Guard (`src/app/[...legacyProduct]/page.tsx`) with custom branded 404 page.
