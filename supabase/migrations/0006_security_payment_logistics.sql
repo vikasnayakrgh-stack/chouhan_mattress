@@ -10,8 +10,8 @@ STABLE
 SECURITY DEFINER
 AS $$
   SELECT coalesce(
-    (current_setting('request.jwt.claims', true)::jsonb -> 'app_metadata' ->> 'is_staff')::boolean = true
-    OR (current_setting('request.jwt.claims', true)::jsonb -> 'app_metadata' ->> 'role') IN (
+    (nullif(current_setting('request.jwt.claims', true), '')::jsonb -> 'app_metadata' ->> 'is_staff')::boolean = true
+    OR (nullif(current_setting('request.jwt.claims', true), '')::jsonb -> 'app_metadata' ->> 'role') IN (
       'super_admin',
       'admin',
       'manager',
