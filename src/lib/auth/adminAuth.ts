@@ -1,7 +1,19 @@
 import 'server-only'
+import { cookies, headers } from 'next/headers'
 import { createClient } from '@supabase/supabase-js'
 
-const ALLOWED_STAFF_ROLES = ['owner', 'admin', 'manager', 'staff', 'viewer']
+export const ALLOWED_STAFF_ROLES = [
+  'super_admin',
+  'admin',
+  'manager',
+  'inventory',
+  'sales',
+  'customer_support',
+  'content_editor',
+  'owner',
+  'staff',
+  'viewer',
+]
 
 // Dev bypass for mock mode
 function isDevMockMode(): boolean {
@@ -25,8 +37,8 @@ export async function validateAdminSession(tokenOrHeader?: string | null): Promi
   if (isDevMockMode()) {
     return {
       authorized: true,
-      user: { id: 'dev-user', app_metadata: { role: 'owner' } },
-      role: 'owner',
+      user: { id: 'dev-user', app_metadata: { role: 'super_admin', is_staff: true } },
+      role: 'super_admin',
       error: null,
       status: 200,
     }
@@ -46,6 +58,28 @@ export async function validateAdminSession(tokenOrHeader?: string | null): Promi
   }
 
   let token = tokenOrHeader
+
+  // If token not provided explicitly, auto-extract from headers or cookies
+  if (!token) {
+    try {
+      const headerList = await headers()
+      const authHeader = headerList.get('authorization')
+      if (authHeader?.startsWith('Bearer ')) {
+        token = authHeader.substring(7)
+      }
+    } catch {
+      // Ignored if headers() not available in context
+    }
+  }
+
+  if (!token) {
+    try {
+      const cookieStore = await cookies()
+      token = cookieStore.get('sb-access-token')?.value || cookieStore.get('supabase-auth-token')?.value
+    } catch {
+      // Ignored if cookies() not available
+    }
+  }
 
   // Extract from Bearer header if provided
   if (token?.startsWith('Bearer ')) {
@@ -75,7 +109,21 @@ export async function validateAdminSession(tokenOrHeader?: string | null): Promi
     }
   }
 
-  const role = (user.app_metadata?.role as string | undefined)?.toLowerCase() || null
+  let role = (user.app_metadata?.role as string | undefined)?.toLowerCase() || null
+
+  // Fallback check against staff table if app_metadata.role not yet synchronized
+  if (!role) {
+    const { data: staffRecord } = await supabase
+      .from('staff')
+      .select('role, status')
+      .or(`auth_user_id.eq.${user.id},email.eq.${user.email}`)
+      .eq('status', 'active')
+      .single()
+
+    if (staffRecord) {
+      role = staffRecord.role.toLowerCase()
+    }
+  }
 
   if (!role || !ALLOWED_STAFF_ROLES.includes(role)) {
     return {
@@ -100,7 +148,10 @@ export async function validateAdminSession(tokenOrHeader?: string | null): Promi
  * Guard assertion function that throws an error if authentication or role check fails.
  * Designed for use in privileged server functions and service methods.
  */
-export async function requireAdminRole(tokenOrHeader?: string | null, requiredRoles: string[] = ALLOWED_STAFF_ROLES): Promise<{ user: any; role: string }> {
+export async function requireAdminRole(
+  tokenOrHeader?: string | null,
+  requiredRoles: string[] = ALLOWED_STAFF_ROLES
+): Promise<{ user: any; role: string }> {
   const auth = await validateAdminSession(tokenOrHeader)
   
   if (!auth.authorized || !auth.user || !auth.role) {

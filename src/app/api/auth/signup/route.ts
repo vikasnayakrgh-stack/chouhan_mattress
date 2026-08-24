@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { signupSchema, SignupInput } from '@/lib/validations/auth';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
+import { logSecurityEvent } from '@/lib/security-logger';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -16,6 +18,7 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 });
 
 export async function POST(request: NextRequest) {
+  const clientIp = getClientIp(request);
   try {
     const body = await request.json();
     
@@ -33,6 +36,31 @@ export async function POST(request: NextRequest) {
     }
 
     const { email, password, fullName, phone, marketingOptIn } = validationResult.data;
+
+    // Rate Limiting (5 signups per hour per IP+email)
+    const rateLimitKey = `${clientIp}:${email.toLowerCase().trim()}`;
+    const rateLimit = checkRateLimit(rateLimitKey, 'auth_signup', 5, 60 * 60 * 1000);
+    if (!rateLimit.success) {
+      logSecurityEvent({
+        eventType: 'RATE_LIMIT_EXCEEDED',
+        ipAddress: clientIp,
+        userEmail: email,
+        resource: '/api/auth/signup',
+        action: 'POST',
+        status: 'BLOCKED',
+        details: { remaining: rateLimit.remaining, resetInMs: rateLimit.resetInMs },
+      });
+
+      return NextResponse.json(
+        { error: 'Too many registration attempts. Please try again later.' },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': Math.ceil(rateLimit.resetInMs / 1000).toString(),
+          },
+        }
+      );
+    }
 
     // Register user with Supabase Auth
     const { data: authData, error: authError } = await supabase.auth.signUp({

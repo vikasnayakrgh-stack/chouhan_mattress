@@ -11,6 +11,8 @@ export type SecurityEventType =
   | 'PRICE_TAMPERING_ATTEMPT'
   | 'COUPON_APPLIED'
   | 'UNAUTHORIZED_ACCESS_ATTEMPT'
+  | 'SIGNATURE_VERIFICATION_FAILURE'
+  | 'SUSPICIOUS_ACTIVITY'
 
 export interface SecurityLogPayload {
   eventType: SecurityEventType

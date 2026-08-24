@@ -41,6 +41,7 @@ export default function AdminOrderDetailPage() {
   const [refundDialogOpen, setRefundDialogOpen] = useState(false)
   const [refundAmount, setRefundAmount] = useState('')
   const [refundReason, setRefundReason] = useState('')
+  const [isGeneratingShipment, setIsGeneratingShipment] = useState(false)
 
   const load = useCallback(async () => {
     if (!params?.id) return
@@ -52,6 +53,31 @@ export default function AdminOrderDetailPage() {
   useEffect(() => {
     void load()
   }, [load])
+
+  const handleGenerateShiprocketShipment = async () => {
+    if (!order) return
+    setIsGeneratingShipment(true)
+    try {
+      const res = await fetch('/api/shipping/create-shipment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId: order.id }),
+      })
+      const result = await res.json()
+      if (!res.ok || !result.success) {
+        toast.error(result.error || 'Failed to generate shipment')
+        setIsGeneratingShipment(false)
+        return
+      }
+
+      toast.success(`Shipment booked! AWB: ${result.data?.awbNumber || 'Assigned'}`)
+      await load()
+    } catch (err: any) {
+      toast.error('Logistics service network error')
+    } finally {
+      setIsGeneratingShipment(false)
+    }
+  }
 
   const transition = async (status: OrderStatus) => {
     if (!order) return
@@ -141,10 +167,11 @@ export default function AdminOrderDetailPage() {
             </button>
             <button
               type="button"
-              onClick={() => toast.info('Shipping label sent to printer (mock)')}
-              className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 text-sm font-medium text-gray-700 hover:bg-gray-50"
+              disabled={isGeneratingShipment}
+              onClick={() => void handleGenerateShiprocketShipment()}
+              className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-orange-600 px-3 text-sm font-medium text-white hover:bg-orange-700 disabled:opacity-50"
             >
-              <Printer className="h-4 w-4" /> Shipping Label
+              <Truck className="h-4 w-4" /> {isGeneratingShipment ? 'Booking...' : 'Book via Shiprocket'}
             </button>
             {(order.status === 'packed' || order.status === 'processing') && (
               <button
@@ -301,18 +328,40 @@ export default function AdminOrderDetailPage() {
 
           <div className="rounded-xl border border-gray-200 bg-white p-5">
             <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-900">
-              <Truck className="h-4 w-4 text-gray-400" /> Fulfillment
+              <Truck className="h-4 w-4 text-gray-400" /> Fulfillment & Logistics
             </h2>
             <div className="mb-3">
               <AdminStatusBadge status={order.fulfillmentStatus} />
             </div>
             {order.trackingNumber ? (
-              <dl className="space-y-1 text-sm">
-                <div className="flex justify-between"><dt className="text-gray-500">Carrier</dt><dd className="font-medium text-gray-900">{order.carrier}</dd></div>
-                <div className="flex justify-between"><dt className="text-gray-500">Tracking #</dt><dd className="font-mono text-xs text-gray-900">{order.trackingNumber}</dd></div>
+              <dl className="space-y-1.5 text-sm">
+                <div className="flex justify-between"><dt className="text-gray-500">Carrier</dt><dd className="font-medium text-gray-900">{order.carrier || 'Delhivery / Shiprocket'}</dd></div>
+                <div className="flex justify-between"><dt className="text-gray-500">AWB / Tracking</dt><dd className="font-mono text-xs font-semibold text-blue-600">{order.trackingNumber}</dd></div>
+                {order.shippingLabelUrl && (
+                  <div className="pt-2">
+                    <a
+                      href={order.shippingLabelUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:underline"
+                    >
+                      <Printer className="h-3.5 w-3.5" /> Download Shipping Label PDF
+                    </a>
+                  </div>
+                )}
               </dl>
             ) : (
-              <p className="text-sm text-gray-400">Not shipped yet</p>
+              <div className="space-y-2">
+                <p className="text-sm text-gray-400">Not shipped yet</p>
+                <button
+                  type="button"
+                  disabled={isGeneratingShipment}
+                  onClick={() => void handleGenerateShiprocketShipment()}
+                  className="w-full h-8 rounded-lg bg-orange-50 text-orange-700 hover:bg-orange-100 border border-orange-200 text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <Truck className="h-3.5 w-3.5" /> {isGeneratingShipment ? 'Booking...' : 'Automate via Shiprocket'}
+                </button>
+              </div>
             )}
           </div>
 

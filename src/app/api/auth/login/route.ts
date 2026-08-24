@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { loginSchema, LoginInput } from '@/lib/validations/auth';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
+import { logSecurityEvent } from '@/lib/security-logger';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -16,6 +18,7 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 });
 
 export async function POST(request: NextRequest) {
+  const clientIp = getClientIp(request);
   try {
     const body = await request.json();
     
@@ -34,6 +37,31 @@ export async function POST(request: NextRequest) {
 
     const { email, password, rememberMe } = validationResult.data;
 
+    // Rate Limiting (5 login attempts per 15 minutes per IP+email)
+    const rateLimitKey = `${clientIp}:${email.toLowerCase().trim()}`;
+    const rateLimit = checkRateLimit(rateLimitKey, 'auth_login', 5, 15 * 60 * 1000);
+    if (!rateLimit.success) {
+      logSecurityEvent({
+        eventType: 'RATE_LIMIT_EXCEEDED',
+        ipAddress: clientIp,
+        userEmail: email,
+        resource: '/api/auth/login',
+        action: 'POST',
+        status: 'BLOCKED',
+        details: { remaining: rateLimit.remaining, resetInMs: rateLimit.resetInMs },
+      });
+
+      return NextResponse.json(
+        { error: 'Too many login attempts. Please try again in 15 minutes.' },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': Math.ceil(rateLimit.resetInMs / 1000).toString(),
+          },
+        }
+      );
+    }
+
     // Sign in with Supabase Auth
     const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
       email,
@@ -41,6 +69,16 @@ export async function POST(request: NextRequest) {
     });
 
     if (authError) {
+      logSecurityEvent({
+        eventType: 'ADMIN_LOGIN_FAILURE',
+        ipAddress: clientIp,
+        userEmail: email,
+        resource: '/api/auth/login',
+        action: 'POST',
+        status: 'FAILURE',
+        details: { error: authError.message },
+      });
+
       return NextResponse.json(
         { success: false, error: authError.message },
         { status: 401 }

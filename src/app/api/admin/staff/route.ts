@@ -1,11 +1,19 @@
+import 'server-only'
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
+import { validateAdminSession } from '@/lib/auth/adminAuth'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
 export async function GET(request: Request) {
   try {
+    // Defense-in-depth: In-handler authentication & role check
+    const auth = await validateAdminSession()
+    if (!auth.authorized) {
+      return NextResponse.json({ success: false, error: auth.error || 'Unauthorized' }, { status: auth.status })
+    }
+
     const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
     // Fetch active & invited staff members
@@ -42,11 +50,27 @@ export async function GET(request: Request) {
 
 export async function PATCH(request: Request) {
   try {
+    // Defense-in-depth: In-handler check (only super_admin, admin, owner can update staff)
+    const auth = await validateAdminSession()
+    if (!auth.authorized) {
+      return NextResponse.json({ success: false, error: auth.error || 'Unauthorized' }, { status: auth.status })
+    }
+
+    const callerRole = auth.role?.toLowerCase()
+    if (!['super_admin', 'admin', 'owner'].includes(callerRole || '')) {
+      return NextResponse.json({ success: false, error: 'Forbidden: Insufficient privileges to manage staff' }, { status: 403 })
+    }
+
     const body = await request.json()
     const { staffId, role, status } = body
 
     if (!staffId) {
       return NextResponse.json({ success: false, error: 'Staff ID is required' }, { status: 400 })
+    }
+
+    // Only super_admin/owner can grant super_admin role
+    if (role === 'super_admin' && !['super_admin', 'owner'].includes(callerRole || '')) {
+      return NextResponse.json({ success: false, error: 'Forbidden: Only Super Admins can grant Super Admin role' }, { status: 403 })
     }
 
     const supabase = createClient(supabaseUrl, supabaseServiceKey)

@@ -45,7 +45,7 @@ export async function GET(
     const address = await repos.customerAddresses.getById(id);
     
     if (!address || address.customer_id !== user.id) {
-      return NextResponse.json({ success: false, error: 'Address not found' }, { status: 404 });
+      return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
     }
     
     return NextResponse.json({ success: true, address });
@@ -70,6 +70,12 @@ export async function PATCH(
     const { id } = await params;
     const body = await request.json();
     
+    // SEC-01: Verify ownership BEFORE performing update in database
+    const existing = await repos.customerAddresses.getById(id);
+    if (!existing || existing.customer_id !== user.id) {
+      return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
+    }
+
     const validationResult = addressSchema.partial().safeParse(body);
     if (!validationResult.success) {
       return NextResponse.json(
@@ -79,11 +85,6 @@ export async function PATCH(
     }
 
     const address = await repos.customerAddresses.update(id, validationResult.data);
-    
-    if (address.customer_id !== user.id) {
-      return NextResponse.json({ success: false, error: 'Address not found' }, { status: 404 });
-    }
-    
     return NextResponse.json({ success: true, address });
   } catch (error: any) {
     if (error.message === 'UNAUTHENTICATED') {
@@ -105,10 +106,10 @@ export async function DELETE(
     const { user, repos } = await getAuthenticatedRepos();
     const { id } = await params;
     
-    // Verify ownership first
+    // SEC-01: Verify ownership before deleting
     const address = await repos.customerAddresses.getById(id);
     if (!address || address.customer_id !== user.id) {
-      return NextResponse.json({ success: false, error: 'Address not found' }, { status: 404 });
+      return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
     }
     
     await repos.customerAddresses.delete(id);

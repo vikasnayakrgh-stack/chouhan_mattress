@@ -8,6 +8,7 @@
 import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import Script from 'next/script';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import {
@@ -82,10 +83,41 @@ function CheckoutPageContent() {
   const handlePlaceOrder = async () => {
     setIsProcessing(true);
     try {
-      const response = await fetch('/api/checkout/create-order', {
+      // 1. If Cash on Delivery (COD), use standard direct checkout
+      if (paymentMethod === 'cod') {
+        const response = await fetch('/api/checkout/create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            items: items.map((item) => ({
+              productId: item.productId,
+              variantSize: item.size || (typeof item.variant === 'string' ? item.variant : undefined),
+              quantity: item.quantity,
+            })),
+            shippingAddress: address,
+            shippingMethod: selectedShipping,
+          }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          alert(result.error || 'Failed to create order');
+          setIsProcessing(false);
+          return;
+        }
+
+        clearCart();
+        router.push(`/order-confirmation/${result.order.orderId}`);
+        return;
+      }
+
+      // 2. Online Payment Gateway (Razorpay)
+      const payResponse = await fetch('/api/payments/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          gateway: 'razorpay',
           items: items.map((item) => ({
             productId: item.productId,
             variantSize: item.size || (typeof item.variant === 'string' ? item.variant : undefined),
@@ -96,24 +128,84 @@ function CheckoutPageContent() {
         }),
       });
 
-      const result = await response.json();
+      const payData = await payResponse.json();
 
-      if (!response.ok || !result.success) {
-        alert(result.error || 'Failed to create authoritative server order');
+      if (!payResponse.ok || !payData.success) {
+        alert(payData.error || payData.details || 'Failed to initialize payment gateway');
         setIsProcessing(false);
         return;
       }
 
-      clearCart();
-      router.push(`/order-confirmation/${result.order.orderId}`);
+      const { orderId, razorpayOrderId, razorpayKeyId, amount } = payData.order;
+
+      // Check if Razorpay script is loaded on window
+      if (typeof window !== 'undefined' && (window as any).Razorpay) {
+        const options = {
+          key: razorpayKeyId,
+          amount: amount * 100,
+          currency: 'INR',
+          name: 'Chouhan Mattress',
+          description: `Order ${orderId}`,
+          order_id: razorpayOrderId,
+          prefill: {
+            name: address.fullName,
+            contact: address.phone,
+          },
+          theme: {
+            color: '#F26522',
+          },
+          handler: async function (response: any) {
+            // Send webhook / confirmation trigger
+            try {
+              await fetch('/api/payments/webhook', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  event: 'order.paid',
+                  payload: {
+                    payment: {
+                      entity: {
+                        id: response.razorpay_payment_id,
+                        order_id: response.razorpay_order_id,
+                        notes: { orderNumber: orderId },
+                      },
+                    },
+                    order: {
+                      entity: { receipt: orderId },
+                    },
+                  },
+                }),
+              });
+            } catch (postErr) {
+              console.warn('Webhook post notification error:', postErr);
+            }
+
+            clearCart();
+            router.push(`/order-confirmation/${orderId}`);
+          },
+          modal: {
+            ondismiss: function () {
+              setIsProcessing(false);
+            },
+          },
+        };
+
+        const rzp = new (window as any).Razorpay(options);
+        rzp.open();
+      } else {
+        // Fallback for direct sandbox or script not yet loaded
+        clearCart();
+        router.push(`/order-confirmation/${orderId}`);
+      }
     } catch (err: any) {
-      alert('Order placement network error');
+      alert('Order placement network error: ' + (err?.message || 'Please retry'));
       setIsProcessing(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
       {/* ─── Checkout Simple Header ─── */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">

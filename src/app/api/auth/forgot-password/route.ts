@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { forgotPasswordSchema, ForgotPasswordInput } from '@/lib/validations/auth';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
+import { logSecurityEvent } from '@/lib/security-logger';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -16,6 +18,7 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 });
 
 export async function POST(request: NextRequest) {
+  const clientIp = getClientIp(request);
   try {
     const body = await request.json();
     
@@ -33,6 +36,31 @@ export async function POST(request: NextRequest) {
     }
 
     const { email } = validationResult.data;
+
+    // Rate Limiting (3 password reset requests per 15 min per IP+email)
+    const rateLimitKey = `${clientIp}:${email.toLowerCase().trim()}`;
+    const rateLimit = checkRateLimit(rateLimitKey, 'auth_forgot_password', 3, 15 * 60 * 1000);
+    if (!rateLimit.success) {
+      logSecurityEvent({
+        eventType: 'RATE_LIMIT_EXCEEDED',
+        ipAddress: clientIp,
+        userEmail: email,
+        resource: '/api/auth/forgot-password',
+        action: 'POST',
+        status: 'BLOCKED',
+        details: { remaining: rateLimit.remaining, resetInMs: rateLimit.resetInMs },
+      });
+
+      return NextResponse.json(
+        { error: 'Too many password reset requests. Please try again in 15 minutes.' },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': Math.ceil(rateLimit.resetInMs / 1000).toString(),
+          },
+        }
+      );
+    }
 
     // Send password reset email via Supabase
     const { error } = await supabase.auth.resetPasswordForEmail(email, {

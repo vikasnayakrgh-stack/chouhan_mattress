@@ -78,6 +78,11 @@ export interface Order {
   timeline: OrderTimelineEvent[]
   trackingNumber?: string
   carrier?: string
+  awbNumber?: string
+  shippingLabelUrl?: string
+  shippingStatus?: string
+  razorpayOrderId?: string
+  razorpayPaymentId?: string
   refunds?: Refund[]
   notes?: string
   createdAt: string
